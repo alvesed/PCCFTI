@@ -1,5 +1,6 @@
 package br.com.whitemarket.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Pedidos {
@@ -7,7 +8,7 @@ public class Pedidos {
 	int cod_compra;
 	int cod_vendedor;
 	int cod_comprador;
-	double valor_pago;
+	BigDecimal valor_pago;
 	boolean finalizado;
 	Date data_compra;
 	
@@ -30,10 +31,10 @@ public class Pedidos {
 	public void setCod_comprador(int cod_comprador) {
 		this.cod_comprador = cod_comprador;
 	}
-	public double getValor_pago() {
+	public BigDecimal getValor_pago() {
 		return valor_pago;
 	}
-	public void setValor_pago(double valor_pago) {
+	public void setValor_pago(BigDecimal valor_pago) {
 		this.valor_pago = valor_pago;
 	}
 	public boolean isFinalizado() {
