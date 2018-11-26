@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ControllerProduto {
 	@RequestMapping("/cadastrarItem")
-	public String form() {
+	public String itemForm() {
 		/*EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
         EntityManager manager = factory.createEntityManager();
         
@@ -20,5 +20,18 @@ public class ControllerProduto {
 		factory.close();
 		manager.close();*/
     	return "cadastrarItem";
+	}
+	
+	@RequestMapping("/adicionaItem")
+	public String addItem() {
+		/*EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+        EntityManager manager = factory.createEntityManager();
+        
+        manager.getTransaction().begin();
+		manager.getTransaction().commit();
+		
+		factory.close();
+		manager.close();*/
+    	return "adicionaItem";
 	}
 }
