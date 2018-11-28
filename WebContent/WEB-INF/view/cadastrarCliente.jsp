@@ -11,6 +11,13 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		  	<style type="text/css">
+		  	
+					.error {
+						border: 1px solid #F00;
+					}
+					
+  			</style>
 	</head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
@@ -58,13 +65,13 @@
                </select>
             </div>
          </div>
-         <button type="submit" class="btn btn-outline-primary" id="botao" onclick="">Cadastrar</button>
+         <button type="submit" class="btn btn-outline-primary" id="botao">Cadastrar</button>
       </form>
    </div>
 </div>
 	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
-	<script type="text/javascript" src="js/validarCadastro.js"></script>
+	<script type="text/javascript" src="res/js/validarCadastro.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 	   </script>
 	   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
