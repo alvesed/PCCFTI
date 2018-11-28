@@ -112,8 +112,8 @@ body * {
 	position: relative;
 	float: top;
 	height: 50px;
-	width: 70%;
-	left: calc(50% - 35%);
+	width: 80%;
+	left: calc(50% - 40%);
 	z-index: 1000;
 }
 
