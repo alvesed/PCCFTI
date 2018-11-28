@@ -23,7 +23,7 @@ $(document).ready(function() {
          return false;
      } else {
     	 $("#form").submit();
-         alert("Cadastrar com Sucesso");
+         alert("Cadastrado com Sucesso");
      }
  });
  
