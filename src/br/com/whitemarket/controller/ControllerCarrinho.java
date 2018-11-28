@@ -24,6 +24,8 @@ public class ControllerCarrinho {
 		return "redirect:telaPrincipal";
 	}
 	
+	/**/
+	
 	@RequestMapping(value="/verCarrinho")
 	public String cart(@ModelAttribute("carrinho") Pedido pedido, Model model) {
 		
