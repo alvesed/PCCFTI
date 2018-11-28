@@ -39,4 +39,9 @@ public class ControllerCarrinho {
 		
 	}
 	
+	@RequestMapping(value = "/confirmaCompra")
+	public String confirmBuy() {
+		return null;
+	}
+	
 }

@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		
-		<title>Insert title here</title>
 		
 		<style type="text/css">
 		
@@ -14,6 +13,10 @@
 				padding: 0px;
 				margin: 0px;
 				background-color: silver;
+			}
+			
+			body * {
+				outline: none;
 			}
 			
 			#divCartContainer {
@@ -55,6 +58,27 @@
 				margin-left: 25px;
 			}
 			
+			.h4CartItemNome {
+				margin-left: 5px;
+			}
+			
+			.h4CartItemQuantidade {
+				width: 25px;
+				height: 25px;
+				font-size: 22px;
+				margin-top: 55px;
+				margin-left: -65px;
+				padding-left: 10px;
+				border: none;
+				border-radius: 5px;
+				
+				transition: 300ms linear;
+			}
+			
+			.h4CartItemQuantidade:hover, .h4CartItemQuantidade:focus {
+				box-shadow: inset 0 -7px 7px -7px black;
+			}
+			
 			h4 {
 				position: relative;
 				float: left;
@@ -85,9 +109,6 @@
 				
 					<c:forEach var="itemPedido" items="${pedido.listaPedidos}">
 				
-						<input type="hidden" name="codItemPedido" value="{$itemPedido.produto.codProduto}">
-						<input type="hidden" name="qtdItemPedido" class="qtdItemPedido" value="{$itemPedido.quantidade}">
-				
 					    <div class="divCartItem">
 					    
 					    	<div class="divCartItemImg">
@@ -97,13 +118,17 @@
 					    	<h4 class="h4CartItemCod"> ${itemPedido.produto.codProduto} </h4>
 					    	<h4> - </h4>
 					    	<h4 class="h4CartItemNome"> ${itemPedido.produto.nome} </h4>
+					    	
+					    	<input type="number" class="h4CartItemQuantidade" value="${itemPedido.quantidade}">
+					    	
 					    </div>
 					    
 					    <svg></svg>
 					    
 					</c:forEach>
 					
-					<input type="submit" >
+					<input type="button" id="keepBuying" onClick="window.location.href='<spring:url value="/telaPrincipal" />';">
+					<input type="button" id="confirmationBuying" onClick="window.location.href='<spring:url value="/confirmaCompra" />'">
 					
 				</c:when>
 				

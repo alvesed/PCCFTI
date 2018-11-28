@@ -74,7 +74,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		var precoFormatado = "${produto.valor}"";
+		var precoFormatado = "${produto.valor}";
 		precoFormatado = precoFormatado.replace(".", ",");
 		
 		
