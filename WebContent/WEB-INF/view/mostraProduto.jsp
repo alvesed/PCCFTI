@@ -74,6 +74,12 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		var precoFormatado = "${produto.valor}"";
+		precoFormatado = precoFormatado.replace(".", ",");
+		
+		
+		$("#valorTotal").maskMoney();
+		
 		$("#quantidade").on("input", function(){
 			var quantidade = $(this).val();
 			var preco = ${produto.valor};
@@ -89,8 +95,10 @@
 	});
 	function adicionaCarrinho(quant) {
 		var codproduto = "${produto.codProduto}";
+		var nomeproduto = "${produto.nome}"
 		var data = {
 			   codProduto: codproduto,
+			   nome: nomeproduto,
 			   quantidade: quant
 	 		};   
 					   
