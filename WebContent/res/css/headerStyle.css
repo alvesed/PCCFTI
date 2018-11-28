@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	background-color: rgba(220, 220, 220, 1);
+}
+
+body * {
+	font-family: 'Ubuntu', sans-serif;
+}
+
+#divHeaderFull {
+	position: relative;
+	float: top;
+	height: 200px;
+	width: 100%;
+	background-color: rgba(100, 100, 100 , 1);
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+#divHeaderFull * {
+	font-family: 'Ubuntu', sans-serif;
+
+	-webkit-transition: 400ms ease-out;
+	-moz-transition: 400ms ease-out;
+	-ms-transition: 400ms ease-out;
+	-o-transition: 400ms ease-out;
+	transition: 400ms ease-out;
+}
+
+#divHeaderTop {
+	position: relative;
+	float: top;
+	height: 150px;
+	width: 100%;
+	background-color: rgba(200, 200, 200 , 1);
+}
+
+#imgHeaderTopLogo {
+	position: relative;
+	float: left;
+	margin-left: 15%;
+	margin-top: 15px;
+	height: 120px;
+	width: 240px;
+	background-position: center;
+	background-repeat: none;
+	background-size: cover;
+}
+
+#imgHeaderTopCart {
+	position: relative;
+	float: right;
+	margin-right: 50px;
+	margin-top: 40px;
+	height: 50px;
+	width: 50px;
+	background-position: center;
+	background-repeat: none;
+	background-size: cover;
+	cursor: pointer;
+}
+
+#divHeaderTopCart {
+	position: relative;
+	float: right;
+	margin-top: -70px;
+	margin-left: -70px;
+	height: 250px;
+	width: 250px;
+	background-color: rgba(240, 240, 240, 1);
+	border-radius: 5px;
+	z-index: -1;
+	display: none;
+}
+
+#imgHeaderTopCart:hover #divHeaderTopCart {
+	z-index: 1001;
+	margin-top: 70px;
+	display: block;
+}
+
+#divHeaderTopCart ul {
+	background-color: black;
+	
+}
+
+#imgHeaderTopLogin {
+	position: relative;
+	float: right;
+	margin-right: 15%;
+	margin-top: 40px;
+	height: 50px;
+	width: 50px;
+	background-position: center;
+	background-repeat: none;
+	background-size: cover;
+}
+
+#divHeaderMenu {
+	position: relative;
+	float: top;
+	height: 50px;
+	width: 70%;
+	left: calc(50% - 35%);
+	z-index: 1000;
+}
+
+#divHeaderMenu a {
+	text-decoration: none;
+}
+
+.divHeaderMenuOption {
+	position: relative;
+	float: left;
+	height: 50px;
+	width: calc(100% / 6);
+	cursor: pointer;
+	padding: 0px;
+}
+
+.divHeaderMenuOption:hover {
+	background-color: rgba(220, 220, 220 , 1);
+}
+
+.pHeaderMenuOption {
+	margin: 0px;
+	line-height: 50px;
+	width: 100%;
+	font-size: 19px;
+	text-align: center;
+	color: rgba(230, 230, 230, 1);
+}
+
+.divHeaderMenuOption:hover .pHeaderMenuOption {
+	color: rgba(50, 50, 50, 1);
+}
+
+.divHeaderSubMenuOption {
+	position: relative;
+	float: top;
+	margin: 0px;
+	height: 50px;
+	width: 100%;
+	opacity: 0;
+	margin-top: -50px;
+	background-color: rgba(200, 200, 200 , 1);
+}
+
+.divHeaderMenuOption:hover .divHeaderSubMenuOption {
+	opacity: 1;
+	margin-top: 0px;
+}
+
+.divHeaderSubMenuOption:hover {
+	background-color: rgba(100, 100, 100 , 1);
+}
+
+.pHeaderSubMenuOption {
+	position: relative;
+	float: top;
+	margin: 0px;
+	line-height: 50px;
+	width: 100%;
+	font-size: 19px;
+	text-align: center;
+	color: rgba(50, 50, 50, 1);
+}
+
+.divHeaderSubMenuOption:hover .pHeaderSubMenuOption {
+	color: rgba(230, 230, 230, 1);
+}
+
+.divHeaderInnerSubMenuOption {
+	position: relative;
+	float: top;
+	width: 100%;
+	height: 50px;
+	background-color: rgba(200, 200, 200 , 1);
+	margin-top: -50px;
+	margin-left: 100%;
+	opacity: 0;
+}
+
+.divHeaderInnerSubMenuOption:hover {
+	background-color: rgba(100, 100, 100 , 1);
+}
+
+.pHeaderInnerSubMenuOption {
+	position: relative;
+	float: top;
+	margin: 0px;
+	line-height: 50px;
+	width: 100%;
+	font-size: 19px;
+	text-align: center;
+	color: rgba(50, 50, 50, 1);
+}
+
+.divHeaderInnerSubMenuOption:hover .pHeaderInnerSubMenuOption {
+	color: rgba(230, 230, 230, 1);
+}
+
+.divHeaderSubMenuOption:hover .divHeaderInnerSubMenuOption {
+	margin-top: 0px;
+	opacity: 1;
+}
+
+.divHeaderSubMenuOption:hover .divHeaderInnerSubMenuOption:nth-child(2) {
+	margin-top: -50px;
+}
+
+#container {
+	position: absolute;
+	margin-top: 25px;
+	margin-left: 50px;
+	margin-bottom: 25px;
+	width: 1000px;
+	left: calc(50% - 550px);
+	padding-top: 50px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 50px;
+	background-color: rgba(250, 250, 250, 1);
+	box-shadow: 0px 0px 10px #888888;
+}
