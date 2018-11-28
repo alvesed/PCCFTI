@@ -50,11 +50,7 @@ public class Produto {
 	@OneToMany(mappedBy = "produto", targetEntity = Foto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Foto> listaFotos;
 	
-	
 	long quantidadeDeVendas;
-	
-	
-	
 	
 	public Usuario getUsuario() {
 		return usuario;

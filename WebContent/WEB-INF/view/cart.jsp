@@ -32,13 +32,34 @@
 				height: 175px;
 				width: 100%;
 				margin-top: 5px;
+				background-color: silver;
 			}
-			
 			.divCartItem a {
 				margin-left: 50px;
 				text-decoration: none;
 				line-height: 150px;
 				font-size: 30px;
+			}
+			
+			.divCartItemImg {
+				position: relative;
+				float: left;
+				height: 145px;
+				width: 145px;
+				margin-top: 15px;
+				margin-left: 15px;
+				background-color: black;
+			}
+			
+			.h4CartItemCod {
+				margin-left: 25px;
+			}
+			
+			h4 {
+				position: relative;
+				float: left;
+				margin-top: 15px;
+				margin-left: 10px;
 			}
 		
 			svg {
@@ -56,7 +77,7 @@
 	
 		<jsp:include page="header.jsp" />
 	
-		<div id="container">
+		<div id="divContainer">
 			
 			<c:choose>
 			
@@ -64,11 +85,18 @@
 				
 					<c:forEach var="itemPedido" items="${pedido.listaPedidos}">
 				
-						<input type="text" name="codItemPedido" value="{$itemPedido.produto.codProduto}">
-						<input type="text" name="qtdItemPedido" class="qtdItemPedido" value="{$itemPedido.quantidade}">
+						<input type="hidden" name="codItemPedido" value="{$itemPedido.produto.codProduto}">
+						<input type="hidden" name="qtdItemPedido" class="qtdItemPedido" value="{$itemPedido.quantidade}">
 				
 					    <div class="divCartItem">
-					        <c:out value="${itemPedido.getInfo()}" />
+					    
+					    	<div class="divCartItemImg">
+					    		<img alt="" src="">
+					    	</div>
+					    	
+					    	<h4 class="h4CartItemCod"> ${itemPedido.produto.codProduto} </h4>
+					    	<h4> - </h4>
+					    	<h4 class="h4CartItemNome"> ${itemPedido.produto.nome} </h4>
 					    </div>
 					    
 					    <svg></svg>
@@ -82,7 +110,7 @@
 				<c:otherwise>
 				
 					<div class="divCartItem">
-				        <a href="#"> Que tal comprar umas coisinhas? VAMOS LÁ!!! </a>
+				        <a href="#">Que tal comprar umas coisinhas? VAMOS LÁ!!!</a>
 				    </div>
 				
 				</c:otherwise>
