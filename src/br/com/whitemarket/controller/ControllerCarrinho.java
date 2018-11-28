@@ -21,7 +21,7 @@ public class ControllerCarrinho {
 
 	@RequestMapping(value = "/")
 	public String welcome() {
-		return "cadastroPessoa";
+		return "telaInicial";
 	}
 	
 	@RequestMapping(value="/verCarrinho")
