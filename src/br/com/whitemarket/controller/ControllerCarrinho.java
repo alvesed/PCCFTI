@@ -21,7 +21,7 @@ public class ControllerCarrinho {
 
 	@RequestMapping(value = "/")
 	public String welcome() {
-		return "telaInicial";
+		return "redirect:telaPrincipal";
 	}
 	
 	@RequestMapping(value="/verCarrinho")

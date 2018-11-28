@@ -29,8 +29,8 @@ img {
 <body>
 <jsp:include page = "header.jsp" />
 
-<div class="container">
-	<div class="container">
+<div id="divContainer">
+	<div class="container" style="width: 92% !important;">
 	
 
 		<div class="row">
