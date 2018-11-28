@@ -14,11 +14,18 @@ import br.com.whitemarket.model.Usuario;
 public class ControllerUsuario {
 	
 	@RequestMapping("/cadastrarCliente")
+	public String cadastrarCliente() {
+
+    	return "cadastrarCliente";
+   	
+	}
+	
+	@RequestMapping("/efetivarCadastroCliente")
 	public String itemForm(Usuario usuario) {
 		
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
         EntityManager manager = factory.createEntityManager();
-      
+        
         manager.getTransaction().begin();
         manager.persist(usuario);
 		manager.getTransaction().commit();

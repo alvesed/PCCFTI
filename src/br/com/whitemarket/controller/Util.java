@@ -1,5 +1,7 @@
 package br.com.whitemarket.controller;
 
+import java.math.BigDecimal;
+
 import br.com.whitemarket.model.Produto;
 
 public class Util {
@@ -13,5 +15,15 @@ public class Util {
 		} else {
 			return false;
 		}
+	}
+	
+	public BigDecimal removeMascaraValor(String valor) {
+		BigDecimal money;
+		if (valor.contains(",") || valor.contains(".")) {
+			valor = valor.replace(".", "");
+			valor = valor.replace(",", ".");
+		}
+		money = new BigDecimal(valor);
+		return money;
 	}
 }

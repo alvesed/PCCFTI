@@ -5,21 +5,15 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.whitemarket.model.Produto;
+import br.com.whitemarket.model.Foto;
 
 @Repository
-public class JPAProdutoDAO implements ProdutoDAO {
-
+public class JPAFotoDAO implements FotoDAO{
 	@PersistenceContext
 	EntityManager manager;
 	
 	@Override
-	public void adiciona(Produto produto) {
-		manager.persist(produto);
-	}
-	
-	@Override
-	public void edita(Produto produto) {
-		manager.merge(produto);
+	public void adicionaFoto(Foto foto) {
+		manager.persist(foto);
 	}
 }
