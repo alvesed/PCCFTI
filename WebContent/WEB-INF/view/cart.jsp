@@ -158,10 +158,7 @@
 						url: "atualizarQuantidadeItemPedido",
 						type: "POST",
 						data: data,
-						contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;",
-						
-						success:
-							alert("Quantidade do item alterada com sucesso!");
+						contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;";
 					});
 				});
 			});
