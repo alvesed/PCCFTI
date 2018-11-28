@@ -11,6 +11,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		
 		  	<style type="text/css">
 		  	
 					.error {
@@ -18,13 +19,14 @@
 					}
 					
   			</style>
+  			
 	</head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	  <div id="divContainer">
    <div id="main" class="container-fluid">
       <h3 class="page-header" align="center">Cadastrar Cliente</h3>
-      <form action="cadastrarCliente" method="post">
+      <form id="form" action="efetivarCadastroCliente" method="post">
          <div class="row">
             <div class="form-group col col-sm-6 col-md-4">
                <label for="nome">Nome</label>
@@ -65,7 +67,7 @@
                </select>
             </div>
          </div>
-         <button type="submit" class="btn btn-outline-primary" id="botao" onclick="">Cadastrar</button>
+         <button type="submit" class="btn btn-outline-primary" id="botao" >Cadastrar</button>
       </form>
    </div>
 </div>
