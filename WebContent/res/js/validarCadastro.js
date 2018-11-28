@@ -56,6 +56,8 @@ $(document).ready(function() {
          }
      }
 
+     
+     //
      //    function testaCPF(strCPF) {
      //     var Soma;
      //     var Resto;
