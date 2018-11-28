@@ -72,12 +72,12 @@ img {
 									
 									<div class="info">
 										<div class="row">
-											<div class="price col-md-6">
-												<h4><b>${produto.nome}</b></h4>
-												<h5>${produto.descricao}</h5>
-												<h5>${produto.condicao}</h5>
+											<div class="price col-md-11">
+												<h4 align="center"><b>${produto.nome}</b></h4>
+												<h5 align="center">${produto.descricao}</h5>
+												<h5 align="center">${produto.condicao}</h5>
 												
-												<h4 class="price-text-color" ><b>R$ ${produto.valor}</b></h4>
+												<h4 align="center" class="price-text-color" ><b>R$ ${produto.valor}</b></h4>
 											</div>
 										</div>
 										
@@ -124,12 +124,12 @@ img {
 									
 									<div class="info">
 										<div class="row">
-											<div class="price col-md-6">
-									<h4><b>${produto.nome}</b></h4>
-												<h5>${produto.descricao}</h5>
-												<h5>${produto.condicao}</h5>
+											<div class="price col-md-11">
+									<h4 align="center"><b>${produto.nome}</b></h4>
+												<h5 align="center">${produto.descricao}</h5>
+												<h5 align="center">${produto.condicao}</h5>
 												
-												<h4 class="price-text-color" ><b>R$ ${produto.valor}</b></h4>
+												<h4 align="center" class="price-text-color" ><b>R$ ${produto.valor}</b></h4>
 											</div>
 										</div>
 										
@@ -172,7 +172,7 @@ img {
 			</div>
 	 
 	
-								<c:forEach items="${produto}" var="produto" begin="0" end="5" varStatus="img" > 
+								<c:forEach items="${produto}" var="produto" begin="6" end="11" varStatus="img" > 
 						   
 							
 								<div class="col-lg-4 col-md-6 mb-4">
@@ -180,19 +180,19 @@ img {
 								
 								
 								<div class="col-item">
-								
+							
 									<div class="photo">
-										<img src="res/img/png/dog5.png" class="img-responsive" alt="a" />
+										<img src="res/img/png/dog4.png" class="img-responsive" alt="a" />
 									</div>
 									
 									<div class="info">
 										<div class="row">
-											<div class="price col-md-6">
-														<h4><b>${produto.nome}</b></h4>
-												<h5>${produto.descricao}</h5>
-												<h5>${produto.condicao}</h5>
+											<div class="price col-md-11">
+														<h4 align="center"><b>${produto.nome}</b></h4>
+												<h5 align="center">${produto.descricao}</h5>
+												<h5 align="center">${produto.condicao}</h5>
 												
-												<h4 class="price-text-color" ><b>R$ ${produto.valor}</b></h4>
+												<h4 align="center" class="price-text-color" ><b>R$ ${produto.valor}</b></h4>
 											</div>
 										</div>
 										
