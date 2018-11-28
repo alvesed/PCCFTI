@@ -64,7 +64,7 @@
 				
 					<c:forEach var="itemPedido" items="${pedido.listaPedidos}">
 				
-						<input type="hidden" name="codItemPedido" value="{$itemPedido.cod_item_pedido}">
+						<input type="text" name="codItemPedido" value="{$itemPedido.produto.codProduto}">
 						<input type="text" name="qtdItemPedido" class="qtdItemPedido" value="{$itemPedido.quantidade}">
 				
 					    <div class="divCartItem">
