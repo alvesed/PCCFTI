@@ -14,55 +14,54 @@
 	</head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<div id="container">	
-	<div id="main" class="container-fluid">
-		<h3 class="page-header" align="center">Cadastrar Cliente</h3>
-			<form action="cadastrarCliente" method="post">
-				<div class="row">
-				    <div class="form-group col col-sm-6 col-md-4">
-				      <label for="nome">Nome</label>
-				      <input type="text" class="form-control" id="nome" placeholder="Nome completo" name="nome">
-				    </div> 
-				    <div class="form-group col col-sm-6 col-md-4">
-				      <label for="cpf">CPF</label>
-				      <input type="text" class="form-control" id="cpf" placeholder="000.000.000-00" name="cpf">
-				    </div>
-				    <div class="form-group col col-sm-6 col-md-4">
-				      <label for="endereco">Endereço</label>
-				      <input type="text" class="form-control" id="endereco" placeholder="" name="endereco">
-				    </div>
-				    <div class="form-group col col-sm-6 col-md-4">
-				      <label for="email">E-mail</label>
-				      <input type="text" class="form-control" id="email" placeholder="" name="email">
-				    </div>
-				        <div class="form-group col col-sm-6 col-md-4">
-				      <label for="telefone">Telefone</label>
-				      <input type="text" class="form-control" id="telefone" placeholder="(00) 0000-00000" name="telefone">
-				    </div>
-				    <div class="form-group col col-sm-6  col-md-4">
-				      <label for="senha">Senha</label>
-				      <input type="text" class="form-control" id="senha" placeholder="*********" name="senha">
-				    </div>
-				  </div>
-				
-				  <div class="form-row">
-				    <div class="form-group col-md-4">
-				      <label for="dataNascimento">Data de Nascimento</label>
-				      <input type="text" class="form-control" id="dataNascimento" placeholder="Dia/Mês/Ano"name="dataNascimento">
-				    </div>
-				    <div class="form-group col-md-4">
-				      <label for="sexo">Sexo</label>
-				      <select id="sexo" class="form-control" name="sexo">
-				        <option value="">Selecione</option>
-				        <option value="m">Masculino</option>
-				     	<option value="f">Feminino</option>
-				      </select>
-				    </div>
-				   </div> 
-				   <button type="submit" class="btn btn-outline-primary" id="botao" onclick="">Cadastrar</button>
-			</form>
-		</div>
-		</div>
+	  <div id="container">
+   <div id="main" class="container-fluid">
+      <h3 class="page-header" align="center">Cadastrar Cliente</h3>
+      <form action="cadastrarCliente" method="post">
+         <div class="row">
+            <div class="form-group col col-sm-6 col-md-4">
+               <label for="nome">Nome</label>
+               <input type="text" class="form-control" id="nome" placeholder="Nome completo" name="nome">
+            </div>
+            <div class="form-group col col-sm-6 col-md-4">
+               <label for="cpf">CPF</label>
+               <input type="text" class="form-control" id="cpf" placeholder="000.000.000-00" name="cpf">
+            </div>
+            <div class="form-group col col-sm-6 col-md-4">
+               <label for="endereco">Endereço</label>
+               <input type="text" class="form-control" id="endereco" placeholder="" name="endereco">
+            </div>
+            <div class="form-group col col-sm-6 col-md-4">
+               <label for="email">E-mail</label>
+               <input type="text" class="form-control" id="email" placeholder="" name="email">
+            </div>
+            <div class="form-group col col-sm-6 col-md-4">
+               <label for="telefone">Telefone</label>
+               <input type="text" class="form-control" id="telefone" placeholder="(00) 0000-00000" name="telefone">
+            </div>
+            <div class="form-group col col-sm-6  col-md-4">
+               <label for="senha">Senha</label>
+               <input type="text" class="form-control" id="senha" placeholder="*****" name="senha">
+            </div>
+         </div>
+         <div class="form-row">
+            <div class="form-group col-md-4">
+               <label for="dataNascimento">Data de Nascimento</label>
+               <input type="text" class="form-control" id="dataNascimento" placeholder="Dia/Mês/Ano"name="dataNascimento">
+            </div>
+            <div class="form-group col-md-4">
+               <label for="sexo">Sexo</label>
+               <select id="sexo" class="form-control" name="sexo">
+                  <option value="" disabled hidden>Selecione</option>
+                  <option value="m">Masculino</option>
+                  <option value="f">Feminino</option>
+               </select>
+            </div>
+         </div>
+         <button type="submit" class="btn btn-outline-primary" id="botao" onclick="">Cadastrar</button>
+      </form>
+   </div>
+</div>
 	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 	<script type="text/javascript" src="js/validarCadastro.js"></script>
