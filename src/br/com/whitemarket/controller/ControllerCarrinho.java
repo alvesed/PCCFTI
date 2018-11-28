@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 
 @Controller
@@ -17,11 +18,6 @@ public class ControllerCarrinho {
 	@ModelAttribute("carrinho")
 	public Pedido retornaCarrinho(){
 		return new Pedido();
-	}
-
-	@RequestMapping(value = "/")
-	public String welcome() {
-		return "cadastroPessoa";
 	}
 	
 	@RequestMapping(value="/verCarrinho")
@@ -33,7 +29,13 @@ public class ControllerCarrinho {
 	}
 	
 	@RequestMapping(value = "/atualizarQuantidadeItemPedido", method = RequestMethod.POST)
-	public void atualizarQuantidadeItemPedido (@RequestParam("codItemPedido") int codItemPedido, @RequestParam("qtdItemPedido") int qtdItemPedido) {
+	public void atualizarQuantidadeItemPedido (@ModelAttribute("carrinho") Pedido pedido, @RequestParam("codProduto") int codProduto, @RequestParam("qtdProduto") int qtdProduto) {
+		
+		for(ItemPedido ip : pedido.getListaPedidos()) {
+			
+			if (ip.getProduto().getCodProduto() == codProduto) System.out.println();
+			
+		}
 		
 	}
 	

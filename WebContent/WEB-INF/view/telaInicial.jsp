@@ -9,7 +9,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<link rel="stylesheet" type="text/css" href="res/css/teste.css">
 <link rel="stylesheet" type="text/css" href="res/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="res/css/font-awesome.css">
 
@@ -30,7 +29,8 @@ img {
 <body>
 <jsp:include page = "header.jsp" />
 
-	<div class="container">
+<div id="divContainer">
+	<div class="container" style="width: 92% !important;">
 	
 
 		<div class="row">
@@ -72,14 +72,13 @@ img {
 									
 									<div class="info">
 										<div class="row">
-											<div class="price col-md-6">
-												<h5>${produto.nome}</h5>
-												<h5>${produto.descricao}</h5>
-												<h5>${produto.condicao}</h5>
+											<div class="price col-md-11">
+												<h4 align="center"><b>${produto.nome}</b></h4>
+												<h5 align="center">${produto.descricao}</h5>
+												<h5 align="center">${produto.condicao}</h5>
 												
-												<h5 class="price-text-color" >$ ${produto.valor}</h5>
+												<h4 align="center" class="price-text-color" ><b>R$ ${produto.valor}</b></h4>
 											</div>
-											<div class="rating hidden-sm col-md-6">	</div>
 										</div>
 										
 										
@@ -125,14 +124,13 @@ img {
 									
 									<div class="info">
 										<div class="row">
-											<div class="price col-md-6">
-												<h5>${produto.nome}</h5>
-												<h5>${produto.descricao}</h5>
-												<h5>${produto.condicao}</h5>
+											<div class="price col-md-11">
+									<h4 align="center"><b>${produto.nome}</b></h4>
+												<h5 align="center">${produto.descricao}</h5>
+												<h5 align="center">${produto.condicao}</h5>
 												
-												<h5 class="price-text-color" >$ ${produto.valor}</h5>
+												<h4 align="center" class="price-text-color" ><b>R$ ${produto.valor}</b></h4>
 											</div>
-											<div class="rating hidden-sm col-md-6">	</div>
 										</div>
 										
 										
@@ -174,7 +172,7 @@ img {
 			</div>
 	 
 	
-								<c:forEach items="${produto}" var="produto" begin="0" end="5" varStatus="img" > 
+								<c:forEach items="${produto}" var="produto" begin="6" end="11" varStatus="img" > 
 						   
 							
 								<div class="col-lg-4 col-md-6 mb-4">
@@ -182,21 +180,20 @@ img {
 								
 								
 								<div class="col-item">
-								
+							
 									<div class="photo">
-										<img src="res/img/png/dog5.png" class="img-responsive" alt="a" />
+										<img src="res/img/png/dog4.png" class="img-responsive" alt="a" />
 									</div>
 									
 									<div class="info">
 										<div class="row">
-											<div class="price col-md-6">
-												<h5>${produto.nome}</h5>
-												<h5>${produto.descricao}</h5>
-												<h5>${produto.condicao}</h5>
+											<div class="price col-md-11">
+														<h4 align="center"><b>${produto.nome}</b></h4>
+												<h5 align="center">${produto.descricao}</h5>
+												<h5 align="center">${produto.condicao}</h5>
 												
-												<h5 class="price-text-color" >$ ${produto.valor}</h5>
+												<h4 align="center" class="price-text-color" ><b>R$ ${produto.valor}</b></h4>
 											</div>
-											<div class="rating hidden-sm col-md-6">	</div>
 										</div>
 										
 										
@@ -225,8 +222,7 @@ img {
 	</div>
 	
 	
-
-					
+</div>			
 	
 
 </body>

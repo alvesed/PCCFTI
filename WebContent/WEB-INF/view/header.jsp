@@ -18,7 +18,7 @@
 
 			<div id="divHeaderTop">
 				
-				<a href="#"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/headerStyle.css' />" alt="white market" /> </a>
+				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/logo.png' />" alt="white market" /> </a>
 
 				<a href="#"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/png/enter.png' />" alt="white market" /> </a>
 
@@ -196,6 +196,14 @@
 
 					</div>
 
+				</div>
+				
+				<div class="divHeaderMenuOption">
+
+					<a href="#">
+						<p class="pHeaderMenuOption"> OptionMenu 5 </p>
+					</a>
+				
 				</div>
 				
 				

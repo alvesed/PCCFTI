@@ -22,11 +22,19 @@ import java.util.ArrayList;
 
 @Transactional
 @Controller
-@SessionAttributes(value = "carrinho")
+@SessionAttributes(value = {"carrinho", "usuario"})
 public class ControllerItemPedido {
 	
 	@Autowired
 	ItemProdutoDAO dao;
+	
+	@ModelAttribute("usuario")
+	public Usuario retornaUsuario(){
+		Usuario u = new Usuario();
+		u.setCod_usuario(1);
+		return u;
+	}
+	
 	
 	@ModelAttribute("carrinho")
 	public Pedido retornaCarrinho(){
@@ -41,12 +49,15 @@ public class ControllerItemPedido {
 	}
 	
 	@RequestMapping(value="adicionaCarrinho", method=RequestMethod.POST)
-	public @ResponseBody String adicionaAoCarrinho(@ModelAttribute("carrinho") Pedido pedido, @ModelAttribute("usuario") Usuario usuario, String cod_produto, String quantidade, Model model) {
+	public @ResponseBody String adicionaAoCarrinho(@ModelAttribute("carrinho") Pedido pedido, @ModelAttribute("usuario") Usuario usuario, String codProduto, String quantidade, String nome, Model model) {
 		
 		int quant = Integer.parseInt(quantidade);
 		
+		
+		
 		Produto p = new Produto();
-		p.setCodProduto(Long.parseLong(cod_produto));
+		p.setCodProduto(Long.parseLong(codProduto));
+		p.setNome(nome);
 		
 		ItemPedido i = new ItemPedido();
 		i.setPedido(pedido);
@@ -55,7 +66,17 @@ public class ControllerItemPedido {
 		
 		if(pedido != null) {
 			if(pedido.getListaPedidos() != null) {
-				pedido.getListaPedidos().add(i);
+				boolean naoAchou = true;
+				for(ItemPedido iP : pedido.getListaPedidos()) {
+					if(iP.getProduto().getCodProduto() == Long.parseLong(codProduto)) {
+						iP.setQuantidade(iP.getQuantidade() + quant);
+						naoAchou = false;
+						break;
+					}
+				}
+				if(naoAchou) {
+					pedido.getListaPedidos().add(i);
+				}
 			} else {
 				pedido.setListaPedidos(new ArrayList<ItemPedido>());
 				pedido.getListaPedidos().add(i);
