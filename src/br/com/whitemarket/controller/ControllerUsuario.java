@@ -25,9 +25,7 @@ public class ControllerUsuario {
 		
 		manager.close();
 		factory.close();
-	
-		//testegit!!!
-			//
+
     	return "cadastrarCliente";
     	
 	}

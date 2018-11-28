@@ -21,7 +21,7 @@
 	</head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	  <div id="container">
+	  <div id="divContainer">
    <div id="main" class="container-fluid">
       <h3 class="page-header" align="center">Cadastrar Cliente</h3>
       <form action="cadastrarCliente" method="post">
@@ -65,7 +65,7 @@
                </select>
             </div>
          </div>
-         <button type="submit" class="btn btn-outline-primary" id="botao">Cadastrar</button>
+         <button type="submit" class="btn btn-outline-primary" id="botao" onclick="">Cadastrar</button>
       </form>
    </div>
 </div>

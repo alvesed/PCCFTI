@@ -29,9 +29,9 @@ $(document).ready(function() {
      e.preventDefault();
 
      if (!validarCadastro()) {
-         alert("Não foi possivel Cadastrar");
+         alert("falha");
      } else {
-         alert("Cadastro Realizado Com Sucesso");
+         alert("sucesso");
      }
 
      function validarCadastro() {
@@ -56,8 +56,6 @@ $(document).ready(function() {
          }
      }
 
-     
-     //
      //    function testaCPF(strCPF) {
      //     var Soma;
      //     var Resto;
