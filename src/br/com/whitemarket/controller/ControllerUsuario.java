@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.whitemarket.model.Usuario;
 
-public class ControllerUsuariob {
+public class ControllerUsuario {
 	
 	@RequestMapping("/cadastrarCliente")
 	public String itemForm(Usuario usuario) {
