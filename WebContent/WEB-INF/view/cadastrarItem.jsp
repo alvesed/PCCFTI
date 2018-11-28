@@ -20,18 +20,11 @@
 		
 		<div id="main" class="container-fluid">
 			<h3 class="page-header" align="center">Cadastrar Produto</h3>
-			<form action="<c:choose>
-							<c:when test="${produto.codProduto > 0}">
-								editaItem
-							</c:when>
-							<c:otherwise>
-								adicionaItem
-							</c:otherwise>
-						  </c:choose>" method="post" onsubmit="Checkfiles(this)">
+			<form action="<c:choose><c:when test="${produto.codProduto > 0}">upload</c:when><c:otherwise>adicionaItem</c:otherwise></c:choose>" method="post" enctype="multipart/form-data"> <!-- onsubmit="Checkfiles(this)" -->
 				<div class="row">
                     <div class="form-group col-md-2">
                         <label hidden id="cod_label" for="campoCod">Código do Produto:</label>
-                        <input hidden class="form-control" id="cod" type="text" value="${produto.codProduto}" readonly>
+                        <input hidden class="form-control" id="cod" type="text" name="codProduto" value="${produto.codProduto}" readonly>
                     </div>
                 </div>
 				<div class="row">
@@ -46,23 +39,23 @@
 					<div class="form-group col-md-3">
 						<!-- label e input-->
 						<label>Descrição</label>
-						<textarea style="resize: none" class="form-control" id="descricao" name="descricao" value="${produto.descricao}" rows="4" cols="40"></textarea>
+						<textarea style="resize: none" class="form-control" id="descricao" name="descricao" rows="4" cols="40">${produto.descricao}</textarea>
 						<span style="color: red" class="erro_descricao">Descrição inválida.</span>
 					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-md-1">
+					<div class="form-group col-md-2">
 						<!-- label e input-->
 						<label>Condição</label>
 						<select class="form-control" name="condicao" id="condicao">
-							<option value="novo" <c:if test="${produto.condicao eq 'novo'}">selected</c:if>/option>
+							<option value="novo" <c:if test="${produto.condicao eq 'novo'}">selected</c:if>>Novo</option>
 							<option value="usado" <c:if test="${produto.condicao eq 'usado'}">selected</c:if>>Usado</option>
 						</select>
 					</div>
 					<div class="form-group col-md-2" id="estado">
 						<!-- label e input-->
 						<label>Estado de conservação</label>
-						<select class="form-control" name="estado" id="sta">
+						<select class="form-control" name="estadoProduto" id="sta">
 							<option value="seminovo" <c:if test="${produto.estadoProduto eq 'seminovo'}">selected</c:if>>Seminovo</option>
 							<option value="usado" <c:if test="${produto.estadoProduto eq 'usado'}">selected</c:if>>De 3 à 6 meses de uso</option>
 							<option value="muitousado" <c:if test="${produto.estadoProduto eq 'muitousado'}">selected</c:if>>De 6 à 12 meses de uso</option>
@@ -75,7 +68,7 @@
 						<div class="form-group col-md-4">
 							<!-- label e input-->
 							<label>Fotos</label>
-							<input type="file" class="form-control" id="fotos" name="foto" accept="image/png, image/jpeg" multiple>
+							<input type="file" class="form-control" id="fotos" name="file" accept="image/png, image/jpeg" multiple>
 							<span style="color: red" class="erro_foto">Adicione ao menos uma foto.</span>
 						</div>
 					</div>
@@ -91,7 +84,7 @@
 				<hr />
                 <div id="actions" class="row">
                     <div class="col-md-12">
-                        <button id="salvar" type="submit" class="btn btn-primary">Salvar</button>
+                        <button id="salvar" type="submit" class="btn btn-primary" value="<c:if test="${produto.codProduto > 0}">Upload File</c:if>">Salvar</button>
                         <a href="listaProdutos" class="btn btn-dark">Cancelar</a>
                     </div>
                 </div>
@@ -102,7 +95,7 @@
 		<script>
 			$(document).ready(function () { 
 	    		$("#valor").mask('000.000.000.000.000,00', {reverse: true});
-				if ($("#condicao").val() != "Usado") {
+				if ($("#condicao").val() != "usado") {
 	    			$("#estado").hide();
 				}
 				
@@ -130,9 +123,11 @@
 			    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
 
 			    if(ext =="jpeg" || ext=="png"){
+			    	console.log("true");
 			        return true;
 			    }
 			    else {
+			    	console.log("false");
 			    	return false;
 			    }
 			}
