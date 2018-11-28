@@ -26,7 +26,6 @@
 			<div class="container-fliud">
 				<div class="wrapper row">
 					<div class="preview col-md-6">
-						
 						<div class="preview-pic tab-content">
 						  <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div>
 						  <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/200/126" /></div>
@@ -50,13 +49,12 @@
 							<span class="review-no">Produto ${produto.condicao}</span>
 						</c:if>
 						<p class="product-description">${produto.descricao}</p>
-						<h4 class="price">Preço unitário: R$ <span class="spanPreco">${produto.valor}</span></h4>
+						<h4 class="price">Preço unitário: R$ <span id="valorProduto" class="spanPreco"></span></h4>
 						<br/>
 						<div class="col-md-2">
-						<h5 class="sizes">quantidade:
-						   <input class="form-control col-2" type="number" id="quantidade" value="1" min="1" max="99">
+						<h5 class="sizes">quantidade: <input style="width: 30%; display: inline;" class="form-control col-2" type="number" id="quantidade" value="1" min="1" max="99">
 						</h5></div>
-						<h5 class="price">preço total: R$ <span class="spanPreco" id="precoTotal">${produto.valor}</span></h5>
+						<h5 class="price">preço total: R$ <span class="spanPreco" id="precoTotal"></span></h5>
 						<br/>
 						<div class="action">
 							<button id="adicionaCarrinho" class="add-to-cart btn btn-outline-primary" type="button">Adicionar ao Carrinho</button>
@@ -74,9 +72,10 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		var precoFormatado = "${produto.valor}"";
+		var precoFormatado = "${produto.valor}";
 		precoFormatado = precoFormatado.replace(".", ",");
-		
+		$("#precoTotal").html(precoFormatado);
+		$("#valorProduto").html(precoFormatado);
 		
 		$("#valorTotal").maskMoney();
 		
