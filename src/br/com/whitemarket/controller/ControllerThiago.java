@@ -15,28 +15,24 @@ import br.com.whitemarket.model.Produto;
 @Controller
 public class ControllerThiago {
 
+	@RequestMapping(value = "/")
+	public String welcome() {
+		return "redirect:telaPrincipal";
+	}
 	
 	@RequestMapping("/telaPrincipal")
 	public String menu(Model model) {
 
-
-				EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-				EntityManager	manager	= factory.createEntityManager();
-				
-
-				   List<Produto> produto = manager.createQuery("SELECT p FROM Produto p").getResultList();
-				   
-				   model.addAttribute("produto", produto);
-				   
-				   manager.close();  
-				   factory.close();
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+		EntityManager	manager	= factory.createEntityManager();
 			
-		
-		
-		
-		
+		List<Produto> produto = manager.createQuery("SELECT p FROM Produto p").getResultList();
+		   
+		model.addAttribute("produto", produto);
+		   
+		manager.close();  
+		factory.close();
+
     	return "telaInicial";
 	}
-	
-	
 }

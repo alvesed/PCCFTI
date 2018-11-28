@@ -19,10 +19,7 @@ public class ControllerCarrinho {
 		return new Pedido();
 	}
 
-	@RequestMapping(value = "/")
-	public String welcome() {
-		return "redirect:telaPrincipal";
-	}
+	
 	
 	/**/
 	
