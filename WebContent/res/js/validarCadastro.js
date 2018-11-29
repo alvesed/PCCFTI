@@ -70,11 +70,12 @@ function validarCadastro(cpf,dataNascimento,telefone,email) {
 		
       nome: { label: 'nome', value: $('#nome').val() },
       cpf: { label: 'cpf', value: $('#cpf').val() },
-	  dataNascimento: { label: 'data de nascimento', value: $('#dataNascimento').val() },
+	  dataNascimento: { label: 'Data De Nascimento', value: $('#dataNascimento').val() },
 	  telefone: { label: 'telefone', value: $('#telefone').val() },
 	  sexo: { label: 'sexo', value: $('#sexo').val() },
 	  email: { label: 'email', value: $('#email').val() },
-	  senha: { label: 'senha', value: $('#senha').val() }
+	  senha: { label: 'senha', value: $('#senha').val() },
+	  endereco: { label: 'endereco' , value: $('#endereco').val() }
  
     }
     
@@ -164,10 +165,13 @@ function validaTelefone(telefone){
 }
 
 function validaEmail(email){
-	console.log(email);
-	if(email.length <=5 || email.length >= 30){
+	
+	if(email.length <= 5 && email.length >= 30){
+		return false;
+	}else if(!email.includes("@", 1)){
 		return false;
 	}else{
 		return true;
 	}
-}
+	
+}	
