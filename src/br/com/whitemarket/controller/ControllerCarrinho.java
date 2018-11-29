@@ -29,9 +29,8 @@ public class ControllerCarrinho {
 	@RequestMapping(value="/verCarrinho")
 	public String cart(@ModelAttribute("carrinho") Pedido pedido, @ModelAttribute("usuarioLogado") Usuario usuario, Model model) {
 		
-		if (usuario != null && usuario.getCod_usuario() != 0) {
-			model.addAttribute("pedido", pedido);
-		}
+		model.addAttribute("pedido", pedido);
+		model.addAttribute("usuario", usuario);
 		
 		return "cart";
 	}

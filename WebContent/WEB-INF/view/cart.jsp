@@ -111,9 +111,9 @@
 	
 		<div id="divContainer">
 			
-			<c:choose>
-			
-				<c:when test="${pedido.getListaPedidos().size() >= 1}">
+			<c:if test="${not empty usuario.nome}">
+				
+				<c:if test="${pedido.getListaPedidos().size() > 0}">
 				
 					<c:forEach var="itemPedido" items="${pedido.listaPedidos}">
 				
@@ -133,20 +133,28 @@
 					    
 					</c:forEach>
 					
-					<input type="button" id="keepBuying" onClick="window.location.href='<spring:url value="/telaPrincipal" />';">
-					<input type="button" id="confirmationBuying" onClick="window.location.href='<spring:url value="/confirmaCompra" />'">
-					
-				</c:when>
+					<input type="button" id="keepBuying" onClick="window.location.href='<spring:url value="/telaPrincipal" />';" value="Comprar mais...">
+					<input type="button" id="confirmationBuying" onClick="window.location.href='<spring:url value="/confirmaCompra" />'" value="Fechar compra">
 				
-				<c:otherwise>
+				</c:if>
+				
+				<c:if test="${pedido.getListaPedidos().size() <= 0 or empty pedido.getListaPedidos().size()}">
 				
 					<div class="divCartItem">
 				        <a href="<spring:url value='/telaPrincipal' />">Que tal comprar umas coisinhas? VAMOS LÁ!!!</a>
 				    </div>
 				
-				</c:otherwise>
+				</c:if>
+			
+			</c:if>
+			
+			<c:if test="${empty usuario.nome}">
 				
-			</c:choose>
+				<div class="divCartItem">
+			        <a href="<spring:url value='/login' />">Vamos nos logar? Partiu #comprinhas...</a>
+			    </div>
+			
+			</c:if>
 			
 		</div>
 		

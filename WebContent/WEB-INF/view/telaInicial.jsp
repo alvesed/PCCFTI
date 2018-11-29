@@ -18,14 +18,11 @@
 <script type="text/javascript" src="res/js/bootstrap.js"></script>
 
 <style>
-
-img {
+.container img {
 	max-width: 150px;
 	min-height: 200px;
 	max-width: 150px;
 	max-height: 200px;
-
-
 }
 
 </style>
