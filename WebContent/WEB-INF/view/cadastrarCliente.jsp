@@ -67,7 +67,7 @@
                </select>
             </div>
          </div>
-         <button type="submit" class="btn btn-outline-primary" id="botao" >Cadastrar</button>
+         <button type="submit" class="btn btn btn-primary" id="botao" >Cadastrar</button>
       </form>
    </div>
 </div>
