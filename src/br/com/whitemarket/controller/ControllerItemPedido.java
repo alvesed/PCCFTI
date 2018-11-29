@@ -43,7 +43,14 @@ public class ControllerItemPedido {
 	
 	@RequestMapping("verProduto")
 	public String mostraProduto(@RequestParam String codigoProduto, Model model) {
-		model.addAttribute("produto", dao.buscaPorCodigo(Long.parseLong(codigoProduto)));
+		Produto p = dao.buscaPorCodigo(Long.parseLong(codigoProduto));
+		
+		if (p.getCodProduto() == 0) {
+			return "produto404";
+		}
+		
+		model.addAttribute("produto", p);
+		model.addAttribute("fotos", p.getListaFotos());
 		
 		return "mostraProduto";
 	}
@@ -53,11 +60,10 @@ public class ControllerItemPedido {
 		
 		int quant = Integer.parseInt(quantidade);
 		
-		
-		
 		Produto p = new Produto();
 		p.setCodProduto(Long.parseLong(codProduto));
 		p.setNome(nome);
+		p.setDescricao(p.getListaFotos().get(0).getUrlFoto());
 		
 		ItemPedido i = new ItemPedido();
 		i.setPedido(pedido);
@@ -67,8 +73,9 @@ public class ControllerItemPedido {
 		if(pedido != null) {
 			if(pedido.getListaPedidos() != null) {
 				boolean naoAchou = true;
-				for(ItemPedido iP : pedido.getListaPedidos()) {
-					if(iP.getProduto().getCodProduto() == Long.parseLong(codProduto)) {
+				
+				for (ItemPedido iP : pedido.getListaPedidos()) {
+					if (iP.getProduto().getCodProduto() == Long.parseLong(codProduto)) {
 						iP.setQuantidade(iP.getQuantidade() + quant);
 						naoAchou = false;
 						break;
@@ -83,7 +90,7 @@ public class ControllerItemPedido {
 			}
 		}
 		model.addAttribute("carrinho", pedido);
-		System.out.println(pedido.getListaPedidos().size());
+		
 		return "adicionado";
 	}
 }

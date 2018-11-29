@@ -27,18 +27,17 @@
 				<div class="wrapper row">
 					<div class="preview col-md-6">
 						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/200/126" /></div>
-						  <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
-						  <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div>
+							<div class="tab-pane active" id="pic-0"><img src="${produto.listaFoto[0].urlFoto}" /></div>
+							<c:forEach items="${fotos}" var="foto" begin="1" varStatus="i">
+								<div class="tab-pane" id="pic-${i.index}"><img src="${foto.urlFoto}" /></div>
+							</c:forEach>
 						</div>
 						<ul class="preview-thumbnail nav nav-tabs">
-						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://placekitten.com/400/252" /></a></li>
-						  <li><a data-target="#pic-2" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-3" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-4" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
-						  <li><a data-target="#pic-5" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+						  <li class="active"><a data-target="#pic-0" data-toggle="tab"><img src="${produto.listaFoto[0].urlFoto}" /></a></li>
+						  
+						  <c:forEach items="${fotos}" var="foto" begin="1" varStatus="i">
+						    	<li><a data-target="#pic-${i.index}" data-toggle="tab"><img src="${foto.urlFoto}" /></a></li>
+							</c:forEach>
 						</ul>
 						
 					</div>
@@ -57,7 +56,15 @@
 						<h5 class="price">preço total: R$ <span class="spanPreco" id="precoTotal"></span></h5>
 						<br/>
 						<div class="action">
-							<button id="adicionaCarrinho" class="add-to-cart btn btn-outline-primary" type="button">Adicionar ao Carrinho</button>
+							<c:if test="${empty usuario}">
+								<span class="d-inline-block" data-toggle="popover" data-content="Por favor, faça o login.">
+									<button class="add-to-cart btn btn-outline-primary" style="pointer-events: none;" type="button" disabled>Adicionar ao Carrinho</button>
+								</span>
+							</c:if>
+							
+							<c:if test="${not empty usuario}">
+								<button id="adicionaCarrinho" class="add-to-cart btn btn-outline-primary" style="pointer-events: none;" type="button">Adicionar ao Carrinho</button>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -88,10 +95,10 @@
 		});
 	
 		$("#adicionaCarrinho").click(function(){
-			<c:if test="${empty usuario}">alert("Por favor, faça o login");</c:if>
-			<c:if test="${not empty usuario}">adicionaCarrinho($("#quantidade").val())</c:if>
+			adicionaCarrinho($("#quantidade").val())
 		})
 	});
+	
 	function adicionaCarrinho(quant) {
 		var codproduto = "${produto.codProduto}";
 		var nomeproduto = "${produto.nome}"
@@ -109,7 +116,7 @@
 			cache: true,
 			contentType: 'application/x-www-form-urlencoded; charset=iso-8859-1;', 
 			success: function(resultado){
-				
+				$("#adicionaCarrinho").html("Produto adicionado!")
 				alert("Produto adicionado ao carrinho com sucesso!");
 			}
 		});
