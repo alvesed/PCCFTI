@@ -28,9 +28,9 @@
   <c:forEach items="${listProdutos}" var="listProdutos">
      <tr>
      <td>
-     	foto
+     	<img src="${listProdutos.urlPrimeiraImagem}" />
      </td>
-     <td><fmt:formatNumber value="${listProdutos.dataCadastro}" type="currency"/></td>
+     <th scope="row"><fmt:formatDate  value="${listProdutos.dataCadastro}" pattern="dd/MM/yyyy"/></th>
       <td><fmt:formatNumber value="${listProdutos.valor}" type="currency"/></td>
       <td>${listProdutos.quantidadeDeVendas}</td>
       <td>

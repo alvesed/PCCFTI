@@ -50,6 +50,9 @@ public class ControllerPedidos {
 	public String verProdutos(Model model) {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
 		EntityManager	manager	= factory.createEntityManager();
+		
+		
+
 
 		   List<Pedido> listProdutos =
 				   manager.createQuery("select NEW Produto(valor," +
@@ -57,7 +60,11 @@ public class ControllerPedidos {
 				   		" count(i.quantidade) as quantidades " + 
 				   		" FROM ItemPedido i "
 				   		+ " WHERE i.produto.codProduto = p.codProduto " + 
-				   		" ), dataCadastro) from Produto p").getResultList();
+				   		" ), dataCadastro, (SELECT " + 
+				   		" urlFoto as urlFoto " + 
+				   		" FROM Foto f " + 
+				   		" WHERE f.produto.codProduto = p.codProduto" + 
+				   		")) from Produto p").getResultList();
 
 		   
 		   model.addAttribute("listProdutos", listProdutos);

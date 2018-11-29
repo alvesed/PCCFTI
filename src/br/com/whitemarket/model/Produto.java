@@ -26,7 +26,8 @@ public class Produto {
 	
 	public Produto() {}
 	
-	public Produto(BigDecimal valor, long quantidadeDeVendas, Date dataCadastro) {
+	public Produto(BigDecimal valor, long quantidadeDeVendas, Date dataCadastro, String urlPrimeiraImagem) {
+		this.urlPrimeiraImagem = urlPrimeiraImagem;
 		this.valor = valor;
 		this.quantidadeDeVendas = quantidadeDeVendas;
 		this.dataCadastro = dataCadastro;
@@ -39,6 +40,22 @@ public class Produto {
 	@Column(name="cod_produto")
 	private long codProduto;
 	
+	@Transient
+	private String urlPrimeiraImagem;
+	
+	
+	
+	
+	public String getUrlPrimeiraImagem() {
+		return urlPrimeiraImagem;
+	}
+
+	public void setUrlPrimeiraImagem(String urlPrimeiraImagem) {
+		this.urlPrimeiraImagem = urlPrimeiraImagem;
+	}
+
+
+
 	private String nome;
 	private String descricao;
 	
