@@ -23,7 +23,7 @@
 			<h3>Produto não encontrado</h3>
 			<br/>
 			<br/>
-			<button class="add-to-cart btn btn-outline-primary" type="button" onclick="/telaInicial">Voltar à página Inicial</button>
+			<button class="add-to-cart btn btn-outline-primary" type="button">Voltar à página Inicial</button>
 		</div>
 	</div>
 </body>

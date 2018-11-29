@@ -47,6 +47,7 @@
 						<c:if test="${produto.condicao eq 'Usado'}">
 							<span class="review-no">Produto ${produto.condicao}</span>
 						</c:if>
+						<br/>
 						<p class="product-description">${produto.descricao}</p>
 						<h4 class="price">Preço unitário: R$ <span id="valorProduto" class="spanPreco"></span></h4>
 						<br/>
@@ -63,7 +64,7 @@
 							</c:if>
 							
 							<c:if test="${not empty usuario}">
-								<button id="adicionaCarrinho" class="add-to-cart btn btn-outline-primary" style="pointer-events: none;" type="button">Adicionar ao Carrinho</button>
+								<button id="adicionaCarrinho" class="add-to-cart btn btn-outline-primary" type="button">Adicionar ao Carrinho</button>
 							</c:if>
 						</div>
 					</div>
@@ -102,9 +103,11 @@
 	function adicionaCarrinho(quant) {
 		var codproduto = "${produto.codProduto}";
 		var nomeproduto = "${produto.nome}"
+		var urlPrimeiraFoto = "${produto.listaFotos[0].urlFoto}";
 		var data = {
 			   codProduto: codproduto,
 			   nome: nomeproduto,
+			   url: urlPrimeiraFoto,
 			   quantidade: quant
 	 		};   
 					   

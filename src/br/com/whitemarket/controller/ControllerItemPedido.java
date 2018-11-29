@@ -56,14 +56,14 @@ public class ControllerItemPedido {
 	}
 	
 	@RequestMapping(value="adicionaCarrinho", method=RequestMethod.POST)
-	public @ResponseBody String adicionaAoCarrinho(@ModelAttribute("carrinho") Pedido pedido, @ModelAttribute("usuario") Usuario usuario, String codProduto, String quantidade, String nome, Model model) {
+	public @ResponseBody String adicionaAoCarrinho(@ModelAttribute("carrinho") Pedido pedido, @ModelAttribute("usuario") Usuario usuario, String codProduto, String quantidade, String nome, String url, Model model) {
 		
 		int quant = Integer.parseInt(quantidade);
 		
 		Produto p = new Produto();
 		p.setCodProduto(Long.parseLong(codProduto));
 		p.setNome(nome);
-		p.setDescricao(p.getListaFotos().get(0).getUrlFoto());
+		p.setDescricao(url);
 		
 		ItemPedido i = new ItemPedido();
 		i.setPedido(pedido);
