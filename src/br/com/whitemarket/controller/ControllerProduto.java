@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -38,12 +39,12 @@ public class ControllerProduto {
 	FotoDAO daoFoto;
 	
 	@RequestMapping("/cadastrarItem")
-	public String itemForm(Produto produto, Model model, @RequestParam("codCadastro") long codP) {
-		if (codP != 0) {
+	public String itemForm(Produto produto, Model model/*, @RequestParam("codCadastro") long codP*/) {
+		if (produto.getCodProduto() != 0) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
     	    EntityManager manager = factory.createEntityManager();
     	    manager.getTransaction().begin();
-    	    model.addAttribute("produto", manager.find(Produto.class, codP));
+    	    model.addAttribute("produto", manager.find(Produto.class, produto.getCodProduto()));
     	    return "cadastrarItem";
 		} else {
 	    	return "cadastrarItem";
@@ -53,7 +54,7 @@ public class ControllerProduto {
 	@RequestMapping("/adicionaItem")
 	public String addItem(Produto produto, Model model) {
 		dao.adiciona(produto);
-		String redirecionar = "redirect:cadastrarItem?codCadastro=" + produto.getCodProduto();
+		String redirecionar = "redirect:cadastrarItem?codProduto=" + produto.getCodProduto();
 		return redirecionar;
 	}
 	
@@ -61,7 +62,7 @@ public class ControllerProduto {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public ModelAndView uploadFiles(@RequestParam CommonsMultipartFile file, HttpSession session, Produto produto) {
 		Date date = new Date();
-		String path = "C:\\Users\\FTI\\git\\PCCFTI\\WebContent\\res\\img\\fotosProduto";/*session.getServletContext().getRealPath("/");*/
+		String path = "C:\\Users\\FTI\\git\\PCCFTI\\WebContent\\res\\img\\fotosProduto";
 		String filename = produto.getCodProduto() + "_" + "foto_" + date.getTime() + file.getOriginalFilename();
 		String url = "/res/img/fotosProduto";
 		
@@ -88,7 +89,33 @@ public class ControllerProduto {
 		produto.setListaFotos(fotinha);
 		dao.edita(produto);
 		
-		return new ModelAndView("produto-success");
+		return new ModelAndView("redirect:cadastrarItem?codProduto=" + produto.getCodProduto() + "&qtdFiles=" + produto.getQtdFiles());
+	}
+	
+	@RequestMapping("/concluirItem")
+	public String addSuccess(Produto produto) {
+		return "produto-success";
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping("/listaProdutos")
+	public String cancelar(long codProduto) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+	    EntityManager manager = factory.createEntityManager();
+	    
+	    manager.getTransaction().begin();
+			Query queryFotos = manager.createQuery("Delete from Foto f WHERE f.produto.codProduto = :id");
+			queryFotos.setParameter("id", codProduto);
+			int rowsFilhos = queryFotos.executeUpdate();
+			Query queryProduto = manager.createQuery("Delete from Produto p WHERE p.codProduto = :id");
+			queryProduto.setParameter("id", codProduto);
+			int rowsProduto = queryProduto.executeUpdate();
+		manager.getTransaction().commit();
+		
+		manager.close();
+		factory.close();
+		
+		return "listaProdutos";
 	}
 	
 }

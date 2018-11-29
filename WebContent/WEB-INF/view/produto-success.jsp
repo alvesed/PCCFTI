@@ -7,6 +7,6 @@
 <title>Cadastro Finalizado</title>
 </head>
 <body>
-	
+	<h2>Produto cadastrado com sucesso!</h2>
 </body>
 </html>

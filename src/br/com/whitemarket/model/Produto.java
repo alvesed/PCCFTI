@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.GenericGenerator;
+import br.com.whitemarket.controller.Util;
 
 @Entity
 @Table(name="produto")
@@ -23,16 +23,16 @@ public class Produto {
 	
 	public Produto() {}
 	
-	public Produto(BigDecimal valor, long quantidadeDeVendas) {
+	/*public Produto(BigDecimal valor, long quantidadeDeVendas) {
 		this.valor = valor;
 		this.quantidadeDeVendas = quantidadeDeVendas;
 		
-	}
+	}*/
 	
 	@Id
 	@GeneratedValue()
 	@Column(name="cod_produto")
-	private Long codProduto;
+	private long codProduto;
 	
 	private String nome;
 	private String descricao;
@@ -48,6 +48,8 @@ public class Produto {
 	@JoinColumn(name="fk_cod_vendedor")
 	Usuario usuario;
 	
+	private int qtdFiles;
+	
 	@OneToMany(mappedBy = "produto", targetEntity = Foto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Foto> listaFotos;
 	
@@ -61,6 +63,14 @@ public class Produto {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+		
+	public int getQtdFiles() {
+		return qtdFiles;
+	}
+
+	public void setQtdFiles(int qtdFiles) {
+		this.qtdFiles = qtdFiles;
+	}
 
 	public long getQuantidadeDeVendas() {
 		return quantidadeDeVendas;
@@ -70,10 +80,10 @@ public class Produto {
 		this.quantidadeDeVendas = quantidadeDeVendas;
 	}
 
-	public Long getCodProduto() {
+	public long getCodProduto() {
 		return codProduto;
 	}
-	public void setCodProduto(Long codProduto) {
+	public void setCodProduto(long codProduto) {
 		this.codProduto = codProduto;
 	}
 	public String getNome() {
@@ -103,8 +113,9 @@ public class Produto {
 	public BigDecimal getValor() {
 		return valor;
 	}
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
+	public void setValor(String valor) {
+		Util util = new Util();
+		this.valor = util.removeMascaraValor(valor);
 	}
 	public List<Foto> getListaFotos() {
 		return listaFotos;

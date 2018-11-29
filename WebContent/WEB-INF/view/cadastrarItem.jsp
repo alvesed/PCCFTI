@@ -20,11 +20,12 @@
 		
 		<div id="main" class="container-fluid">
 			<h3 class="page-header" align="center">Cadastrar Produto</h3>
-			<form action="<c:choose><c:when test="${produto.codProduto > 0}">upload</c:when><c:otherwise>adicionaItem</c:otherwise></c:choose>" method="post" enctype="multipart/form-data"> <!-- onsubmit="Checkfiles(this)" -->
+			<form id="form" action="<c:choose><c:when test="${produto.codProduto > 0}">upload</c:when><c:otherwise>adicionaItem</c:otherwise></c:choose>" method="post" enctype="multipart/form-data"> <!-- onsubmit="Checkfiles(this)" -->
 				<div class="row">
                     <div class="form-group col-md-2">
                         <label hidden id="cod_label" for="campoCod">Código do Produto:</label>
                         <input hidden class="form-control" id="cod" type="text" name="codProduto" value="${produto.codProduto}" readonly>
+                        <input class="form-control" id="qtd_files" type="hidden" name="qtdFiles" value="${produto.qtdFiles}" readonly>
                     </div>
                 </div>
 				<div class="row">
@@ -68,7 +69,8 @@
 						<div class="form-group col-md-4">
 							<!-- label e input-->
 							<label>Fotos</label>
-							<input type="file" class="form-control" id="fotos" name="file" accept="image/png, image/jpeg" multiple>
+							<input type="file" class="form-control" id="fotos" name="file" accept="image/png, image/jpeg">
+							<button type="submit" class="form-control btn btn-primary" id="uploadFile" value="Upload File">Upload</button>
 							<span style="color: red" class="erro_foto">Adicione ao menos uma foto.</span>
 						</div>
 					</div>
@@ -84,16 +86,17 @@
 				<hr />
                 <div id="actions" class="row">
                     <div class="col-md-12">
-                        <button id="salvar" type="submit" class="btn btn-primary" value="<c:if test="${produto.codProduto > 0}">Upload File</c:if>">Salvar</button>
-                        <a href="listaProdutos" class="btn btn-dark">Cancelar</a>
+                        <button id="salvar" type="submit" class="btn btn-primary"><c:choose><c:when test="${produto.codProduto > 0}">Concluir</c:when><c:otherwise>Próximo</c:otherwise></c:choose></button>
+                        <a href='listaProdutos<c:if test="${produto.codProduto > 0}">?codProduto=${produto.codProduto}</c:if>' class="btn btn-dark">Cancelar</a>
                     </div>
                 </div>
 			</form>
 		</div>
 		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
-		<script>
-			$(document).ready(function () { 
+		<script>		
+			var erro_foto = false;
+			$(document).ready(function () {			
 	    		$("#valor").mask('000.000.000.000.000,00', {reverse: true});
 				if ($("#condicao").val() != "usado") {
 	    			$("#estado").hide();
@@ -103,17 +106,24 @@
 				$(".erro_descricao").hide();
 				$(".erro_foto").hide();
 				$(".erro_valor").hide();
+				
+				if ($("#qtd_files").val() < 1 && $("#cod").val() > 0) {
+					erro_foto = true;
+					$("#fotos").css("border", "1px solid red");
+					$(".erro_foto").show();
+				} else {
+					erro_foto = false;
+				}
 			 })
 			
 			//VALIDAÇÕES
 			var erro_nome = true;
 			var erro_descricao = true;
-			var erro_foto = true;
 			var erro_valor = true;
 			if ($("#cod").val() > 0) {
 				var erro_nome = false;
 				var erro_descricao = false;
-				var erro_foto = false;
+				var erro_foto = true;
 				var erro_valor = false;
 			}
 			
@@ -123,14 +133,29 @@
 			    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
 
 			    if(ext =="jpeg" || ext=="png"){
-			    	console.log("true");
 			        return true;
 			    }
 			    else {
-			    	console.log("false");
 			    	return false;
 			    }
 			}
+			
+			$("#uploadFile").on("click", function() {
+				if ($("#fotos").val() != 0) {
+					if ($("#qtd_files").val() < 5) {
+						var qtd = $("#qtd_files").val();
+						$("#qtd_files").val(+qtd + 1);
+						erro_foto = false;
+						$("#form").submit();
+					} else {
+						alert("Você atingiu o limite de fotos por produto.");
+						return false;
+					}
+				} else {
+					alert("Adicione uma imagem antes de clicar em 'Upload'");
+					return false;
+				}
+			})
 			
 			$("#condicao").on("change", function() {
 	    		if ($(this).val() == "usado") {
@@ -164,18 +189,6 @@
 	    		}
 	    	})
 	    	
-	    	/*$("#fotos").on("change", function() {
-	    		if ($(this).val().trim() == "") {
-	    			$(".erro_foto").show();
-	    			$("#fotos").css("border", "1px solid red");
-	    			erro_foto = true;
-	    		} else {
-	    			$(".erro_foto").hide();
-	    			$("#fotos").css("border", "1px solid green");
-	    			erro_foto = false;
-	    		}
-	    	})*/
-	    	
 	    	$("#valor").on("change", function() {
 	    		if ($(this).val().trim() == "") {
 	    			$(".erro_valor").show();
@@ -190,7 +203,7 @@
 	    	
 	    	//BOTÃO SALVAR
 	    	$("#salvar").on("click", function() {
-	    		if (erro_nome || erro_descricao || erro_valor) {
+	    		if (erro_nome || erro_descricao || erro_valor || erro_foto) {
 	    			alert("Existem erros de preenchimento. Verifique os campos em vermelho.")
 	    			if (erro_nome) {
 	    				$("#nome").css("border", "1px solid red");
@@ -198,10 +211,16 @@
 	    				$("#descricao").css("border", "1px solid red");
 	    			} if (erro_valor) {
 	    				$("#valor").css("border", "1px solid red");
+	    			} if (erro_foto) {
+	    				$("#fotos").css("border", "1px solid red");
 	    			}
 	    			return false;
 	    		} else {
-	    			alert("Produto cadastrado com sucesso!");
+	    			if ($("#cod").val() > 0) {
+	    				$("#form").attr("action", "concluirItem")
+		    			//alert("Produto cadastrado com sucesso!");
+		    			$("#form").submit();
+	    			}	    			
 	    		}
 	    	})
 		</script>
