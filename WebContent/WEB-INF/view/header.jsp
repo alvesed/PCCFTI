@@ -228,6 +228,14 @@
 						</a>
 
 					</div>
+					
+					<div class="divHeaderSubMenuOption">
+
+						<a href="cadastrarItem">
+							<p class="pHeaderMenuOption">Vender Produto</p>
+						</a>
+
+					</div>
 
 				</div>
 

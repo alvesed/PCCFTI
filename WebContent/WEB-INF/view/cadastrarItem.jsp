@@ -14,6 +14,7 @@
 	</head>
 	<body>
 	<jsp:include page = "header.jsp" />
+	<div id="divcontainer">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 	    </script>
 	    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -88,10 +89,12 @@
                 <div id="actions" class="row">
                     <div class="col-md-12">
                         <button id="salvar" type="submit" class="btn btn-primary"><c:choose><c:when test="${produto.codProduto > 0}">Concluir</c:when><c:otherwise>Próximo</c:otherwise></c:choose></button>
-                        <a href='listaProdutos<c:if test="${produto.codProduto > 0}">?codProduto=${produto.codProduto}</c:if>' class="btn btn-dark">Cancelar</a>
+                        <a href='verProdutos<c:if test="${produto.codProduto > 0}">?codProduto=${produto.codProduto}</c:if>' class="btn btn-dark">Cancelar</a>
                     </div>
                 </div>
+                <br>
 			</form>
+		</div>
 		</div>
 		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
@@ -207,10 +210,13 @@
 	    		if (erro_nome || erro_descricao || erro_valor || erro_foto) {
 	    			alert("Existem erros de preenchimento. Verifique os campos em vermelho.")
 	    			if (erro_nome) {
+	    				$(".erro_nome").show();
 	    				$("#nome").css("border", "1px solid red");
 	    			} if (erro_descricao) {
+	    				$(".erro_descricao").show();
 	    				$("#descricao").css("border", "1px solid red");
 	    			} if (erro_valor) {
+	    				$(".erro_valor").show();
 	    				$("#valor").css("border", "1px solid red");
 	    			} if (erro_foto) {
 	    				$("#fotos").css("border", "1px solid red");

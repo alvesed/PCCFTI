@@ -95,7 +95,7 @@ public class ControllerProduto {
 	
 	@RequestMapping("/concluirItem")
 	public String addSuccess(Produto produto) {
-		return "verProdutos";
+		return "redirect:verProdutos";
 	}
 	
 	@SuppressWarnings("unused")
