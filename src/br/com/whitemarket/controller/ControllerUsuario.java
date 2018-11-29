@@ -37,7 +37,7 @@ public class ControllerUsuario {
 		manager.close();
 		factory.close();
 
-    	return "cadastrarCliente";
+    	return "login";
     	
 	}
 	
