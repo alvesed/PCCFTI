@@ -1,6 +1,7 @@
 package br.com.whitemarket.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import br.com.whitemarket.controller.Util;
@@ -50,6 +53,9 @@ public class Produto {
 	
 	private int qtdFiles;
 	
+	@Temporal(TemporalType.DATE)
+	private Date dataCadastro;
+	
 	@OneToMany(mappedBy = "produto", targetEntity = Foto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Foto> listaFotos;
 	
@@ -66,6 +72,14 @@ public class Produto {
 		
 	public int getQtdFiles() {
 		return qtdFiles;
+	}
+	
+	public Date getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 	public void setQtdFiles(int qtdFiles) {

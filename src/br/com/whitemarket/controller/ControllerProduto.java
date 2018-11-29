@@ -53,6 +53,7 @@ public class ControllerProduto {
 	
 	@RequestMapping("/adicionaItem")
 	public String addItem(Produto produto, Model model) {
+		produto.setDataCadastro(new Date());
 		dao.adiciona(produto);
 		String redirecionar = "redirect:cadastrarItem?codProduto=" + produto.getCodProduto();
 		return redirecionar;
@@ -115,7 +116,7 @@ public class ControllerProduto {
 		manager.close();
 		factory.close();
 		
-		return "listaProdutos";
+		return "redirect:telaPrincipal";
 	}
 	
 }
