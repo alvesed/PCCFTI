@@ -16,7 +16,7 @@
 			<property name="javax.persistence.jdbc.driver"
 			value="com.mysql.cj.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url"
-			value="jdbc:mysql://192.168.20.154:3306/fti_final?useTimezone=true&amp;serverTimezone=UTC" />
+			value="jdbc:mysql://192.168.20.132:3306/fti_final?useTimezone=true&amp;serverTimezone=UTC" />
 			<property name="javax.persistence.jdbc.user"
 			value="root" />
 			<property name="javax.persistence.jdbc.password"

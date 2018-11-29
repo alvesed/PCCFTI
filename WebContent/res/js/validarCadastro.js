@@ -26,7 +26,7 @@ $(document).ready(function() {
       e.preventDefault();
 	  
      if (!validarCadastro(cpf,dataNascimento,telefone,email)) { 
-         alert("Erro ao cadastrar");
+       console.log("Erro ao cadastrar");
          return false;
      } else {
     	 $("#form").submit();
@@ -53,7 +53,6 @@ function validarCadastro(cpf,dataNascimento,telefone,email) {
 	}
 	
 	if(!validaTelefone(telefone)){
-		console.log(telefone);
 		alert("Digite uma Telefone valido Por favor");
 		retorno = false;
 	}else{
