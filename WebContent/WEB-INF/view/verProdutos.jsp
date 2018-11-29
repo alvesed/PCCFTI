@@ -18,6 +18,7 @@
   <thead>
     <tr>
       <th scope="col">Foto</th>
+      <th scope="col">Data Cadastro</th>
       <th scope="col">Valor do produto</th>
       <th scope="col">Vendas</th>
       <th scope="col">Ver Mais</th>
@@ -27,8 +28,9 @@
   <c:forEach items="${listProdutos}" var="listProdutos">
      <tr>
      <td>
-     	Foto
+     	<img src="${produto.listaFotos[0].urlFoto}" />
      </td>
+     <td><fmt:formatNumber value="${listProdutos.dataCadastro}" type="currency"/></td>
       <td><fmt:formatNumber value="${listProdutos.valor}" type="currency"/></td>
       <td>${listProdutos.quantidadeDeVendas}</td>
       <td>

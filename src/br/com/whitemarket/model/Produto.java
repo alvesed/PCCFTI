@@ -26,11 +26,14 @@ public class Produto {
 	
 	public Produto() {}
 	
-	/*public Produto(BigDecimal valor, long quantidadeDeVendas) {
+	public Produto(BigDecimal valor, long quantidadeDeVendas, Date dataCadastro, List<Foto> listaFotos) {
 		this.valor = valor;
 		this.quantidadeDeVendas = quantidadeDeVendas;
-		
-	}*/
+		this.dataCadastro = dataCadastro;
+		this.listaFotos = listaFotos;
+	}
+	
+	
 	
 	@Id
 	@GeneratedValue()

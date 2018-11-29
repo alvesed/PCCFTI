@@ -22,7 +22,6 @@ import javax.persistence.Transient;
 public class Pedido {
 	
 	public Pedido(Date data_compra, BigDecimal valor_pago, long quantidadeItensPedido) {
-		// TODO Auto-generated constructor stub
 		this.data_compra = data_compra;
 		this.valor_pago = valor_pago;
 		this.quantidadeItensPedido = quantidadeItensPedido;
@@ -46,11 +45,9 @@ public class Pedido {
 	
 	@OneToMany(mappedBy = "pedido", targetEntity = ItemPedido.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<ItemPedido> listaPedidos;
-	
+
 	@Transient
 	private long quantidadeItensPedido;
-	
-	
 	
 	public long getQuantidadeItensPedido() {
 		return quantidadeItensPedido;
