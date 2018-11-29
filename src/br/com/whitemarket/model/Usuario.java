@@ -23,6 +23,7 @@ public class Usuario {
 	String telefone;
 	String email;
 	String senha;
+	String endereco;
 	
 	public long getCod_usuario() {
 		return cod_usuario;
@@ -71,6 +72,12 @@ public class Usuario {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 	
 	

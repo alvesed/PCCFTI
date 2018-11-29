@@ -169,6 +169,7 @@ function validaEmail(email){
 	if(email.length <= 5 && email.length >= 30){
 		return false;
 	}else if(!email.includes("@", 1)){
+		alert("Seu e-mail deve conter @");
 		return false;
 	}else{
 		return true;
