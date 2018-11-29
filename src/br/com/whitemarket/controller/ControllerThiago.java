@@ -28,14 +28,26 @@ public class ControllerThiago {
 	
 	@RequestMapping("/telaPrincipal")
 	public String menu(Model model) {
+		Util util = new Util();
 
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
 		EntityManager	manager	= factory.createEntityManager();
 			
-		List<Produto> produto = manager.createQuery("SELECT p FROM Produto p JOIN FETCH p.listaFotos f").getResultList();
-		
-		   
-		model.addAttribute("produto", produto);
+		List<Produto> listProdutos =
+				   manager.createQuery("select NEW Produto(valor," +
+					   		" (SELECT " + 
+					   		" count(i.quantidade) as quantidades " + 
+					   		" FROM ItemPedido i "
+					   		+ " WHERE i.produto.codProduto = p.codProduto " + 
+					   		" ), dataCadastro, codProduto) from Produto p").getResultList();
+			   
+			   for(Produto produto: listProdutos) {
+				   System.out.println("TESTE" + produto.getCodProduto());
+				   produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
+			   }
+
+
+		model.addAttribute("produto", listProdutos);
 		   
 		manager.close();  
 		factory.close();
