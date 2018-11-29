@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.whitemarket.dao.JPAUsuarioDAO;
+import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
 import javax.servlet.http.HttpSession;
 
@@ -71,6 +72,12 @@ public class ControllerUsuario {
 		
 		model.addAttribute("usuarioLogado", usuario);
 		session.setAttribute("usuarioLogado",	usuario);
+		
+		Pedido pedido = new Pedido();
+		pedido.setUsuario(usuario);
+		
+		model.addAttribute("carrinho", pedido);
+		session.setAttribute("carrinho", pedido);
 		
 		manager.close();  
 		factory.close();
