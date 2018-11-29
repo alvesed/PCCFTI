@@ -24,7 +24,6 @@ img {
 }
 </style>
 
-<title>Menu Principal</title>
 </head>
 <body>
 <jsp:include page = "header.jsp" />
@@ -48,7 +47,7 @@ img {
 					</div>
 				</div>
 			</div>
-			
+				
 				<!-- carrosel de produtos -->
 			<div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
 				<!-- Wrapper for slides -->
@@ -67,7 +66,7 @@ img {
 								<div class="col-item">
 								
 									<div class="photo">
-										<img src="res/img/png/dog5.png" class="img-responsive" alt="a" />
+										<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive" alt="${produto.listaFotos[1].urlFoto}" />
 									</div>
 									
 									<div class="info">
@@ -119,7 +118,7 @@ img {
 								<div class="col-item">
 								
 									<div class="photo">
-										<img src="res/img/png/dog5.png" class="img-responsive" alt="a" />
+								<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive" alt="${produto.listaFotos[1].urlFoto}" />
 									</div>
 									
 									<div class="info">
@@ -182,7 +181,7 @@ img {
 								<div class="col-item">
 							
 									<div class="photo">
-										<img src="res/img/png/dog4.png" class="img-responsive" alt="a" />
+											<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive" alt="${produto.listaFotos[1].urlFoto}" />
 									</div>
 									
 									<div class="info">
