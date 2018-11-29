@@ -63,7 +63,7 @@ public class ControllerProduto {
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public ModelAndView uploadFiles(@RequestParam CommonsMultipartFile file, HttpSession session, Produto produto) {
 		Date date = new Date();
-		String path = "C:\\Users\\FTI\\git\\PCCFTI\\WebContent\\res\\img\\fotosProduto";
+		String path = "C:\\Users\\rafin\\git\\PCCFTI\\WebContent\\res\\img\\fotosProduto";
 		String filename = produto.getCodProduto() + "_" + "foto_" + date.getTime() + file.getOriginalFilename();
 		String url = "res/img/fotosProduto";
 		System.out.println(path + " " + filename);
