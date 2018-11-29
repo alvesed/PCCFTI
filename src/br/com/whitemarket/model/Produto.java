@@ -26,11 +26,11 @@ public class Produto {
 	
 	public Produto() {}
 	
-	public Produto(BigDecimal valor, long quantidadeDeVendas, Date dataCadastro, String urlPrimeiraImagem) {
-		this.urlPrimeiraImagem = urlPrimeiraImagem;
+	public Produto(BigDecimal valor, long quantidadeDeVendas, Date dataCadastro, long codProduto) {
 		this.valor = valor;
 		this.quantidadeDeVendas = quantidadeDeVendas;
 		this.dataCadastro = dataCadastro;
+		this.codProduto = codProduto;
 	}
 	
 	
