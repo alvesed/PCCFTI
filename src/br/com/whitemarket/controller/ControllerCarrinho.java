@@ -1,12 +1,5 @@
 package br.com.whitemarket.controller;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,10 +10,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
-import br.com.whitemarket.model.Produto;
+import br.com.whitemarket.model.Usuario;
 
 @Controller
-@SessionAttributes(value = "carrinho")
+@SessionAttributes(value = {"carrinho", "usuarioLogado"})
 public class ControllerCarrinho {
 	
 	@ModelAttribute("carrinho")
@@ -28,10 +21,17 @@ public class ControllerCarrinho {
 		return new Pedido();
 	}
 	
+	@ModelAttribute("usuarioLogado")
+	public Usuario retornaUsuario(){
+		return new Usuario();
+	}
+	
 	@RequestMapping(value="/verCarrinho")
-	public String cart(@ModelAttribute("carrinho") Pedido pedido, Model model) {
+	public String cart(@ModelAttribute("carrinho") Pedido pedido, @ModelAttribute("usuarioLogado") Usuario usuario, Model model) {
 		
-		model.addAttribute("pedido", pedido);
+		if (usuario != null && usuario.getCod_usuario() != 0) {
+			model.addAttribute("pedido", pedido);
+		}
 		
 		return "cart";
 	}
