@@ -8,9 +8,9 @@
 <head>
 <!-- Latest compiled and minified CSS -->
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="res/css/mostraProdutoStyle.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,7 +27,7 @@
 				<div class="wrapper row">
 					<div class="preview col-md-6">
 						<div class="preview-pic tab-content">
-							<div class="tab-pane active" id="pic-0"><img src="${produto.listaFotos[0].urlFoto}" /></div>
+							<div class="tab-pane active" id="pic-0"><img class="img-fluid" src="${produto.listaFotos[0].urlFoto}" /></div>
 							<c:forEach items="${fotos}" var="foto" begin="1" varStatus="i">
 								<div class="tab-pane" id="pic-${i.index}"><img src="${foto.urlFoto}" /></div>
 							</c:forEach>
@@ -48,19 +48,19 @@
 							<span class="review-no">Produto ${produto.condicao}</span>
 						</c:if>
 						<br/>
+						<div class="border border-primary rounded" style="height: 5em; border-color: #646464 !important;">
 						<p class="product-description">${produto.descricao}</p>
+						</div>
+						<br/>
 						<h4 class="price">Preço unitário: R$ <span id="valorProduto" class="spanPreco"></span></h4>
 						<br/>
-						<div style="display: inline;" class="col-md-6">
-						<h5 class="sizes">quantidade: <input style="width: 35%;"class="form-control col-2" type="number" id="quantidade" value="1" min="1" max="99">
-						</h5></div>
+						<h5 class="sizes">quantidade: <input class="form-control col-2" type="number" id="quantidade" value="1" max="99">
+						</h5>
 						<h5 class="price">preço total: R$ <span class="spanPreco" id="precoTotal"></span></h5>
 						<br/>
 						<div class="action">
 							<c:if test="${empty usuario}">
-								<span class="d-inline-block" data-toggle="popover" data-content="Por favor, faça o login.">
-									<button class="add-to-cart btn btn-outline-primary" style="pointer-events: none;" type="button" disabled>Adicionar ao Carrinho</button>
-								</span>
+									<button class="add-to-cart btn btn-outline-primary" type="button" disabled>Adicionar ao Carrinho</button>
 							</c:if>
 							
 							<c:if test="${not empty usuario}">
@@ -90,7 +90,12 @@
 		$("#quantidade").on("input", function(){
 			var quantidade = $(this).val();
 			var preco = ${produto.valor};
-			var precoTotal = preco*quantidade;
+			if (quantidade > 99){
+				$(this).val(99);
+				var precoTotal = preco * 99;
+			} else {
+				var precoTotal = preco*quantidade;
+			}
 			$("#valorTotal").maskMoney('mask', precoTotal);
 			$("#precoTotal").html($("#valorTotal").val());
 		});
