@@ -11,6 +11,16 @@
 		
 		<div id="divContainer">
 			
+			Usuario: <input readonly value="${pedido.usuario.nome}">
+			Quantidade de Itens: <input readonly value="${pedido.usuario.quantidadeItensPedido}">
+			Endereço: 
+			<select>
+			<option> ${pedido.usuario.endereco}</option>
+			<option>Outro</option>
+			</select>
+			Valor Total: <input readonly>
+			<input type="button" value="Confirmar">
+			
 		</div>
 	</body>
 </html>

@@ -1,3 +1,4 @@
+<%@page import="br.com.whitemarket.model.ItemPedido"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -6,6 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 		
 		<style type="text/css">
 		
@@ -62,7 +64,7 @@
 				margin-left: 5px;
 			}
 			
-			.h4CartItemQuantidade {
+			.inputCartItemQuantidade {
 				width: 25px;
 				height: 25px;
 				font-size: 22px;
@@ -71,12 +73,18 @@
 				padding-left: 10px;
 				border: none;
 				border-radius: 5px;
+				background-color: rgba(245, 245, 245, 0);
 				
-				transition: 300ms linear;
+				transition: 200ms linear;
 			}
 			
-			.h4CartItemQuantidade:hover, .h4CartItemQuantidade:focus {
-				box-shadow: inset 0 -7px 7px -7px black;
+			.inputCartItemQuantidade:hover {
+				box-shadow: inset 0 -5px 7px -7px black;
+			}
+			
+			.inputCartItemQuantidade:focus {
+			box-shadow: inset 0 -7px 7px -7px black;
+				background-color: rgba(245, 245, 245, 1);
 			}
 			
 			h4 {
@@ -111,15 +119,13 @@
 				
 					    <div class="divCartItem">
 					    
-					    	<div class="divCartItemImg">
-					    		<img alt="" src="">
-					    	</div>
+					    	<img alt="" class="divCartItemImg" src="${itemPedido.produto.descricao}">
 					    	
 					    	<h4 class="h4CartItemCod"> ${itemPedido.produto.codProduto} </h4>
 					    	<h4> - </h4>
 					    	<h4 class="h4CartItemNome"> ${itemPedido.produto.nome} </h4>
 					    	
-					    	<input type="number" class="h4CartItemQuantidade" value="${itemPedido.quantidade}">
+					    	<input type="text" id="produtoQuantidade" class="inputCartItemQuantidade" value="${itemPedido.quantidade}" maxlength="2" max="99">
 					    	
 					    </div>
 					    
@@ -135,7 +141,7 @@
 				<c:otherwise>
 				
 					<div class="divCartItem">
-				        <a href="#">Que tal comprar umas coisinhas? VAMOS LÁ!!!</a>
+				        <a href="<spring:url value='/telaPrincipal' />">Que tal comprar umas coisinhas? VAMOS LÁ!!!</a>
 				    </div>
 				
 				</c:otherwise>
@@ -147,18 +153,22 @@
 		<script type="text/javascript">
 		
 			$(document).ready(function() {
-				$('.qtdItemPedido').onchange(function () {
+				
+				$('#produtoQuantidade').blur(function () {
 					
 					var data = {
-						codItemPedido: $(this).parent().find("input[name='codItemPedido']").val(),
-						qtdItemPedido: $(this).val()
+						codProduto: $(this).parent().find(".h4CartItemCod").text(),
+						qtdProduto: $(this).val()
 					}
 					
 					$.ajax({
 						url: "atualizarQuantidadeItemPedido",
 						type: "POST",
 						data: data,
-						contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;";
+						contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;",
+						success: function(data){
+							alert("OK");
+						}
 					});
 				});
 			});
