@@ -20,7 +20,7 @@
 				
 				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/logo.png' />" alt="white market" /> </a>
 
-				<a href="#"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/png/enter.png' />" alt="white market" /> </a>
+				<a href="login"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/png/enter.png' />" alt="white market" /> </a>
 
 				<a href="verCarrinho"> <div id="imgHeaderTopCart" style="background-image: url('<spring:url value="res/img/png/cartVerified.png" />');" > </div> </a>
 

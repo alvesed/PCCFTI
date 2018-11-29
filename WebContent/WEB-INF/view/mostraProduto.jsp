@@ -27,13 +27,13 @@
 				<div class="wrapper row">
 					<div class="preview col-md-6">
 						<div class="preview-pic tab-content">
-							<div class="tab-pane active" id="pic-0"><img src="${produto.listaFoto[0].urlFoto}" /></div>
+							<div class="tab-pane active" id="pic-0"><img src="${produto.listaFotos[0].urlFoto}" /></div>
 							<c:forEach items="${fotos}" var="foto" begin="1" varStatus="i">
 								<div class="tab-pane" id="pic-${i.index}"><img src="${foto.urlFoto}" /></div>
 							</c:forEach>
 						</div>
 						<ul class="preview-thumbnail nav nav-tabs">
-						  <li class="active"><a data-target="#pic-0" data-toggle="tab"><img src="${produto.listaFoto[0].urlFoto}" /></a></li>
+						  <li class="active"><a data-target="#pic-0" data-toggle="tab"><img src="${produto.listaFotos[0].urlFoto}" /></a></li>
 						  
 						  <c:forEach items="${fotos}" var="foto" begin="1" varStatus="i">
 						    	<li><a data-target="#pic-${i.index}" data-toggle="tab"><img src="${foto.urlFoto}" /></a></li>
@@ -50,8 +50,8 @@
 						<p class="product-description">${produto.descricao}</p>
 						<h4 class="price">Preço unitário: R$ <span id="valorProduto" class="spanPreco"></span></h4>
 						<br/>
-						<div class="col-md-2">
-						<h5 class="sizes">quantidade: <input style="width: 30%; display: inline;" class="form-control col-2" type="number" id="quantidade" value="1" min="1" max="99">
+						<div style="display: inline;" class="col-md-6">
+						<h5 class="sizes">quantidade: <input style="width: 35%;"class="form-control col-2" type="number" id="quantidade" value="1" min="1" max="99">
 						</h5></div>
 						<h5 class="price">preço total: R$ <span class="spanPreco" id="precoTotal"></span></h5>
 						<br/>
