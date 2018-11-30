@@ -42,34 +42,22 @@ public class Produto {
 	
 	@Transient
 	private String urlPrimeiraImagem;
-	
-	
-	
-	
-	public String getUrlPrimeiraImagem() {
-		return urlPrimeiraImagem;
-	}
-
-	public void setUrlPrimeiraImagem(String urlPrimeiraImagem) {
-		this.urlPrimeiraImagem = urlPrimeiraImagem;
-	}
-
-
 
 	private String nome;
 	private String descricao;
+	private boolean ativo;
 	
 	@Column(name="estado_produto")
 	private String estadoProduto;
 	
 	private String condicao;
-	
 	private BigDecimal valor;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_cod_vendedor")
 	Usuario usuario;
 	
+	@Column(name="fotos")
 	private int qtdFiles;
 	
 	@Temporal(TemporalType.DATE)
@@ -80,6 +68,24 @@ public class Produto {
 	
 	@Transient
 	long quantidadeDeVendas;
+	
+	
+	//GETS E SETS	
+	public String getUrlPrimeiraImagem() {
+		return urlPrimeiraImagem;
+	}
+
+	public boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public void setUrlPrimeiraImagem(String urlPrimeiraImagem) {
+		this.urlPrimeiraImagem = urlPrimeiraImagem;
+	}
 	
 	public Usuario getUsuario() {
 		return usuario;

@@ -66,14 +66,18 @@
 						</select>
 					</div>
 				</div>
+				<!-- O CAMPO DE UPLOAD SÓ APARECE NA PRÓXIMA ETAPA DO CADASTRO -->
 				<c:if test="${produto.codProduto > 0}">
 					<div class="row">
 						<div class="form-group col-md-4">
 							<!-- label e input-->
 							<label>Fotos</label>
 							<input type="file" class="form-control" id="fotos" name="file" accept="image/png, image/jpeg">
-							<button type="submit" class="form-control btn btn-primary" id="uploadFile" value="Upload File">Upload</button>
 							<span style="color: red" class="erro_foto">Adicione ao menos uma foto.</span>
+						</div>
+						<div>
+							<div style="height: 32px"></div>
+							<button style="height: 44px; width: 100px" type="submit" class="form-control btn btn-primary" id="uploadFile" value="Upload File">Upload</button>
 						</div>
 					</div>
 				</c:if>
@@ -111,6 +115,7 @@
 				$(".erro_foto").hide();
 				$(".erro_valor").hide();
 				
+				//VERIFICA SE O USUÁRIO FEZ UPLOAD DE PELO MENOS UMA FOTO
 				if ($("#qtd_files").val() < 1 && $("#cod").val() > 0) {
 					erro_foto = true;
 					$("#fotos").css("border", "1px solid red");
@@ -120,10 +125,12 @@
 				}
 			 })
 			
-			//VALIDAÇÕES
+			//VARIÁVEIS GLOBAIS
 			var erro_nome = true;
 			var erro_descricao = true;
 			var erro_valor = true;
+			//FIM VARIÁVEIS GLOBAIS
+			
 			if ($("#cod").val() > 0) {
 				var erro_nome = false;
 				var erro_descricao = false;
@@ -131,7 +138,7 @@
 				var erro_valor = false;
 			}
 			
-			function Checkfiles(){
+			/*function Checkfiles(){
 			    var fup = document.getElementById('filename');
 			    var fileName = fup.value;
 			    var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
@@ -142,8 +149,10 @@
 			    else {
 			    	return false;
 			    }
-			}
+			}*/
 			
+			
+			//INCREMENTA A QUANTIDADE DE FOTOS AO FAZER UPLOAD
 			$("#uploadFile").on("click", function() {
 				if ($("#fotos").val() != 0) {
 					if ($("#qtd_files").val() < 5) {
@@ -169,6 +178,7 @@
 	    		}
 	    	})
 	    	
+	    	//VALIDAÇÕES
 	    	$("#nome").on("input", function() {
 	    		if ($(this).val() == "") {
 	    			$(".erro_nome").show();
@@ -204,6 +214,8 @@
 	    			erro_valor = false;
 	    		}
 	    	})
+	    	//FIM VALIDAÇÕES
+	    	
 	    	
 	    	//BOTÃO SALVAR
 	    	$("#salvar").on("click", function() {
@@ -225,7 +237,7 @@
 	    		} else {
 	    			if ($("#cod").val() > 0) {
 	    				$("#form").attr("action", "concluirItem")
-		    			//alert("Produto cadastrado com sucesso!");
+		    			alert("Produto cadastrado com sucesso!");
 		    			$("#form").submit();
 	    			}	    			
 	    		}

@@ -40,23 +40,23 @@ public class ControllerProduto {
 	
 	@RequestMapping("/cadastrarItem")
 	public String itemForm(Produto produto, Model model/*, @RequestParam("codCadastro") long codP*/) {
+		//VERIFICA SE É UMA EDIÇÃO
 		if (produto.getCodProduto() != 0) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
     	    EntityManager manager = factory.createEntityManager();
     	    manager.getTransaction().begin();
     	    model.addAttribute("produto", manager.find(Produto.class, produto.getCodProduto()));
-    	    return "cadastrarItem";
-		} else {
-	    	return "cadastrarItem";
 		}
+	    return "cadastrarItem";
 	}
 	
+	//ADICIONA O PRODUTO NO BANCO AO CLICAR EM 'PRÓXIMO'
 	@RequestMapping("/adicionaItem")
 	public String addItem(Produto produto, Model model) {
 		produto.setDataCadastro(new Date());
+		produto.setAtivo(false);
 		dao.adiciona(produto);
-		String redirecionar = "redirect:cadastrarItem?codProduto=" + produto.getCodProduto();
-		return redirecionar;
+		return "redirect:cadastrarItem?codProduto=" + produto.getCodProduto();
 	}
 	
 	@SuppressWarnings("unused")
@@ -88,16 +88,19 @@ public class ControllerProduto {
 		fotinha.add(foto);
 		produto.setListaFotos(fotinha);
 		produto.setDataCadastro(new Date());
+		produto.setAtivo(true);
 		dao.edita(produto);
 		
-		return new ModelAndView("redirect:cadastrarItem?codProduto=" + produto.getCodProduto() + "&qtdFiles=" + produto.getQtdFiles());
+		return new ModelAndView("redirect:cadastrarItem?codProduto=" + produto.getCodProduto() + "&fotos=" + produto.getQtdFiles());
 	}
 	
+	//ACIONADO AO CLICAR EM 'CONCLUIR'	
 	@RequestMapping("/concluirItem")
 	public String addSuccess(Produto produto) {
 		return "redirect:verProdutos";
 	}
 	
+	//SE O USUARIO CLICAR EM CANCELAR ANTES DE CONCLUIR O PRODUTO, O MESMO É REMOVIDO DO BANCO.
 	@SuppressWarnings("unused")
 	@RequestMapping("/listaProdutos")
 	public String cancelar(long codProduto) {
