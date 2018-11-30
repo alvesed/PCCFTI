@@ -26,9 +26,10 @@
   </thead>
   <tbody>
   <c:forEach items="${listProdutos}" var="listProdutos">
+  teste
      <tr>
      <td>
-     	<img src="${listProdutos.urlPrimeiraImagem}" />
+     	<img style="height: 50px" src="${listProdutos.urlPrimeiraImagem}" />
      </td>
      <th scope="row"><fmt:formatDate  value="${listProdutos.dataCadastro}" pattern="dd/MM/yyyy"/></th>
       <td><fmt:formatNumber value="${listProdutos.valor}" type="currency"/></td>

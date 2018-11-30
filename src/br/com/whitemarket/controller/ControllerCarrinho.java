@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.sun.glass.ui.Application;
-
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
@@ -24,13 +22,27 @@ import br.com.whitemarket.model.Usuario;
 @SessionAttributes(value = {"carrinho", "usuarioLogado"})
 public class ControllerCarrinho {
 	
+	@ModelAttribute(value = "carrinho")
+	public Pedido retornaPedido() {
+		return new Pedido();
+	}
+	
 	@RequestMapping(value="/verCarrinho")
-	public String cart(@ModelAttribute("carrinho") Pedido pedido, @SessionAttribute("usuarioLogado") Usuario usuario, Model model) {
+	public String cart(HttpSession session, Model model) {
+		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
 		
 		model.addAttribute("pedido", pedido);
-		model.addAttribute("usuario", usuario);
 		
-		return "cart";
+		if(usuario != null && !usuario.getEmail().equals("")) {
+			model.addAttribute("usuario", usuario);
+			model.addAttribute("pedido", pedido);
+			return "cart";
+		} else {
+			return "forward:login";
+		}
+		
 	}
 	
 	@RequestMapping(value = "alterarQuantidadeItemCarrinho", method = RequestMethod.POST)
@@ -70,20 +82,35 @@ public class ControllerCarrinho {
 		
 		model.addAttribute("usuario", usuario);
 		model.addAttribute("pedido", pedido);
-		
-		pedido.setFinalizado(true);
-		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-		EntityManager manager = factory.createEntityManager();
-		
-		manager.getTransaction().begin();
-		manager.merge(pedido);
-		manager.getTransaction().commit();
-		
-		manager.close();
-		factory.close();
-				
+			
 		return "confirmarCompra";
+	}
+	
+	@RequestMapping(value = "")
+	public String endBuy(@SessionAttribute("usuarioLogado") Usuario usuario, @ModelAttribute("carrinho") Pedido pedido, Model model) {
+		
+		if (!usuario.getEmail().equals("") && usuario != null) {
+			System.out.println("P");
+			System.out.println("A");
+			System.out.println("S");
+			System.out.println("S");
+			System.out.println("O");
+			System.out.println("U");
+			System.out.println("!");
+			pedido.setFinalizado(true);
+			
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+			EntityManager manager = factory.createEntityManager();
+			
+			manager.getTransaction().begin();
+			manager.merge(pedido);
+			manager.getTransaction().commit();
+			
+			manager.close();
+			factory.close();
+		}
+		
+		return null;
 	}
 	
 	@RequestMapping(value = "/verificarLogin")

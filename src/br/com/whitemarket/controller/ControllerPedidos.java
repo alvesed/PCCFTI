@@ -66,7 +66,6 @@ public class ControllerPedidos {
 				   		" ), dataCadastro, codProduto) from Produto p").getResultList();
 		   
 		   for(Produto produto: listProdutos) {
-			   System.out.println("TESTE" + produto.getCodProduto());
 			   produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
 		   }
 		   
