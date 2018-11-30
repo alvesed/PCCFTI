@@ -264,7 +264,17 @@
 							<a href="login">
 								<p class="pHeaderMenuOption">Logar</p>
 							</a>
+							
+						</div>
+						
+						
+						<div class="divHeaderSubMenuOption">
 	
+						
+							<a href="cadastrarCliente">
+								<p class="pHeaderMenuOption">Criar uma conta</p>
+							</a>
+							
 						</div>
 						
 					</div>
