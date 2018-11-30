@@ -141,7 +141,7 @@
 				
 				</c:if>
 				
-				<c:if test="${empty fn:trim(pedido)}">
+				<c:if test="${pedido.quantidadeItensPedido eq 0}">
 					<div class="divCartItem">
 				        <a href="<spring:url value='/telaPrincipal' />">Que tal comprar umas coisinhas? VAMOS LÁ!!!</a>
 				    </div>

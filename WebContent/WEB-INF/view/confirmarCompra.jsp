@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	</head>
 	
-	<body>
+	<body  onLoad="javascript:verificaSessao()">
 		<jsp:include page="header.jsp"></jsp:include>
 		
 		<div id="divContainer">
@@ -31,6 +31,12 @@
 					window.location.href = 'finalizarCompra';
 				});
 			});
+
+	    	function verificaSessao() {
+    			<c:if test="${empty usuarioLogado.email.length()}">
+    				window.location.href="<c:url value='/login'/>";
+	    		</c:if>
+	    	}
 		
 		</script>
 		

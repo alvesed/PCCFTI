@@ -46,9 +46,10 @@ public class Util {
 				
 		
 
-		   manager.close();  
-		   factory.close();
-		  return foto.get(0).getUrlFoto();
+		manager.close();  
+		factory.close();
+		
+		return (foto.get(0) != null && !foto.get(0).getUrlFoto().equals("")) ? foto.get(0).getUrlFoto() : "";
 		
 	}
 }
