@@ -12,15 +12,27 @@
 		<div id="divContainer">
 			
 			Usuario: <input readonly value="${pedido.usuario.nome}">
-			Quantidade de Itens: <input readonly value="${pedido.usuario.quantidadeItensPedido}">
+			Quantidade de Itens: <input readonly value="${pedido.listaPedidos.size()}">
 			Endereço: 
 			<select>
 			<option> ${pedido.usuario.endereco}</option>
 			<option>Outro</option>
 			</select>
 			Valor Total: <input readonly>
-			<input type="button" value="Confirmar">
+			<input type="button" id="confirmar" value="Confirmar">
 			
 		</div>
+		
+		<script type="text/javascript">
+		
+			$(document).ready(function() {
+				$('#confirmar').click(function(){
+					alert('Parabens!');
+					window.location.href = 'telaPrincipal';
+				});
+			});
+		
+		</script>
+		
 	</body>
 </html>

@@ -207,8 +207,9 @@
 					</a>
 				
 				</div>
+				<c:out value="${usuario.email}"></c:out>
+				<c:if test="${ not empty usuario.email }">
 				
-				<c:if test="${ usuario ne null }">
 					<div class="divHeaderMenuOption">
 	
 						<a href="#">
@@ -243,7 +244,7 @@
 				
 				</c:if>
 				
-				<c:if test="${ usuario eq null }">
+				<c:if test="${ usuario.email eq null or empty usuario.email }">
 					<div class="divHeaderMenuOption">
 	
 						<a href="#">
@@ -270,7 +271,9 @@
 		<script type="text/javascript">
 
 			$(document).ready(function() {
-				
+				$.ajax{
+					
+				}
 			});
 
 		</script>

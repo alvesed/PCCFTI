@@ -163,7 +163,6 @@
 			$(document).ready(function() {
 				
 				$('#produtoQuantidade').change(function () {
-					alert($(this).parent().find(".h4CartItemCod").text());
 					
 					if ($('#produtoQuantidade').val() <= 0) {
 						var confirmation = confirm("Deseja retirar esse item das compras?");

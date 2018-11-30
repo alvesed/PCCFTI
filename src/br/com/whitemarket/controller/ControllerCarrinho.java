@@ -1,11 +1,17 @@
 package br.com.whitemarket.controller;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.sun.glass.ui.Application;
@@ -18,18 +24,8 @@ import br.com.whitemarket.model.Usuario;
 @SessionAttributes(value = {"carrinho", "usuarioLogado"})
 public class ControllerCarrinho {
 	
-	@ModelAttribute("carrinho")
-	public Pedido retornaCarrinho(){
-		return new Pedido();
-	}
-	
-	@ModelAttribute("usuarioLogado")
-	public Usuario retornaUsuario(){
-		return new Usuario();
-	}
-	
 	@RequestMapping(value="/verCarrinho")
-	public String cart(@ModelAttribute("carrinho") Pedido pedido, @ModelAttribute("usuarioLogado") Usuario usuario, Model model) {
+	public String cart(@ModelAttribute("carrinho") Pedido pedido, @SessionAttribute("usuarioLogado") Usuario usuario, Model model) {
 		
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("usuario", usuario);
@@ -39,10 +35,7 @@ public class ControllerCarrinho {
 	
 	@RequestMapping(value = "alterarQuantidadeItemCarrinho", method = RequestMethod.POST)
 	public void refreshQuantityItemCart(@ModelAttribute("carrinho") Pedido pedido, @RequestParam("codProduto") int codProduto, @RequestParam("qtdProduto") int qtdProduto) {
-		
-		System.out.println(codProduto);
-		System.out.println(qtdProduto);
-		
+
 		for(ItemPedido ip : pedido.getListaPedidos()) {
 			if (ip.getProduto().getCodProduto() == codProduto) {
 				if (qtdProduto <= 0) {
@@ -73,15 +66,28 @@ public class ControllerCarrinho {
 	}
 	
 	@RequestMapping(value = "/confirmaCompra")
-	public String confirmBuy(@ModelAttribute("carrinho") Pedido pedido, Model model) {
+	public String confirmBuy(@SessionAttribute("usuarioLogado") Usuario usuario, @ModelAttribute("carrinho") Pedido pedido, Model model) {
 		
+		model.addAttribute("usuario", usuario);
 		model.addAttribute("pedido", pedido);
 		
+		pedido.setFinalizado(true);
+		
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+		EntityManager manager = factory.createEntityManager();
+		
+		manager.getTransaction().begin();
+		manager.merge(pedido);
+		manager.getTransaction().commit();
+		
+		manager.close();
+		factory.close();
+				
 		return "confirmarCompra";
 	}
 	
 	@RequestMapping(value = "/verificarLogin")
-	public Model verifyUserLogin(@ModelAttribute("usuarioLogado") Usuario usuario, Model model) {
+	public Model verifyUserLogin(@SessionAttribute("usuarioLogado") Usuario usuario, Model model) {
 		
 		model.addAttribute("usuario", usuario);
 		
