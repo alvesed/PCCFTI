@@ -18,12 +18,12 @@
 		
 		  <div class="form-group">
 		    <label for="InputEmail1">Email:</label>
-		    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Email">
+		    <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Email" name="email">
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="InputPassword1">Senha:</label>
-		    <input type="password" class="form-control" id="InputPassword1" placeholder="******">
+		    <input type="password" class="form-control" id="InputPassword1" placeholder="******" name="senha">
 		  </div>
   
 		  <button type="submit" class="btn btn-primary">Login</button>

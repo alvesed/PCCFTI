@@ -18,10 +18,13 @@
 <script type="text/javascript" src="res/js/bootstrap.js"></script>
 
 <style>
-img {
+.container img {
+	max-width: 150px;
+	min-height: 200px;
 	max-width: 150px;
 	max-height: 200px;
 }
+
 </style>
 
 </head>
@@ -66,7 +69,7 @@ img {
 								<div class="col-item">
 								
 									<div class="photo">
-										<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive" alt="${produto.listaFotos[1].urlFoto}" />
+										<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive"  />
 									</div>
 									
 									<div class="info">
@@ -118,7 +121,7 @@ img {
 								<div class="col-item">
 								
 									<div class="photo">
-								<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive" alt="${produto.listaFotos[1].urlFoto}" />
+								<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive"  />
 									</div>
 									
 									<div class="info">
@@ -171,7 +174,7 @@ img {
 			</div>
 	 
 	
-								<c:forEach items="${produto}" var="produto" begin="6" end="11" varStatus="img" > 
+								<c:forEach items="${produto}" var="produto" begin="0" end="11" varStatus="img" > 
 						   
 							
 								<div class="col-lg-4 col-md-6 mb-4">
@@ -181,7 +184,7 @@ img {
 								<div class="col-item">
 							
 									<div class="photo">
-											<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive" alt="${produto.listaFotos[1].urlFoto}" />
+											<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive"  />
 									</div>
 									
 									<div class="info">

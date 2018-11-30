@@ -20,11 +20,17 @@
 	<jsp:include page = "header.jsp" />
 	<div class="container">
 		<div class="card">
+		<div style="left-margin: auto; right-margin: auto; width: 50%;">
 			<h3>Produto não encontrado</h3>
 			<br/>
 			<br/>
-			<button class="add-to-cart btn btn-outline-primary" type="button">Voltar à página Inicial</button>
+			<a href="/WhiteMarket/telaPrincipal"><button class="add-to-cart btn btn-outline-primary" type="button">Voltar à página Inicial</button></a>
+		</div>
 		</div>
 	</div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<script type="text/javascript">
+</script>
 </html>
