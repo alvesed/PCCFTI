@@ -1,5 +1,8 @@
 package br.com.whitemarket.controller;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -7,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,12 +24,8 @@ import br.com.whitemarket.model.Usuario;
 @SessionAttributes(value = {"carrinho", "usuarioLogado"})
 public class ControllerCarrinho {
 	
-	HttpSession hs;
-	
 	@RequestMapping(value="/verCarrinho")
 	public String cart(HttpSession session, Model model) {
-		
-		this.hs = session;
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
@@ -43,12 +41,14 @@ public class ControllerCarrinho {
 	}
 	
 	@RequestMapping(value = "alterarQuantidadeItemCarrinho", method = RequestMethod.POST)
-	public void refreshQuantityItemCart(@ModelAttribute("carrinho") Pedido pedido, @RequestParam("codProduto") int codProduto, @RequestParam("qtdProduto") int qtdProduto) {
+	public void refreshQuantityItemCart(HttpSession session, @RequestParam("codProduto") int codProduto, @RequestParam("qtdProduto") int qtdProduto) {
 
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		
 		for(ItemPedido ip : pedido.getListaPedidos()) {
 			if (ip.getProduto().getCodProduto() == codProduto) {
 				if (qtdProduto <= 0) {
-					removeItemCart(pedido, codProduto);
+					removeItemCart(session, codProduto);
 				}
 				
 				ip.setQuantidade(qtdProduto);
@@ -58,7 +58,9 @@ public class ControllerCarrinho {
 	}
 	
 	@RequestMapping(value="removerItemCarrinho", method = RequestMethod.POST)
-	public void removeItemCart(@ModelAttribute("carrinho") Pedido pedido, @RequestParam("codProduto") int codProduto) {
+	public void removeItemCart(HttpSession session, @RequestParam("codProduto") int codProduto) {
+		
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
 		
 		for(ItemPedido ip : pedido.getListaPedidos()) {
 			
@@ -75,26 +77,38 @@ public class ControllerCarrinho {
 	}
 	
 	@RequestMapping(value = "/confirmaCompra")
-	public String confirmBuy(@SessionAttribute("usuarioLogado") Usuario usuario, @ModelAttribute("carrinho") Pedido pedido, Model model) {
+	public String confirmBuy(HttpSession session, Model model) {
 		
-		model.addAttribute("usuario", usuario);
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		
+		BigDecimal sum = BigDecimal.valueOf(0.0);
+		for(ItemPedido ip : pedido.getListaPedidos()) {
+			
+			System.out.println(ip.getProduto().getNome());
+			
+			sum.add(
+					ip.getProduto().getValor().multiply(
+							BigDecimal.valueOf(
+									ip.getQuantidade())));
+			
+		}
+		
+		pedido.setValor_pago(sum);
+		
 		model.addAttribute("pedido", pedido);
 			
 		return "confirmarCompra";
 	}
 	
-	@RequestMapping(value = "")
-	public String endBuy(@SessionAttribute("usuarioLogado") Usuario usuario, @ModelAttribute("carrinho") Pedido pedido, Model model) {
+	@RequestMapping(value = "/finalizarCompra")
+	public String endBuy(HttpSession session, Model model) {
+		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
 		
 		if (!usuario.getEmail().equals("") && usuario != null) {
-			System.out.println("P");
-			System.out.println("A");
-			System.out.println("S");
-			System.out.println("S");
-			System.out.println("O");
-			System.out.println("U");
-			System.out.println("!");
 			pedido.setFinalizado(true);
+			pedido.setData_compra(new Date());
 			
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
 			EntityManager manager = factory.createEntityManager();
@@ -107,7 +121,7 @@ public class ControllerCarrinho {
 			factory.close();
 		}
 		
-		return null;
+		return "redirect:verPedidos";
 	}
 	
 	@RequestMapping(value = "/verificarLogin")

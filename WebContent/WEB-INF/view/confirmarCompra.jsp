@@ -28,7 +28,7 @@
 			$(document).ready(function() {
 				$('#confirmar').click(function(){
 					alert('Parabens!');
-					window.location.href = 'telaPrincipal';
+					window.location.href = 'finalizarCompra';
 				});
 			});
 		
