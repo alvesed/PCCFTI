@@ -103,10 +103,15 @@
 	
 		$("#adicionaCarrinho").click(function(){
 			if(adicionou == false){
-				adicionaCarrinho($("#quantidade").val());
+				if (parseInt($("#quantidade").val()) == 0){
+					alert("Selecione a quantidade");
+					return false;
+				} else {
+					adicionaCarrinho($("#quantidade").val());
+				}
 			}
-		})
-	});
+		});
+	})
 	
 	function adicionaCarrinho(quant) {
 		var codproduto = "${produto.codProduto}";
@@ -117,7 +122,7 @@
 			   nome: nomeproduto,
 			   url: urlPrimeiraFoto,
 			   quantidade: quant
-	 		};   
+	 	};   
 					   
 		$.ajax({
 			url:"adicionaCarrinho",
