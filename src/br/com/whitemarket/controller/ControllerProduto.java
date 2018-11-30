@@ -38,6 +38,15 @@ public class ControllerProduto {
 	@Autowired
 	FotoDAO daoFoto;
 	
+	@RequestMapping("/verItemJaCadastrado")
+	public String verItemJaCadastrado(String codProduto, Model model/*, @RequestParam("codCadastro") long codP*/) {
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+    	    EntityManager manager = factory.createEntityManager();
+    	    model.addAttribute("produto", manager.find(Produto.class, Long.parseLong(codProduto)));
+    	    return "verProdutoJaCadastrado";
+
+	}
+	
 	@RequestMapping("/cadastrarItem")
 	public String itemForm(Produto produto, Model model/*, @RequestParam("codCadastro") long codP*/) {
 		//VERIFICA SE É UMA EDIÇÃO

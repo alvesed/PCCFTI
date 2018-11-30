@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Produto;
+import br.com.whitemarket.model.Usuario;
 
 @Controller
 public class ControllerPedidos {
@@ -51,9 +53,11 @@ public class ControllerPedidos {
 	 * @Rafa Nonino
 	 */
 	@RequestMapping("/verProdutos")
-	public String verProdutos(Model model) {
+	public String verProdutos(Model model, HttpSession session) {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
 		EntityManager	manager	= factory.createEntityManager();
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		
 		Util util = new Util();
 		
 		

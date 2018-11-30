@@ -26,18 +26,21 @@
   </thead>
   <tbody>
   <c:forEach items="${listProdutos}" var="listProdutos">
-  teste
      <tr>
      <td>
-     	<img style="height: 50px" src="${listProdutos.urlPrimeiraImagem}" />
+     	<img style="max-height: 50px;max-width: 50px; width: auto; height: auto" src="${listProdutos.urlPrimeiraImagem}" />
      </td>
      <th scope="row"><fmt:formatDate  value="${listProdutos.dataCadastro}" pattern="dd/MM/yyyy"/></th>
       <td><fmt:formatNumber value="${listProdutos.valor}" type="currency"/></td>
       <td>${listProdutos.quantidadeDeVendas}</td>
       <td>
-      <button type="button" class="btn btn-default">
+      <form action="verItemJaCadastrado" method="post">
+	      <input type="hidden" value="${listProdutos.codProduto}" name="codProduto"/>  
+            <button  type="submit" class="btn btn-default">
   		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 	  </button>
+      </form>
+
 	  </td>
     </tr>
  </c:forEach>
