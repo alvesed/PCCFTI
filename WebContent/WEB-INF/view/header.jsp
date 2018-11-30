@@ -21,8 +21,24 @@
 			<div id="divHeaderTop">
 				
 				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/logo.png' />" alt="white market" /> </a>
+				
+				<c:choose>
+				
+					<c:when test="${ not empty usuarioLogado.email }">
+					
+						<a href="#"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/png/logout.png' />" alt="white market" /> </a>
+					
+					</c:when>
+					
+					<c:otherwise>
+					
+						<a href="login"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/png/login.png' />" alt="white market" /> </a>
+					
+					</c:otherwise>
+					
+				</c:choose>
+				
 
-				<a href="login"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/png/enter.png' />" alt="white market" /> </a>
 
 				<a href="verCarrinho"> <div id="imgHeaderTopCart" style="background-image: url('<spring:url value="res/img/png/cartVerified.png" />');" > </div> </a>
 
@@ -210,9 +226,82 @@
 
 				<c:choose>
 				
+<<<<<<< HEAD
+					<div class="divHeaderMenuOption">
+	
+						<a href="#">
+							<p class="pHeaderMenuOption"> Minha Conta </p>
+						</a>
+	
+						<div class="divHeaderSubMenuOption">
+	
+							<a href="verPedidos">
+								<p class="pHeaderMenuOption">Meus Pedidos</p>
+							</a>
+	
+						</div>
+	
+						<div class="divHeaderSubMenuOption">
+	
+							<a href="verProdutos">
+								<p class="pHeaderMenuOption">Meus Produtos</p>
+							</a>
+	
+						</div>
+						
+						<div class="divHeaderSubMenuOption">
+	
+							<a href="cadastrarItem">
+								<p class="pHeaderMenuOption">Vender Produto</p>
+							</a>
+	
+						</div>
+						
+						<div class="divHeaderSubMenuOption">
+	
+							<a href="logout">
+								<p class="pHeaderMenuOption">Sair</p>
+							</a>
+	
+						</div>
+	
+					</div>
+				
+				</c:if>
+				
+				<c:if test="${ usuario.email eq null or empty usuario.email }">
+					<div class="divHeaderMenuOption">
+	
+						<a href="#">
+							<p class="pHeaderMenuOption"> Minha Conta </p>
+						</a>
+						
+						<div class="divHeaderSubMenuOption">
+	
+							<a href="login">
+								<p class="pHeaderMenuOption">Logar</p>
+							</a>
+							
+						</div>
+						
+						
+						<div class="divHeaderSubMenuOption">
+	
+						
+							<a href="cadastrarCliente">
+								<p class="pHeaderMenuOption">Criar uma conta</p>
+							</a>
+							
+						</div>
+						
+					</div>
+				</c:if>
+
+=======
 					<c:when test="${ not empty usuarioLogado.email }">
 					
 						<div class="divHeaderMenuOption">
+>>>>>>> branch 'master' of https://github.com/alvesed/PCCFTI
 		
 							<a href="#">
 								<p class="pHeaderMenuOption"> Minha Conta </p>
