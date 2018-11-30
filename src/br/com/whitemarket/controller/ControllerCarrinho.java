@@ -22,27 +22,24 @@ import br.com.whitemarket.model.Usuario;
 @SessionAttributes(value = {"carrinho", "usuarioLogado"})
 public class ControllerCarrinho {
 	
-	@ModelAttribute(value = "carrinho")
-	public Pedido retornaPedido() {
-		return new Pedido();
-	}
+	HttpSession hs;
 	
 	@RequestMapping(value="/verCarrinho")
 	public String cart(HttpSession session, Model model) {
 		
+		this.hs = session;
+		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
-		
-		model.addAttribute("pedido", pedido);
 		
 		if(usuario != null && !usuario.getEmail().equals("")) {
 			model.addAttribute("usuario", usuario);
 			model.addAttribute("pedido", pedido);
-			return "cart";
 		} else {
-			return "forward:login";
+			model.addAttribute("usuario", new Usuario());
 		}
 		
+		return "cart";
 	}
 	
 	@RequestMapping(value = "alterarQuantidadeItemCarrinho", method = RequestMethod.POST)

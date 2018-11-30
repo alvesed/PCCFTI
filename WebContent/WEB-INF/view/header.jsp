@@ -208,70 +208,74 @@
 				
 				</div>
 
-				<c:if test="${ not empty usuarioLogado.email }">
+				<c:choose>
 				
-					<div class="divHeaderMenuOption">
-	
-						<a href="#">
-							<p class="pHeaderMenuOption"> Minha Conta </p>
-						</a>
-	
-						<div class="divHeaderSubMenuOption">
-	
-							<a href="verPedidos">
-								<p class="pHeaderMenuOption">Meus Pedidos</p>
-							</a>
-	
-						</div>
-	
-						<div class="divHeaderSubMenuOption">
-	
-							<a href="verProdutos">
-								<p class="pHeaderMenuOption">Meus Produtos</p>
-							</a>
-	
-						</div>
-						
-						<div class="divHeaderSubMenuOption">
-	
-							<a href="cadastrarItem">
-								<p class="pHeaderMenuOption">Vender Produto</p>
-							</a>
-	
-						</div>
-						
-						<div class="divHeaderSubMenuOption">
-	
-							<a href="logout">
-								<p class="pHeaderMenuOption">Sair</p>
-							</a>
-	
-						</div>
-	
-					</div>
-				
-				</c:if>
-				
-				<c:if test="${ usuario.email eq null or empty usuario.email }">
-					<div class="divHeaderMenuOption">
-	
-						<a href="#">
-							<p class="pHeaderMenuOption"> Minha Conta </p>
-						</a>
-						
-						<div class="divHeaderSubMenuOption">
-	
-							<a href="login">
-								<p class="pHeaderMenuOption">Logar</p>
-							</a>
-	
-						</div>
-						
-					</div>
-				</c:if>
-
+					<c:when test="${ not empty usuarioLogado.email }">
+					
+						<div class="divHeaderMenuOption">
 		
-
+							<a href="#">
+								<p class="pHeaderMenuOption"> Minha Conta </p>
+							</a>
+		
+							<div class="divHeaderSubMenuOption">
+		
+								<a href="verPedidos">
+									<p class="pHeaderMenuOption">Meus Pedidos</p>
+								</a>
+		
+							</div>
+		
+							<div class="divHeaderSubMenuOption">
+		
+								<a href="verProdutos">
+									<p class="pHeaderMenuOption">Meus Produtos</p>
+								</a>
+		
+							</div>
+							
+							<div class="divHeaderSubMenuOption">
+		
+								<a href="cadastrarItem">
+									<p class="pHeaderMenuOption">Vender Produto</p>
+								</a>
+		
+							</div>
+							
+							<div class="divHeaderSubMenuOption">
+		
+								<a href="logout">
+									<p class="pHeaderMenuOption">Sair</p>
+								</a>
+		
+							</div>
+		
+						</div>
+					
+					</c:when>
+					
+					<c:otherwise>
+					
+						<div class="divHeaderMenuOption">
+		
+							<a href="#">
+								<p class="pHeaderMenuOption"> Minha Conta </p>
+							</a>
+							
+							<div class="divHeaderSubMenuOption">
+		
+								<a href="login">
+									<p class="pHeaderMenuOption">Logar</p>
+								</a>
+		
+							</div>
+							
+						</div>
+					
+					</c:otherwise>
+					
+				</c:choose>
+				
 			</div>
 
 		</div>
