@@ -33,9 +33,7 @@ public class ControllerItemPedido {
 		if (p.getCodProduto() == 0) {
 			return "produto404";
 		}
-		Usuario u = (Usuario) session.getAttribute("usuarioLogado");
 		
-		model.addAttribute("usuario", u);
 		model.addAttribute("produto", p);
 		model.addAttribute("fotos", p.getListaFotos());
 		

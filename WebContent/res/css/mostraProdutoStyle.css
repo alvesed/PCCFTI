@@ -13,6 +13,19 @@ img {
   max-width: 100%;
 }
 
+.tab-pane{
+	height: 370px;
+	width: 100%;
+}
+
+.tab-pane img{
+	display: block;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	max-height: 368px !important;
+	width: auto !important;
+}
+
 .preview {
   display: -webkit-box;
   display: -webkit-flex;
@@ -28,7 +41,7 @@ img {
       margin-bottom: 20px; } }
 
 .preview-pic {
-	max-height: 370px;
+	max-height: 370px !important;
   	-webkit-box-flex: 1;
   	-webkit-flex-grow: 1;
   	-ms-flex-positive: 1;
@@ -109,25 +122,37 @@ img {
   .size:first-of-type {
     margin-left: 40px; }
 
-.add-to-cart {
-  background: #646464 !important;
-  padding: 1.2em 1.5em;
-  border: none;
-  text-transform: UPPERCASE;
-  font-weight: bold;
+.adicionado-carrinho, .erro-carrinho, .add-to-cart {
+	padding: 1.2em 1.5em;
+	border: none;
+	text-transform: UPPERCASE;
+	font-weight: bold;
+	-webkit-transition: background .3s ease;
+    transition: background .3s ease;
+}
+
+.adicionado-carrinho {
+  background: #008000 !important;
+ 
   color: #fff !important;
   -webkit-transition: background .3s ease;
-          transition: background .3s ease; }
-  .add-to-cart:hover, .like:hover {
-    background: #b36800 !important;
-    color: #fff; }
+          transition: background .3s ease; 
+}
 
-.not-available {
-  text-align: center;
-  line-height: 2em; }
-  .not-available:before {
-    font-family: fontawesome;
-    content: "\f00d";
+.adicionado-carrinho:hover {
+    background: #008000 !important;
+    color: #0f0; }
+
+.erro-carrinho:hover {
+	background: #cc0000 !important;
+	color: #fff; }
+
+.add-to-cart, .erro-carrinho {
+  background: #646464 !important;
+  color: #fff !important;
+}
+  .add-to-cart:hover {
+    background: #b36800 !important;
     color: #fff; }
 
 .tooltip-inner {
