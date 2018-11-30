@@ -9,7 +9,6 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import br.com.whitemarket.model.Foto;
-import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Produto;
 
 public class Util {

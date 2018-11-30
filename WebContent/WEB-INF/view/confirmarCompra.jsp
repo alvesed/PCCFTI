@@ -18,7 +18,7 @@
 			<option> ${pedido.usuario.endereco}</option>
 			<option>Outro</option>
 			</select>
-			Valor Total: <input readonly>
+			Valor Total: <input readonly value="${pedido.valor_pago}">
 			<input type="button" id="confirmar" value="Confirmar">
 			
 		</div>

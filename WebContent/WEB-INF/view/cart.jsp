@@ -126,7 +126,7 @@
 					    	<h4> - </h4>
 					    	<h4 class="h4CartItemNome"> ${itemPedido.produto.nome} </h4>
 					    	
-					    	<h4 class="h4CartItemNome"> ${itemPedido.produto.valor * itempedido.quantidade} </h4>
+					    	<h4 class="h4CartItemNome"> ${itemPedido.produto.valor * itemPedido.quantidade} </h4>
 					    	
 					    	<input type="text" id="produtoQuantidade" class="inputCartItemQuantidade" value="${itemPedido.quantidade}" maxlength="2" max="99">
 					    	

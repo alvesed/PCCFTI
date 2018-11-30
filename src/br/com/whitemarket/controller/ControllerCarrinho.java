@@ -84,7 +84,7 @@ public class ControllerCarrinho {
 		BigDecimal sum = BigDecimal.valueOf(0.0);
 		for(ItemPedido ip : pedido.getListaPedidos()) {
 			
-			System.out.println(ip.getProduto().getNome());
+			System.out.println(sum);
 			
 			sum.add(
 					ip.getProduto().getValor().multiply(
