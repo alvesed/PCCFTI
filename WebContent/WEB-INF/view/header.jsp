@@ -207,8 +207,8 @@
 					</a>
 				
 				</div>
-				<c:out value="${usuario.email}"></c:out>
-				<c:if test="${ not empty usuario.email }">
+
+				<c:if test="${ not empty usuarioLogado.email }">
 				
 					<div class="divHeaderMenuOption">
 	
@@ -236,6 +236,14 @@
 	
 							<a href="cadastrarItem">
 								<p class="pHeaderMenuOption">Vender Produto</p>
+							</a>
+	
+						</div>
+						
+						<div class="divHeaderSubMenuOption">
+	
+							<a href="logout">
+								<p class="pHeaderMenuOption">Sair</p>
 							</a>
 	
 						</div>

@@ -47,6 +47,13 @@ public class ControllerUsuario {
 		return "login";
 	}
 	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("usuarioLogado");
+		session.removeAttribute("carrinho");
+		return "redirect:telaPrincipal";
+	}
+	
 	@RequestMapping("/autenticacao")
 	public String auth(@RequestParam String email, @RequestParam String senha, Model model, HttpSession session) {
 //		JPAUsuarioDAO user = new JPAUsuarioDAO();
@@ -58,31 +65,40 @@ public class ControllerUsuario {
 		EntityManager	manager	= factory.createEntityManager();
 		Usuario usuario = new Usuario();
 		
-		System.out.println("entrou no controller com email = " + email);
-		
-		usuario = manager.createQuery(
+		//System.out.println("entrou no controller com email = " + email);
+		try {
+			System.out.println("entrou no try");
+			usuario = manager.createQuery(
 				  "SELECT u from Usuario u WHERE u.email = :email and u.senha = :senha", Usuario.class).
 				  setParameter("email", email).setParameter("senha", senha).getSingleResult();
-		
-		if(usuario.getCod_usuario() == 0) {
+			if(usuario.getCod_usuario() == 0) {
+				model.addAttribute("erroLogin", "Usuário não encontrado.");
+				return "login";
+			}
+			
+			//System.out.println("Retornou do banco usuario = " + usuario.getNome());
+			
+			//model.addAttribute("usuarioLogado", usuario);
+			session.setAttribute("usuarioLogado",	usuario);
+			
+			Pedido pedido = new Pedido();
+			pedido.setUsuario(usuario);
+			
+			//model.addAttribute("carrinho", pedido);
+			session.setAttribute("carrinho", pedido);
+			
+			manager.close();  
+			factory.close();
+			
+			return "redirect:telaPrincipal";
+			
+		} catch (Exception e) {
+			model.addAttribute("erroLogin", "Usuário ou Senha Inválidos");
 			return "login";
 		}
 		
-		System.out.println("Retornou do banco usuario = " + usuario.getNome());
 		
-		model.addAttribute("usuarioLogado", usuario);
-		session.setAttribute("usuarioLogado",	usuario);
-		
-		Pedido pedido = new Pedido();
-		pedido.setUsuario(usuario);
-		
-		model.addAttribute("carrinho", pedido);
-		session.setAttribute("carrinho", pedido);
-		
-		manager.close();  
-		factory.close();
-		
-		return "redirect:telaPrincipal";
+
 	}
 
 }

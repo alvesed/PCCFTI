@@ -14,6 +14,8 @@
 <body>
 <jsp:include page="header.jsp" ></jsp:include>
 	<div id="divContainer">
+	
+		
 		<form action="autenticacao">
 		
 		  <div class="form-group">
@@ -24,8 +26,12 @@
 		  <div class="form-group">
 		    <label for="InputPassword1">Senha:</label>
 		    <input type="password" class="form-control" id="InputPassword1" placeholder="******" name="senha">
+		     <c:if test="${not empty erroLogin}">
+  		   	<span id="aviso" class="form-text text-muted">${erroLogin}</span></br>
+  		   </c:if>
 		  </div>
-  
+  		  
+  		   
 		  <button type="submit" class="btn btn-primary">Login</button>
 		</form>
   </div>
