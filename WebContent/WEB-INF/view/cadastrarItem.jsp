@@ -12,7 +12,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	</head>
-	<body>
+	<body onLoad="javascript:verificaSessao();">
+	
 	<jsp:include page = "header.jsp" />
 	<div id="divcontainer">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
@@ -27,7 +28,6 @@
                     <div class="form-group col-md-2">
                         <label hidden id="cod_label" for="campoCod">Código do Produto:</label>
                         <input hidden class="form-control" id="cod" type="text" name="codProduto" value="${produto.codProduto}" readonly>
-             			<input hidden class="form-control" id="codUser" type="text" name="usuario.cod_usuario" value="${usuarioLogado.cod_usuario}" readonly>
                         <input class="form-control" id="qtd_files" type="hidden" name="qtdFiles" value="${produto.qtdFiles}" readonly>
                     </div>
                 </div>
@@ -80,14 +80,6 @@
 							<div style="height: 32px"></div>
 							<button style="height: 44px; width: 100px" type="submit" class="form-control btn btn-primary" id="uploadFile" value="Upload File">Upload</button>
 						</div>
-					</div>
-					<hr>
-					<div class="row">
-						<dir class="form-group col-md-4">
-							<c:forEach items="${produto.listaFotos}" var="listFotos">
-								<img style="max-height: 250px;max-width: 250px; width: auto; height: auto" src="${listFotos.urlFoto}" />
-				  			</c:forEach>
-						</dir>
 					</div>
 				</c:if>
 				<div class="row">
@@ -250,7 +242,13 @@
 		    			$("#form").submit();
 	    			}	    			
 	    		}
-	    	})
+	    	});
+	    	
+	    	function verificaSessao() {
+    			<c:if test="${empty usuarioLogado.email.length()}">
+    				window.location.href="<c:url value='/login'/>";
+	    		</c:if>
+	    	}
 		</script>
 	</body>
 </html>
