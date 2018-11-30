@@ -38,6 +38,8 @@ public class Pedido {
 	private Usuario usuario;
 	
 	BigDecimal valor_pago;
+	double valor_pagoDouble;
+
 	private boolean finalizado;
 	
 	@Temporal(TemporalType.DATE)
@@ -76,6 +78,15 @@ public class Pedido {
 	public void setValor_pago(BigDecimal valor_pago) {
 		this.valor_pago = valor_pago;
 	}
+
+	public double getValor_pagoDouble() {
+		return this.getValor_pago().doubleValue();
+	}
+
+	public void setValor_pagoDouble(double valor_pagoDouble) {
+		this.setValor_pago(BigDecimal.valueOf(valor_pagoDouble));
+	}
+	
 	public boolean isFinalizado() {
 		return finalizado;
 	}

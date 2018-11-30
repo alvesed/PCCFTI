@@ -41,19 +41,13 @@ public class ControllerCarrinho {
 	}
 	
 	@RequestMapping(value = "alterarQuantidadeItemCarrinho", method = RequestMethod.POST)
-	public void refreshQuantityItemCart(HttpSession session, @RequestParam("codProduto") int codProduto, @RequestParam("qtdProduto") int qtdProduto) {
+	public void refreshQuantityItemCart(HttpSession session, @RequestParam("codProduto") int codProduto, @RequestParam("qtdProduto") String qtdProduto) {
 
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
 		
 		for(ItemPedido ip : pedido.getListaPedidos()) {
-			if (ip.getProduto().getCodProduto() == codProduto) {
-				if (qtdProduto <= 0) {
-					removeItemCart(session, codProduto);
-				}
-				
-				ip.setQuantidade(qtdProduto);
-				break;
-			}
+			ip.setQuantidade(Integer.parseInt(qtdProduto));
+			break;
 		}
 	}
 	
@@ -81,19 +75,14 @@ public class ControllerCarrinho {
 		
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
 		
-		BigDecimal sum = BigDecimal.valueOf(0.0);
+		double sum = 0.0;
 		for(ItemPedido ip : pedido.getListaPedidos()) {
 			
+			sum += ip.getProduto().getValor().doubleValue() * ip.getQuantidade();
 			System.out.println(sum);
-			
-			sum.add(
-					ip.getProduto().getValor().multiply(
-							BigDecimal.valueOf(
-									ip.getQuantidade())));
-			
 		}
 		
-		pedido.setValor_pago(sum);
+		pedido.setValor_pagoDouble(sum);
 		
 		model.addAttribute("pedido", pedido);
 			

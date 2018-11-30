@@ -112,50 +112,54 @@
 	
 		<div id="divContainer">
 			
-			<c:if test="${not empty usuario.nome}">
+			<c:choose>
+				<c:when test="${not empty usuario.nome}">
 				
-				<c:if test="${not empty pedido and pedido.getListaPedidos().size() > 0}">
+					<c:if test="${not empty pedido and pedido.getListaPedidos().size() > 0}">
 				
-					<c:forEach var="itemPedido" items="${pedido.listaPedidos}">
-				
-					    <div class="divCartItem">
-					    
-					    	<img alt="" class="divCartItemImg" src="${itemPedido.produto.descricao}">
-					    	
-					    	<h4 class="h4CartItemCod"> ${itemPedido.produto.codProduto} </h4>
-					    	<h4> - </h4>
-					    	<h4 class="h4CartItemNome"> ${itemPedido.produto.nome} </h4>
-					    	
-					    	<h4 class="h4CartItemNome"> ${itemPedido.produto.valor * itemPedido.quantidade} </h4>
-					    	
-					    	<input type="text" id="produtoQuantidade" class="inputCartItemQuantidade" value="${itemPedido.quantidade}" maxlength="2" max="99">
-					    	
-					    </div>
-					    
-					    <svg></svg>
-					    
-					</c:forEach>
+						<c:forEach var="itemPedido" items="${pedido.listaPedidos}">
 					
-					<input type="button" id="keepBuying" onClick="window.location.href='<spring:url value="/telaPrincipal" />';" value="Comprar mais...">
-					<input type="button" id="confirmationBuying" onClick="window.location.href='<spring:url value="/confirmaCompra" />'" value="Fechar compra">
+						    <div class="divCartItem">
+						    
+						    	<img alt="" class="divCartItemImg" src="${itemPedido.produto.descricao}">
+						    	
+						    	<h4 class="h4CartItemCod"> ${itemPedido.produto.codProduto} </h4>
+						    	<h4> - </h4>
+						    	<h4 class="h4CartItemNome"> ${itemPedido.produto.nome} </h4> <br>
+						    	
+						    	<h4 class="h4CartItemName"> ${itemPedido.produto.valor * itemPedido.quantidade} </h4>
+						    	
+						    	<input type="text" id="produtoQuantidade" class="inputCartItemQuantidade" value="${itemPedido.quantidade}" maxlength="2" max="99">
+						    	
+						    </div>
+						    
+						    <svg></svg>
+						    
+						</c:forEach>
+						
+						<input type="button" id="keepBuying" onClick="window.location.href='<spring:url value="/telaPrincipal" />';" value="Comprar mais...">
+						<input type="button" id="confirmationBuying" onClick="window.location.href='<spring:url value="/confirmaCompra" />'" value="Fechar compra">
+					
+					</c:if>
+					
+					<c:if test="${pedido.getListaPedidos().size() eq 0}">
+						<div class="divCartItem">
+					        <a href="<spring:url value='/telaPrincipal' />">Que tal comprar umas coisinhas? VAMOS LÁ!!!</a>
+					    </div>
+					</c:if>
 				
-				</c:if>
+				</c:when>
 				
-				<c:if test="${pedido.quantidadeItensPedido eq 0}">
+				<c:otherwise>
+				
 					<div class="divCartItem">
-				        <a href="<spring:url value='/telaPrincipal' />">Que tal comprar umas coisinhas? VAMOS LÁ!!!</a>
+				        <a href="<spring:url value='/login' />">Vamos nos logar? Partiu #comprinhas...</a>
 				    </div>
-				</c:if>
-			
-			</c:if>
-			
-			<c:if test="${empty usuario.nome}">
 				
-				<div class="divCartItem">
-			        <a href="<spring:url value='/login' />">Vamos nos logar? Partiu #comprinhas...</a>
-			    </div>
+				</c:otherwise>
+			</c:choose>
 			
-			</c:if>
+			
 			
 		</div>
 		
@@ -183,6 +187,7 @@
 							});
 						}
 					} else {
+						var confirmation = confirm("Deseja alterar esse item das compras?");
 						var data = {
 							codProduto: $(this).parent().find(".h4CartItemCod").text(),
 							qtdProduto: $(this).val()
