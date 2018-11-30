@@ -67,7 +67,7 @@ public class ControllerPedidos {
 				   		" count(i.quantidade) as quantidades " + 
 				   		" FROM ItemPedido i "
 				   		+ " WHERE i.produto.codProduto = p.codProduto " + 
-				   		" ), dataCadastro, codProduto) from Produto p").getResultList();
+				   		" ), dataCadastro, codProduto) from Produto p WHERE p.ativo = 1").getResultList();
 		   
 		   for(Produto produto: listProdutos) {
 			   produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
