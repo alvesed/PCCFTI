@@ -26,6 +26,7 @@
   </thead>
   <tbody>
   <c:forEach items="${listProdutos}" var="listProdutos">
+  teste
      <tr>
      <td>
      	<img style="height: 25px" src="${listProdutos.urlPrimeiraImagem}" />
