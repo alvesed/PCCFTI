@@ -162,22 +162,42 @@
 		
 			$(document).ready(function() {
 				
-				$('#produtoQuantidade').blur(function () {
+				$('#produtoQuantidade').change(function () {
+					alert($(this).parent().find(".h4CartItemCod").text());
 					
-					var data = {
-						codProduto: $(this).parent().find(".h4CartItemCod").text(),
-						qtdProduto: $(this).val()
-					}
-					
-					$.ajax({
-						url: "atualizarQuantidadeItemPedido",
-						type: "POST",
-						data: data,
-						contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;",
-						success: function(data){
-							alert("OK");
+					if ($('#produtoQuantidade').val() <= 0) {
+						var confirmation = confirm("Deseja retirar esse item das compras?");
+						if (confirmation == true) {
+							var removeData = {
+								codProduto: $(this).parent().find(".h4CartItemCod").text()
+							}
+							
+							$.ajax({
+								url: "removerItemCarrinho",
+								type: "POST",
+								data: removeData,
+								contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;",
+								success: function(data){
+									alert("OK");
+								}
+							});
 						}
-					});
+					} else {
+						var data = {
+							codProduto: $(this).parent().find(".h4CartItemCod").text(),
+							qtdProduto: $(this).val()
+						}
+						
+						$.ajax({
+							url: "alterarQuantidadeItemCarrinho",
+							type: "POST",
+							data: data,
+							contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;",
+							success: function(data){
+								alert("OK");
+							}
+						});
+					}
 				});
 			});
 		

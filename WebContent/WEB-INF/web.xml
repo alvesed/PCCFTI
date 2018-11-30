@@ -35,7 +35,7 @@
 		<url-pattern>*.png</url-pattern>
 	</servlet-mapping>
 	<session-config>
-		<session-timeout>3</session-timeout>
+		<session-timeout>99</session-timeout>
 	</session-config>
 	<filter>
      <filter-name>SetCharacterEncodingFilter</filter-name>
