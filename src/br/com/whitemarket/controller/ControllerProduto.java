@@ -26,6 +26,7 @@ import br.com.whitemarket.dao.FotoDAO;
 import br.com.whitemarket.dao.ProdutoDAO;
 import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.Produto;
+import br.com.whitemarket.model.Usuario;
 
 
 @Transactional
@@ -39,7 +40,7 @@ public class ControllerProduto {
 	FotoDAO daoFoto;
 	
 	@RequestMapping("/verItemJaCadastrado")
-	public String verItemJaCadastrado(String codProduto, Model model/*, @RequestParam("codCadastro") long codP*/) {
+	public String verItemJaCadastrado(String codProduto, Model model) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
     	    EntityManager manager = factory.createEntityManager();
     	    model.addAttribute("produto", manager.find(Produto.class, Long.parseLong(codProduto)));
@@ -48,7 +49,11 @@ public class ControllerProduto {
 	}
 	
 	@RequestMapping("/cadastrarItem")
-	public String itemForm(Produto produto, Model model/*, @RequestParam("codCadastro") long codP*/) {
+	public String itemForm(Produto produto, Model model, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		if (usuario == null || usuario.getEmail().equals("")) {
+			return "redirect:login";
+		}
 		//VERIFICA SE É UMA EDIÇÃO
 		if (produto.getCodProduto() != 0) {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
@@ -70,7 +75,7 @@ public class ControllerProduto {
 	
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public ModelAndView uploadFiles(@RequestParam CommonsMultipartFile file, HttpSession session, Produto produto) {
+	public ModelAndView uploadFiles(@RequestParam CommonsMultipartFile file, HttpSession session, Produto produto, String codUser) {
 		Date date = new Date();
 		String path = "C:\\Users\\rafin\\git\\PCCFTI\\WebContent\\res\\img\\fotosProduto";
 		String filename = produto.getCodProduto() + "_" + "foto_" + date.getTime() + file.getOriginalFilename();
