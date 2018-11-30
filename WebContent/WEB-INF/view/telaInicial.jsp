@@ -68,9 +68,10 @@
 								
 								<div class="col-item">
 								
-									<div class="photo">
-										<img src="${produto.urlPrimeiraImagem}" class="img-responsive"  />
+								<div class="photo">
+											<a href="verProduto?codigoProduto=${produto.codProduto}" > <img src="${produto.urlPrimeiraImagem}" class="img-responsive"  />  </a>
 									</div>
+									
 									
 									<div class="info">
 										<div class="row">
@@ -121,7 +122,7 @@
 								<div class="col-item">
 								
 									<div class="photo">
-								<img src="${produto.urlPrimeiraImagem}" class="img-responsive"  />
+								<a href="verProduto?codigoProduto=${produto.codProduto}" > <img src="${produto.urlPrimeiraImagem}" class="img-responsive"  />  </a>
 									</div>
 									
 									<div class="info">
@@ -184,7 +185,7 @@
 								<div class="col-item">
 							
 									<div class="photo">
-											<img src="${produto.urlPrimeiraImagem}" class="img-responsive"  />
+											<a href="verProduto?codigoProduto=${produto.codProduto}" > <img src="${produto.urlPrimeiraImagem}" class="img-responsive"  />  </a>
 									</div>
 									
 									<div class="info">
