@@ -69,7 +69,7 @@
 								<div class="col-item">
 								
 									<div class="photo">
-										<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive"  />
+										<img src="${produto.urlPrimeiraImagem}" class="img-responsive"  />
 									</div>
 									
 									<div class="info">
@@ -121,7 +121,7 @@
 								<div class="col-item">
 								
 									<div class="photo">
-								<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive"  />
+								<img src="${produto.urlPrimeiraImagem}" class="img-responsive"  />
 									</div>
 									
 									<div class="info">
@@ -184,7 +184,7 @@
 								<div class="col-item">
 							
 									<div class="photo">
-											<img src="${produto.listaFotos[0].urlFoto}" class="img-responsive"  />
+											<img src="${produto.urlPrimeiraImagem}" class="img-responsive"  />
 									</div>
 									
 									<div class="info">
@@ -198,7 +198,7 @@
 											</div>
 										</div>
 										
-										
+										 
 										<div class="separator clear-left">
 											<p class="btn-add">
 												<i class="fa fa-shopping-cart"></i><a

@@ -33,6 +33,13 @@ public class Produto {
 		this.codProduto = codProduto;
 	}
 	
+	public Produto(String nome, String descricao, String condicao, BigDecimal valor, long codProduto) {
+		this.valor = valor;
+		this.descricao = descricao;
+		this.condicao = condicao;
+		this.nome = nome;
+		this.codProduto = codProduto;
+	}
 	
 	
 	@Id

@@ -17,7 +17,7 @@ import br.com.whitemarket.model.Foto;
 
 @Controller
 public class ControllerThiago {
-	
+	  
 	@Autowired
 	ItemProdutoDAO dao;
 
@@ -34,15 +34,9 @@ public class ControllerThiago {
 		EntityManager	manager	= factory.createEntityManager();
 			
 		List<Produto> listProdutos =
-				   manager.createQuery("select NEW Produto(valor," +
-					   		" (SELECT " + 
-					   		" count(i.quantidade) as quantidades " + 
-					   		" FROM ItemPedido i "
-					   		+ " WHERE i.produto.codProduto = p.codProduto " + 
-					   		" ), dataCadastro, codProduto) from Produto p").getResultList();
+				   manager.createQuery("select NEW Produto(nome, descricao, condicao, valor, codProduto) from Produto p").getResultList();
 			   
 			   for(Produto produto: listProdutos) {
-				   System.out.println("TESTE" + produto.getCodProduto());
 				   produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
 			   }
 
