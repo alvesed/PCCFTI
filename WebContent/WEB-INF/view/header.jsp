@@ -285,6 +285,14 @@
 								</a>
 		
 							</div>
+					
+							<div class="divHeaderSubMenuOption">
+							
+								<a href="cadastrarCliente">
+									<p class="pHeaderMenuOption">Crie a sua conta</p>
+								</a>
+		
+							</div>
 							
 						</div>
 					
