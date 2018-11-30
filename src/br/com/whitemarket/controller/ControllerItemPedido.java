@@ -34,7 +34,8 @@ public class ControllerItemPedido {
 			return "produto404";
 		}
 		
-		model.addAttribute("produto", p);
+		session.setAttribute("produto", p);
+
 		model.addAttribute("fotos", p.getListaFotos());
 		
 		return "mostraProduto";
@@ -43,13 +44,11 @@ public class ControllerItemPedido {
 	@RequestMapping(value="adicionaCarrinho", method=RequestMethod.POST)
 	public @ResponseBody String adicionaAoCarrinho(HttpSession session, String codProduto, String quantidade, String nome, String url, Model model) {
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		Produto p = (Produto) session.getAttribute("produto");
+		
+		session.removeAttribute("produto");
 		
 		int quant = Integer.parseInt(quantidade);
-		
-		Produto p = new Produto();
-		p.setCodProduto(Long.parseLong(codProduto));
-		p.setNome(nome);
-		p.setDescricao(url);
 		
 		ItemPedido i = new ItemPedido();
 		i.setPedido(pedido);
