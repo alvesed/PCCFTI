@@ -20,7 +20,7 @@
 
 			<div id="divHeaderTop">
 				
-				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/logo.png' />" alt="white market" /> </a>
+				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/logo-novo.png' />" alt="white market" /> </a>
 				
 				<c:choose>
 				
@@ -51,7 +51,7 @@
 				<div class="divHeaderMenuOption">
 
 					<a href="#">
-						<p class="pHeaderMenuOption"> OptionMenu 1 </p>
+						<p class="pHeaderMenuOption"> Categorias </p>
 					</a>
 
 					<div class="divHeaderSubMenuOption">
@@ -137,41 +137,14 @@
 				</div>
 
 				<div class="divHeaderMenuOption">
-
-					<a href="#">
-						<p class="pHeaderMenuOption"> OptionMenu 2 </p>
-					</a>
-
-					<div class="divHeaderSubMenuOption">
-
-						<a href="#">
-							<p class="pHeaderSubMenuOption"> SubOptionMenu 1 </p>
-						</a>
-
-						<div class="divHeaderInnerSubMenuOption">
-
-							<a href="#">
-								<p class="pHeaderInnerSubMenuOption"> Inner SubOption 1 </p>
-							</a>
-
-						</div>
-
-						<div class="divHeaderInnerSubMenuOption">
-
-							<a href="#">
-								<p class="pHeaderInnerSubMenuOption"> Inner SubOption 2 </p>
-							</a>
-
-						</div>
-
-					</div>
+		
 
 				</div>
 
 				<div class="divHeaderMenuOption">
 
 					<a href="#">
-						<p class="pHeaderMenuOption"> OptionMenu 3 </p>
+						<p class="pHeaderMenuOption"> Ofertas </p>
 					</a>
 
 					<div class="divHeaderSubMenuOption">
@@ -195,7 +168,7 @@
 				<div class="divHeaderMenuOption">
 
 					<a href="#">
-						<p class="pHeaderMenuOption"> OptionMenu 4 </p>
+						<p class="pHeaderMenuOption"> Promoções </p>
 					</a>
 
 					<div class="divHeaderSubMenuOption">
@@ -218,9 +191,7 @@
 				
 				<div class="divHeaderMenuOption">
 
-					<a href="#">
-						<p class="pHeaderMenuOption"> OptionMenu 5 </p>
-					</a>
+					
 				
 				</div>
 
