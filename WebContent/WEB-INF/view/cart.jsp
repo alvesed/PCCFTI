@@ -114,11 +114,11 @@
 		<div id="divContainer">
 			
 			<c:choose>
-				<c:when test="${not empty usuario.nome}">
+				<c:when test="${not empty usuarioLogado.nome}">
 				
-					<c:if test="${not empty pedido and pedido.getListaPedidos().size() > 0}">
+					<c:if test="${not empty carrinho and carrinho.listaPedidos.size() > 0}">
 				
-						<c:forEach var="itemPedido" items="${pedido.listaPedidos}">
+						<c:forEach var="itemPedido" items="${carrinho.listaPedidos}">
 					
 						    <div class="divCartItem">
 						    
@@ -143,7 +143,7 @@
 					
 					</c:if>
 					
-					<c:if test="${pedido.getListaPedidos().size() eq 0}">
+					<c:if test="${carrinho.listaPedidos.size() eq 0}">
 						<div class="divCartItem">
 					        <a href="<spring:url value='/telaPrincipal' />">Que tal comprar umas coisinhas? VAMOS LÁ!!!</a>
 					    </div>

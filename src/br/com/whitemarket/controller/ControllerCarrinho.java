@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
-import br.com.whitemarket.model.Produto;
 import br.com.whitemarket.model.Usuario;
 
 @Controller
@@ -25,39 +24,12 @@ import br.com.whitemarket.model.Usuario;
 public class ControllerCarrinho {
 	
 	@RequestMapping(value="/verCarrinho")
-	public String cart(HttpSession session, Model model) {
+	public String cart(HttpSession session) {
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
 		
-		if(usuario != null && !usuario.getEmail().equals("")) {
-			model.addAttribute("usuario", usuario);
-			model.addAttribute("pedido", pedido);
-		} else {
-			model.addAttribute("usuario", new Usuario());
-		}
-		
 		return "cart";
-	}
-	
-	
-	@RequestMapping(value="/verCarrinhoJaCadastrao")
-	public String cartJaCadastrado(HttpSession session, Model model, String cod_pedido) {
-		
-		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-	    EntityManager manager = factory.createEntityManager();
-	    
-	    System.out.println(manager.find(Pedido.class, Long.parseLong(cod_pedido)).getValor_pago());
-		
-		if(usuario != null && !usuario.getEmail().equals("")) {
-			model.addAttribute("usuario", usuario);
-			model.addAttribute("pedido", manager.find(Pedido.class, Long.parseLong(cod_pedido)));
-		} else {
-			model.addAttribute("usuario", new Usuario());
-		}
-		
-		return "cartJaCadastrado";
 	}
 	
 	@RequestMapping(value = "alterarQuantidadeItemCarrinho", method = RequestMethod.POST)
@@ -110,7 +82,7 @@ public class ControllerCarrinho {
 	}
 	
 	@RequestMapping(value = "/finalizarCompra")
-	public String endBuy(HttpSession session, Model model) {
+	public String endBuy(HttpSession session) {
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
@@ -132,9 +104,9 @@ public class ControllerCarrinho {
 		
 		session.removeAttribute("carrinho");
 		
-		pedido = new Pedido();
-		pedido.setUsuario(usuario);
-		session.setAttribute("carrinho", pedido);
+		Pedido novoPedido = new Pedido();
+		novoPedido.setUsuario(usuario);
+		session.setAttribute("carrinho", novoPedido);
 		
 		return "redirect:verPedidos";
 	}
