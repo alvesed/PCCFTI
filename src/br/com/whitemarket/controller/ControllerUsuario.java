@@ -1,136 +1,127 @@
 package br.com.whitemarket.controller;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import br.com.whitemarket.dao.JPAUsuarioDAO;
+import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
-import javax.servlet.http.HttpSession;
-
 
 @Controller
-public class ControllerUsuario {
+@SessionAttributes(value = {"carrinho", "usuarioLogado"})
+public class ControllerCarrinho {
 	
-	@RequestMapping("/cadastrarCliente")
-	public String cadastrarCliente() {
+	@RequestMapping(value="/verCarrinho")
+	public String cart(HttpSession session) {
+		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		
+		return "cart";
+	}
+	
+	@RequestMapping(value = "alterarQuantidadeItemCarrinho", method = RequestMethod.POST)
+	public void refreshQuantityItemCart(HttpSession session, @RequestParam("codProduto") int codProduto, @RequestParam("qtdProduto") String qtdProduto) {
 
-    	return "cadastrarCliente";
-   	
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		
+		for(ItemPedido ip : pedido.getListaPedidos()) {
+			ip.setQuantidade(Integer.parseInt(qtdProduto));
+			break;
+		}
 	}
 	
-	@RequestMapping("/efetivarCadastroCliente")
-	public String itemForm(Usuario usuario) {
+	@RequestMapping(value="removerItemCarrinho", method = RequestMethod.POST)
+	public void removeItemCart(HttpSession session, @RequestParam("codProduto") int codProduto) {
 		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-        EntityManager manager = factory.createEntityManager();
-        
-        manager.getTransaction().begin();
-        manager.persist(usuario);
-		manager.getTransaction().commit();
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
 		
-		manager.close();
-		factory.close();
-
-    	return "login";
-    	
-	}
-	
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-	
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("usuarioLogado");
-		session.removeAttribute("carrinho");
-		return "redirect:telaPrincipal";
-	}
-	
-	@RequestMapping("/autenticacao")
-	public String auth(@RequestParam String email, @RequestParam String senha, Model model, HttpSession session) {
-//		JPAUsuarioDAO user = new JPAUsuarioDAO();
-//		
-//		System.out.println("o que veio pelo form é: " + senha);
-//		user.autentica(email, senha);
-		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-		EntityManager	manager	= factory.createEntityManager();
-		Usuario usuario = new Usuario();
-		
-		//System.out.println("entrou no controller com email = " + email);
-		try {
-			System.out.println("entrou no try");
-			usuario = manager.createQuery(
-				  "SELECT u from Usuario u WHERE u.email = :email and u.senha = :senha", Usuario.class).
-				  setParameter("email", email).setParameter("senha", senha).getSingleResult();
-			if(usuario.getCod_usuario() == 0) {
-				model.addAttribute("erroLogin", "Usuário não encontrado.");
-				return "login";
+		for(ItemPedido ip : pedido.getListaPedidos()) {
+			
+			if (ip.getProduto().getCodProduto() == codProduto) {
+				
+				int i = pedido.getListaPedidos().indexOf(ip);
+				pedido.getListaPedidos().remove(i);
+				break;
+				
 			}
 			
-			//System.out.println("Retornou do banco usuario = " + usuario.getNome());
-			
-			//model.addAttribute("usuarioLogado", usuario);
-			session.setAttribute("usuarioLogado",	usuario);
-			
-			Pedido pedido = new Pedido();
-			pedido.setUsuario(usuario);
-			
-			//model.addAttribute("carrinho", pedido);
-			session.setAttribute("carrinho", pedido);
-			
-			manager.close();  
-			factory.close();
-			
-			return "redirect:telaPrincipal";
-			
-		} catch (Exception e) {
-			model.addAttribute("erroLogin", "Usuário ou Senha Inválidos");
-			return "login";
 		}
 		
-		
-
 	}
 	
+	@RequestMapping(value = "/confirmaCompra")
+	public String confirmBuy(HttpSession session, Model model) {
+		
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		
+		double sum = 0.0;
+		for(ItemPedido ip : pedido.getListaPedidos()) {
+			
+			sum += ip.getProduto().getValor().doubleValue() * ip.getQuantidade();
+			System.out.println(sum);
+		}
+		
+		pedido.setValor_pagoDouble(sum);
+		
+		model.addAttribute("pedido", pedido);
+			
+		return "confirmarCompra";
+	}
 	
-//	@RequestMapping("/verificarLoginRepetido")
-//	public String verificarLoginRepetido(String valor) {
-//		
-//		Connection conn = null;
-//		Statement stmt = null;
-//
-//		try {
-//			conn = db.obterConexao();
-//
-//			String sql = "SELECT * FROM usuario WHERE email = verificar_email";
-//			
-//			stmt = conn.createStatement();
-//			ResultSet rs = stmt.executeQuery(sql);
-//			while (rs.next()) {
-//			
-//			}
-//
-//		} catch (SQLException e) {
-//			System.out.println("Erro ao consultar");
-//			e.printStackTrace();
-//		}
-//		
-//		return verificar_email;
-//		
-//    	
-//	}
+	@RequestMapping(value = "/finalizarCompra")
+	public String endBuy(HttpSession session) {
+		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		
+		if (!usuario.getEmail().equals("") && usuario != null) {
+			pedido.setFinalizado(true);
+			pedido.setData_compra(new Date());
+			
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+			EntityManager manager = factory.createEntityManager();
+			
+			manager.getTransaction().begin();
+			manager.merge(pedido);
+			manager.getTransaction().commit();
+			
+			manager.close();
+			factory.close();
+		}
+		
+		session.removeAttribute("carrinho");
+		
+		Pedido novoPedido = new Pedido();
+		novoPedido.setUsuario(usuario);
+		session.setAttribute("carrinho", novoPedido);
+		
+		return "redirect:verPedidos";
+	}
 	
-
+	@RequestMapping(value = "/verificarLogin")
+	public Model verifyUserLogin(@SessionAttribute("usuarioLogado") Usuario usuario, Model model) {
+		
+		model.addAttribute("usuario", usuario);
+		
+		return model;
+	}
+	
+	@RequestMapping(value="/test")
+	public String test() {
+		return "headerH";
+	}
+	
 }
