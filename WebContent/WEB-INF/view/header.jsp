@@ -20,19 +20,19 @@
 
 			<div id="divHeaderTop">
 				
-				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/logo-novo.png' />" alt="white market" /> </a>
+				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/ico/logo-novo.png' />" alt="white market" /> </a>
 				
 				<c:choose>
 				
 					<c:when test="${ not empty usuarioLogado.email }">
 					
-						<a href="#"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/png/logout.png' />" alt="white market" /> </a>
+						<a href="#"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/ico/logout.png' />" alt="white market" /> </a>
 					
 					</c:when>
 					
 					<c:otherwise>
 					
-						<a href="login"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/png/login.png' />" alt="white market" /> </a>
+						<a href="login"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/ico/login.png' />" alt="white market" /> </a>
 					
 					</c:otherwise>
 					
