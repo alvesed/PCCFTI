@@ -138,8 +138,8 @@
 						    
 						</c:forEach>
 						
-						<input type="button" id="keepBuying" onClick="window.location.href='<spring:url value="/telaPrincipal" />';" value="Comprar mais...">
-						<input type="button" id="confirmationBuying" onClick="window.location.href='<spring:url value="/confirmaCompra" />'" value="Fechar compra">
+						<input type="button" id="keepBuying" onClick="window.location.href='<spring:url value="/telaPrincipal" />';" value="Continuar Comprando...">
+						<input type="button" id="confirmationBuying" onClick="window.location.href='<spring:url value="/confirmaCompra" />'" value="Finalizar Pedido">
 					
 					</c:if>
 					
