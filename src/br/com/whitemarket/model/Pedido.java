@@ -21,10 +21,11 @@ import javax.persistence.Transient;
 @Table(name="pedido")
 public class Pedido {
 	
-	public Pedido(Date data_compra, BigDecimal valor_pago, long quantidadeItensPedido) {
+	public Pedido(Date data_compra, BigDecimal valor_pago, long quantidadeItensPedido, Usuario usuario) {
 		this.data_compra = data_compra;
 		this.valor_pago = valor_pago;
 		this.quantidadeItensPedido = quantidadeItensPedido;
+		this.usuario = usuario;
 	}
 	
 	public Pedido() {}	
