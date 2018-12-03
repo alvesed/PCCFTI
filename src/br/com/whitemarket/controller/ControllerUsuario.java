@@ -1,5 +1,8 @@
 package br.com.whitemarket.controller;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -100,5 +103,34 @@ public class ControllerUsuario {
 		
 
 	}
+	
+	
+//	@RequestMapping("/verificarLoginRepetido")
+//	public String verificarLoginRepetido(String valor) {
+//		
+//		Connection conn = null;
+//		Statement stmt = null;
+//
+//		try {
+//			conn = db.obterConexao();
+//
+//			String sql = "SELECT * FROM usuario WHERE email = verificar_email";
+//			
+//			stmt = conn.createStatement();
+//			ResultSet rs = stmt.executeQuery(sql);
+//			while (rs.next()) {
+//			
+//			}
+//
+//		} catch (SQLException e) {
+//			System.out.println("Erro ao consultar");
+//			e.printStackTrace();
+//		}
+//		
+//		return verificar_email;
+//		
+//    	
+//	}
+	
 
 }

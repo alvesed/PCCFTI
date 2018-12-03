@@ -29,18 +29,23 @@ public class ControllerPedidos {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/verPedidos")
-	public String verPedidos(Model model) {
+	public String verPedidos(Model model, HttpSession session) {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
 		EntityManager	manager	= factory.createEntityManager();
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		long codigo = usuario.getCod_usuario();
 		
-
-		   List<Pedido> listPedidos =
-				   manager.createQuery("select NEW Pedido(data_compra, valor_pago," +
+		Query query = manager.createQuery("select NEW Pedido(data_compra, valor_pago," +
 				   		" (SELECT " + 
 				   		" SUM(i.quantidade) as quantidades " + 
 				   		" FROM ItemPedido i "
 				   		+ " WHERE i.pedido.cod_pedido = p.cod_pedido " + 
-				   		" )) from Pedido p").getResultList();
+				   		" ), usuario) from Pedido p WHERE"
+				   		+ " p.usuario.cod_usuario = :codigo");
+		
+			query.setParameter("codigo", codigo);
+
+		   List<Pedido> listPedidos = query.getResultList();
 		   
 		   model.addAttribute("listPedidos", listPedidos);
 		   
