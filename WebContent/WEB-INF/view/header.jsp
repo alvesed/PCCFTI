@@ -21,7 +21,7 @@
 			<div id="divHeaderTop">
 				
 				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/logo-novo.png' />" alt="white market" /> </a>
-				
+					
 				<div id="busca">
 					<input type="text" id="searchtext" class="form-field form-field-text placeholder" name="q" value="" size="20" placeholder="Buscar por palavra-chave">
 					<input id="searchbutton" class="btn btn-search btn-green" type="submit" onclick="" value="Buscar">
