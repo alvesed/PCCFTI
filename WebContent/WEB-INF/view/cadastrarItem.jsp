@@ -67,6 +67,18 @@
 						</select>
 					</div>
 				</div>
+				<!-- FILTRO DE CATEGORIAS -->
+				<div class="row">
+					<div class="form-group col-md-2">
+						<!-- label e input-->
+						<label>Categorias</label>
+						<select class="form-control" name="categoria" id="categoria">
+							<option value="automotivo" <c:if test="${produto.condicao eq 'novo'}">selected</c:if>>Automotivo</option>
+							<option value="vestuario" <c:if test="${produto.condicao eq 'usado'}">selected</c:if>>Vestuario</option>
+							<option value="usado" <c:if test="${produto.condicao eq 'usado'}">selected</c:if>>Vestuario</option>
+						</select>
+					</div>
+				</div>
 				<!-- O CAMPO DE UPLOAD SÓ APARECE NA PRÓXIMA ETAPA DO CADASTRO -->
 				<c:if test="${produto.codProduto > 0}">
 					<div class="row">
