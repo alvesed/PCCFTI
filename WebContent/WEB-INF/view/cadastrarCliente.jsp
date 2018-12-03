@@ -86,12 +86,12 @@
 			   
 			   var valor = $("#email").val();
 			   
-			   verificarLoginRepetido(valor);
+			   verificarLoginRepetido(verificar_email);
 			   
 			});
 		});
 	   
-	   function verificarLoginRepetido(valor){
+	   function verificarLoginRepetido(verificar_email){
 		  
 	   }
 	   
