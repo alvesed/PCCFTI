@@ -1,6 +1,7 @@
 package br.com.whitemarket.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,10 @@ import javax.persistence.Transient;
 @Table(name="pedido")
 public class Pedido {
 	
+	public Pedido() {
+		this.listaPedidos = new ArrayList<ItemPedido>();
+	}
+	
 	public Pedido(Long cod_pedido, Date data_compra, BigDecimal valor_pago, long quantidadeItensPedido, Usuario usuario) {
 		this.data_compra = data_compra;
 		this.valor_pago = valor_pago;
@@ -28,8 +33,6 @@ public class Pedido {
 		this.usuario = usuario;
 		this.cod_pedido = cod_pedido;
 	}
-	
-	public Pedido() {}	
 	
 	@Id
 	@GeneratedValue

@@ -34,6 +34,16 @@ public class ItemPedido {
 	private Produto produto;
 	
 	private long quantidade;
+	
+	private boolean avaliado;
+
+	public boolean isAvaliado() {
+		return avaliado;
+	}
+
+	public void setAvaliado(boolean avaliado) {
+		this.avaliado = avaliado;
+	}
 
 	public Pedido getPedido() {
 		return pedido;
