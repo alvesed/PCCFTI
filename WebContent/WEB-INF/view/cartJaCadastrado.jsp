@@ -9,6 +9,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+		<script src="res/js/jquery.barrating.min.js" type="text/javascript"></script>
 		
 		<style type="text/css">
 		
@@ -123,7 +124,7 @@
 					
 						    <div class="divCartItem">
 						    
-						    	<img alt="" class="divCartItemImg" src="${itemPedido.produto.descricao}">
+						    	<img alt="" class="divCartItemImg" src="${itemPedido.produto.listaFotos[0].urlFoto}">
 						    	
 						    	<h4 class="h4CartItemCod"> ${itemPedido.produto.codProduto} </h4>
 						    	<h4> - </h4>

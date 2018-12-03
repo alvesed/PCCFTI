@@ -22,7 +22,7 @@ public class JPAItemProdutoDAO implements ItemProdutoDAO {
 		
 		Produto p = new Produto();
 		
-		Query query = manager.createQuery("SELECT p FROM Produto p JOIN FETCH p.listaFotos f WHERE p.codProduto = :codigo");
+		Query query = manager.createQuery("SELECT p FROM Produto p JOIN FETCH p.listaPedidos lP WHERE p.cod_pedido = :codigo");
     	query.setParameter("codigo", codigo);
 		
     	List<Produto> temp = query.getResultList();

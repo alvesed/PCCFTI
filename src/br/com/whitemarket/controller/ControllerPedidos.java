@@ -97,6 +97,26 @@ public class ControllerPedidos {
 		   factory.close();
     	return "verProdutos";
 	}
+	
+	@RequestMapping(value="/verCarrinhoJaCadastrado")
+	public String cartJaCadastrado(HttpSession session, Model model, String cod_pedido) {
+		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+	    EntityManager manager = factory.createEntityManager();
+	    
+	    System.out.println(manager.find(Pedido.class, Long.parseLong(cod_pedido)).getValor_pago());
+		
+		if(usuario != null && !usuario.getEmail().equals("")) {
+			model.addAttribute("usuario", usuario);
+			model.addAttribute("pedido", manager.find(Pedido.class, Long.parseLong(cod_pedido)));
+		} else {
+			model.addAttribute("usuario", new Usuario());
+		}
+		
+		return "cartJaCadastrado";
+	}
+	
 }
 
 
