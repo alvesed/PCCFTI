@@ -1,6 +1,5 @@
 package br.com.whitemarket.controller;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -106,6 +105,12 @@ public class ControllerCarrinho {
 			manager.merge(pedido);
 			manager.getTransaction().commit();
 			
+			session.removeAttribute("carrinho");
+			
+			pedido = new Pedido();
+			pedido.setUsuario(usuario);
+			session.setAttribute("carrinho", pedido);
+			
 			manager.close();
 			factory.close();
 		}
@@ -119,6 +124,11 @@ public class ControllerCarrinho {
 		model.addAttribute("usuario", usuario);
 		
 		return model;
+	}
+	
+	@RequestMapping(value="/test")
+	public String test() {
+		return "headerH";
 	}
 	
 }

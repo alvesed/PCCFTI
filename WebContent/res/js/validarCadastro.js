@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+	
   $("input").blur(function() {
    if ($(this).val() == "") {
      $(this).addClass('error');
@@ -33,7 +33,9 @@ $(document).ready(function() {
          alert("Cadastrado com Sucesso");
      }
  });
- 
+   
+   
+
 });
 function validarCadastro(cpf,dataNascimento,telefone,email) {
     var retorno = true;
