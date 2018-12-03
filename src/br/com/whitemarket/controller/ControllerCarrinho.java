@@ -1,5 +1,6 @@
 package br.com.whitemarket.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -12,23 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
 
 @Controller
-@SessionAttributes(value = {"carrinho", "usuarioLogado"})
 public class ControllerCarrinho {
 	
 	@RequestMapping(value="/verCarrinho")
 	public String cart(HttpSession session) {
-		
-		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-		Pedido pedido = (Pedido) session.getAttribute("carrinho");
-		
 		return "cart";
 	}
 	
@@ -121,17 +115,19 @@ public class ControllerCarrinho {
 			factory.close();
 		}
 		
-		session.removeAttribute("carrinho");
+		pedido = new Pedido();
+		pedido.setUsuario(usuario);
+		pedido.setListaPedidos(new ArrayList<ItemPedido>());
 		
-		Pedido novoPedido = new Pedido();
-		novoPedido.setUsuario(usuario);
-		session.setAttribute("carrinho", novoPedido);
+		session.setAttribute("carrinho", pedido);
 		
 		return "redirect:verPedidos";
 	}
 	
 	@RequestMapping(value = "/verificarLogin")
-	public Model verifyUserLogin(@SessionAttribute("usuarioLogado") Usuario usuario, Model model) {
+	public Model verifyUserLogin(HttpSession session, Model model) {
+		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		
 		model.addAttribute("usuario", usuario);
 		
