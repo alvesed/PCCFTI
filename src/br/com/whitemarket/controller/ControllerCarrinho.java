@@ -24,17 +24,10 @@ import br.com.whitemarket.model.Usuario;
 public class ControllerCarrinho {
 	
 	@RequestMapping(value="/verCarrinho")
-	public String cart(HttpSession session, Model model) {
+	public String cart(HttpSession session) {
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
-		
-		if(usuario != null && !usuario.getEmail().equals("")) {
-			model.addAttribute("usuario", usuario);
-			model.addAttribute("pedido", pedido);
-		} else {
-			model.addAttribute("usuario", new Usuario());
-		}
 		
 		return "cart";
 	}
@@ -89,7 +82,7 @@ public class ControllerCarrinho {
 	}
 	
 	@RequestMapping(value = "/finalizarCompra")
-	public String endBuy(HttpSession session, Model model) {
+	public String endBuy(HttpSession session) {
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
@@ -111,9 +104,9 @@ public class ControllerCarrinho {
 		
 		session.removeAttribute("carrinho");
 		
-		pedido = new Pedido();
-		pedido.setUsuario(usuario);
-		session.setAttribute("carrinho", pedido);
+		Pedido novoPedido = new Pedido();
+		novoPedido.setUsuario(usuario);
+		session.setAttribute("carrinho", novoPedido);
 		
 		return "redirect:verPedidos";
 	}

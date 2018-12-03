@@ -20,7 +20,7 @@
 
 			<div id="divHeaderTop">
 				
-				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/ico/logo-novo.png' />" alt="white market" /> </a>
+				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/logo-novo.png' />" alt="white market" /> </a>
 				
 				<c:choose>
 				
@@ -40,7 +40,7 @@
 				
 
 
-				<a href="verCarrinho"> <div id="imgHeaderTopCart" style="background-image: url('<spring:url value="res/img/png/cartVerified.png" />');" > </div> </a>
+				<a href="verCarrinho"> <div id="imgHeaderTopCart" style="background-image: url('<spring:url value="res/img/ico/cartVerified.png" />');" > </div> </a>
 
 				
 				
