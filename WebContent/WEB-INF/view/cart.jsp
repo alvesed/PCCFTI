@@ -143,7 +143,7 @@
 					
 					</c:if>
 					
-					<c:if test="${not empty pedido or pedido.getListaPedidos().size() eq 0}">
+					<c:if test="${pedido.getListaPedidos().size() eq 0}">
 						<div class="divCartItem">
 					        <a href="<spring:url value='/telaPrincipal' />">Que tal comprar umas coisinhas? VAMOS LÁ!!!</a>
 					    </div>
@@ -186,9 +186,9 @@
 									alert("OK");
 								}
 							});
+							window.location.href="verCarrinho";
 						}
 					} else {
-						var confirmation = confirm("Deseja alterar esse item das compras?");
 						var data = {
 							codProduto: $(this).parent().find(".h4CartItemCod").text(),
 							qtdProduto: $(this).val()
