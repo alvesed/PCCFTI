@@ -27,6 +27,7 @@ public class ControllerPedidos {
 	 * Método que lista os pedidos de um determinado usuário.
 	 * @Rafa Nonino
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/verPedidos")
 	public String verPedidos(Model model) {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
@@ -52,6 +53,7 @@ public class ControllerPedidos {
 	 * Método que lista os produtos listados para a venda de um determinado usuário.
 	 * @Rafa Nonino
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/verProdutos")
 	public String verProdutos(Model model, HttpSession session) {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
@@ -60,21 +62,22 @@ public class ControllerPedidos {
 		
 		Util util = new Util();
 		
+		long codigo = usuario.getCod_usuario();
 		
-		   List<Produto> listProdutos =
-				   manager.createQuery("select NEW Produto(valor," +
+		 Query query = manager.createQuery("select NEW Produto(valor," +
 				   		" (SELECT " + 
 				   		" count(i.quantidade) as quantidades " + 
 				   		" FROM ItemPedido i "
 				   		+ " WHERE i.produto.codProduto = p.codProduto " + 
-				   		" ), dataCadastro, codProduto) from Produto p "
-				   		+ "WHERE p.ativo = 1 ").getResultList();
+				   		" ), dataCadastro, codProduto, usuario) from Produto p "
+				   		+ "WHERE p.ativo = 1 AND p.usuario.cod_usuario = :codigo");
+		 query.setParameter("codigo", codigo);
+		 
+		 List<Produto> listProdutos = query.getResultList();
 		   
 		   for(Produto produto: listProdutos) {
 			   produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
 		   }
-		   
-
 		   
 		   model.addAttribute("listProdutos", listProdutos);
 		   

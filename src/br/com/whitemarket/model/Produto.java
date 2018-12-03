@@ -26,11 +26,12 @@ public class Produto {
 	
 	public Produto() {}
 	
-	public Produto(BigDecimal valor, long quantidadeDeVendas, Date dataCadastro, long codProduto) {
+	public Produto(BigDecimal valor, long quantidadeDeVendas, Date dataCadastro, long codProduto, Usuario usuario) {
 		this.valor = valor;
 		this.quantidadeDeVendas = quantidadeDeVendas;
 		this.dataCadastro = dataCadastro;
 		this.codProduto = codProduto;
+		this.usuario = usuario;
 	}
 	
 	public Produto(String nome, String descricao, String condicao, BigDecimal valor, long codProduto) {
