@@ -105,6 +105,12 @@ public class ControllerCarrinho {
 			manager.merge(pedido);
 			manager.getTransaction().commit();
 			
+			session.removeAttribute("carrinho");
+			
+			pedido = new Pedido();
+			pedido.setUsuario(usuario);
+			session.setAttribute("carrinho", pedido);
+			
 			manager.close();
 			factory.close();
 		}

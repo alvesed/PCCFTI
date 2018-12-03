@@ -29,7 +29,7 @@
 			
 			#divHeaderMenu {
 				height: 50%;
-				width: 100%;
+				width: 100px;
 				background-color: silver;
 				position: relative;
 				float: top;
@@ -44,7 +44,7 @@
 				position: relative;
 				float: top;
 				height: 25%;
-				width: 100%;
+				width: 100px;
 				background-color: gray;
 				
 				transition: 300ms linear;
@@ -52,14 +52,14 @@
 			}
 			
 			.divHeaderMenuOption {
-				width: 100%;
+				width: 100px;
 				height: 100%;
 				
 				transition: 300ms linear;
 			}
 			
 			.divHeaderMenuOption:hover  {
-				width: 100%;
+				width: 100px;
 				transform: rotateY(180deg);
 			}
 			
@@ -75,9 +75,17 @@
 			
 			.face {
 				position: relative;
-				width: 100%;
+				width: 100px;
 				height: 100%;
 				backface-visibility: hidden;
+			}
+			
+			.face img {
+				background-size: cover;
+				margin-left: 15px;
+				margin-top: 5px;
+				height: 70px;
+				width: 70px;
 			}
 			
 			.face.back {
@@ -113,7 +121,7 @@
 					<div class="divHeaderMenuOptionContainer">
 						<div class="divHeaderMenuOption" class="shadow">
 							<div class="front face">
-								<img src=""/>
+								<img src="<spring:url value='res/img/ico/shop-facade.png' />"/>
 							</div>
 							<div class="back face center">
 								<p>Comprar</p>
