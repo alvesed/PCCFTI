@@ -30,7 +30,7 @@
          <div class="row">
             <div class="form-group col col-sm-6 col-md-4">
                <label for="nome">Nome</label>
-               <input type="text" class="form-control" id="nome" placeholder="Nome completo" name="nome">
+               <input type="text" class="form-control" id="nome" placeholder="Nome Completo" name="nome">
             </div>
             <div class="form-group col col-sm-6 col-md-4">
                <label for="cpf">CPF</label>
@@ -78,5 +78,35 @@
 	   </script>
 	   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	   <script>
+	   
+	   $(document).ready(function() {
+			
+		   $("#email").blur(function(){
+			   
+			   var valor = $("#email").val();
+			   
+			   verificarLoginRepetido(valor);
+			   
+			});
+		});
+	   
+	   function verificarLoginRepetido(valor){
+		  
+	   }
+	   
+		$.ajax({
+			url:"verificarLoginRepetido",
+			type: "POST",
+			async:false,
+			data: data,
+			cache: true,
+			contentType: 'application/x-www-form-urlencoded; charset=iso-8859-1;', 
+			success: function(parametro){
+					
+			}
+		});
+
+	   </script> 
 </body>
 </html>
