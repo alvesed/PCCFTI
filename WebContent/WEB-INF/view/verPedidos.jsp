@@ -31,9 +31,15 @@
       <td><fmt:formatNumber value="${listPedidos.valor_pago}" type="currency"/></td>
       <td>${listPedidos.quantidadeItensPedido}</td>
       <td>
-      <button type="button" class="btn btn-default">
-  		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-	  </button>
+      
+      <form action="verCarrinhoJaCadastrao" method="post">
+	      <input type="hidden" value="${listPedidos.cod_pedido}" name="cod_pedido"/>  
+                  <button type="submit" class="btn btn-default">
+				  		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					  </button>
+      </form>
+      
+
 	  </td>
     </tr>
  </c:forEach>

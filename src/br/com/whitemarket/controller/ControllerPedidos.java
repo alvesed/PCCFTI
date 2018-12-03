@@ -33,9 +33,13 @@ public class ControllerPedidos {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
 		EntityManager	manager	= factory.createEntityManager();
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		
+		if(usuario == null) {
+			return "login";
+		}
 		long codigo = usuario.getCod_usuario();
 		
-		Query query = manager.createQuery("select NEW Pedido(data_compra, valor_pago," +
+		Query query = manager.createQuery("select NEW Pedido(cod_pedido, data_compra, valor_pago," +
 				   		" (SELECT " + 
 				   		" SUM(i.quantidade) as quantidades " + 
 				   		" FROM ItemPedido i "
@@ -66,6 +70,9 @@ public class ControllerPedidos {
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		
 		Util util = new Util();
+		if(usuario == null) {
+			return "login";
+		}
 		
 		long codigo = usuario.getCod_usuario();
 		
