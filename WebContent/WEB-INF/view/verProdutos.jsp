@@ -14,6 +14,20 @@
 </head>
 <body>
 <jsp:include page = "header.jsp" />
+
+<div class="container">
+
+<div class="row btn-header">
+	<div class="col-md-6">
+		<a href="#" url=""><button type="button" class="btn btn-warning">Novo Produto</button></a>
+	</div>
+	
+	<div class="col-md-6">
+		<button type="button" class="btn btn-warning">Cadastrar Cupom de Desconto</button>
+	</div>
+</div>
+
+
 <table class="table table-striped" style="position: relative;float: top">
   <thead>
     <tr>
@@ -46,6 +60,6 @@
  </c:forEach>
   </tbody>
 </table>
-
+</div>
 </body>
 </html>

@@ -32,7 +32,7 @@
       <td>${listPedidos.quantidadeItensPedido}</td>
       <td>
       
-      <form action="verCarrinhoJaCadastrao" method="post">
+      <form action="verCarrinhoJaCadastrado" method="post">
 	      <input type="hidden" value="${listPedidos.cod_pedido}" name="cod_pedido"/>  
                   <button type="submit" class="btn btn-default">
 				  		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>

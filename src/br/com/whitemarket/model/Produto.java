@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -64,6 +65,12 @@ public class Produto {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_cod_vendedor")
 	Usuario usuario;
+	
+	// Para se ligar a tabela categoria
+	@ManyToOne
+	@JoinColumn(name="fk_categoria")
+	Categoria categoria;
+	
 	
 	@Column(name="fotos")
 	private int qtdFiles;
@@ -170,5 +177,15 @@ public class Produto {
 	public void setListaFotos(List<Foto> listaFotos) {
 		this.listaFotos = listaFotos;
 	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
+	
 
 }
