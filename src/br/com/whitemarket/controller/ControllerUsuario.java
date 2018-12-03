@@ -28,6 +28,11 @@ public class ControllerUsuario {
    	
 	}
 	
+	@RequestMapping(value="/main")
+	public String see() {
+		return "telaInicial2";
+	}
+	
 	@RequestMapping("/efetivarCadastroCliente")
 	public String itemForm(Usuario usuario) {
 		

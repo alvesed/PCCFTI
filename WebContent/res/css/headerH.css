@@ -1,0 +1,103 @@
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+body * {
+	font-family: 'ubuntu', sans-serif;
+	transition: 300ms linear;
+}
+
+#divHeaderFull {
+	position: fixed;
+	width: 100px;
+	height: 100%;
+	background-color: #d7cec7;
+	border-right: 3px solid #76323f;
+	transition: 300ms linear;
+	z-index: 1000;
+}
+
+#divHeaderMenu {
+	height: 100%;
+	width: 100px;
+	margin-left: -13px;
+	background-color: #d7cec7;
+	position: absolute;
+}
+
+#divHeaderMenu a {
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.divHeaderMenuOptionContainer {
+	position: relative;
+	float: top;
+	height: 100px;
+	width: 100px;
+	
+	transition: 300ms linear;
+	perspective: 1000;
+}
+
+.divHeaderMenuOption {
+	width: 100px;
+	height: 100%;
+}
+
+.divHeaderMenuOption:hover  {
+	width: 100px;
+	transform: rotateY(180deg);
+}
+
+.divHeaderMenuOption {
+	transform-style: preserve-3d;
+	transition: all .9s linear;
+}
+
+.divHeaderMenuOptionContainer:hover .divHeaderMenuOption {
+	transform: rotateY(180deg);
+}
+
+.face {
+	position: relative;
+	width: 100px;
+	height: 100%;
+	backface-visibility: hidden;
+}
+
+.face img {
+	background-size: cover;
+	margin-left: 25px;
+	margin-top: 25px;
+	height: 50px;
+	width: 50px;
+}
+
+.face.back {
+	position: relative;
+	top: -100%;
+	width: 400%;
+	left: -300%;
+	display: block;
+	transform: rotateY(180deg);
+	background-color: #76323f;
+}
+
+.back p {
+	margin-top: -18%;
+	text-decoration: none;
+	color: rgba(245, 245, 245, 1);
+	line-height: 200%;
+	font-size: 300%;
+	text-align: right;
+	padding-right: 20px;
+}
+
+.divHeaderMenuOptionSubContainer {
+	background-color: black;
+	width: calc(100% - 103px);
+	margin-left: 103px;
+}
