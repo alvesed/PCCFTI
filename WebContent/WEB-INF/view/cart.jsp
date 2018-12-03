@@ -22,6 +22,7 @@
 				outline: none;
 			}
 			
+			
 			#divCartContainer {
 				position: relative;
 				float: top;
