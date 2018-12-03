@@ -22,6 +22,13 @@
 				
 				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/logo-novo.png' />" alt="white market" /> </a>
 				
+				<div id="busca">
+					<input type="text" id="searchtext" class="form-field form-field-text placeholder" name="q" value="" size="20" placeholder="Buscar por palavra-chave">
+					<input id="searchbutton" class="btn btn-search btn-green" type="submit" onclick="" value="Buscar">
+				</div>
+			
+				
+				
 				<c:choose>
 				
 					<c:when test="${ not empty usuarioLogado.email }">
@@ -43,13 +50,13 @@
 				<a href="verCarrinho"> <div id="imgHeaderTopCart" style="background-image: url('<spring:url value="res/img/ico/cartVerified.png" />');" > </div> </a>
 
 				
-				
 			</div>
-
+			
 			<div id="divHeaderMenu">
 
 				<div class="divHeaderMenuOption">
-
+				
+		
 					<a href="#">
 						<p class="pHeaderMenuOption"> Categorias </p>
 					</a>
@@ -68,37 +75,6 @@
 
 						</div>
 
-						<div class="divHeaderInnerSubMenuOption">
-
-							<a href="#">
-								<p class="pHeaderInnerSubMenuOption"> Inner SubOption 2 </p>
-							</a>
-
-						</div>
-
-						<div class="divHeaderInnerSubMenuOption">
-
-							<a href="#">
-								<p class="pHeaderInnerSubMenuOption"> Inner SubOption 3 </p>
-							</a>
-
-						</div>
-
-						<div class="divHeaderInnerSubMenuOption">
-
-							<a href="#">
-								<p class="pHeaderInnerSubMenuOption"> Inner SubOption 4 </p>
-							</a>
-
-						</div>
-
-						<div class="divHeaderInnerSubMenuOption">
-
-							<a href="#">
-								<p class="pHeaderInnerSubMenuOption"> Inner SubOption 5 </p>
-							</a>
-
-						</div>
 
 					</div>
 
