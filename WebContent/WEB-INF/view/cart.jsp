@@ -142,7 +142,7 @@
 					
 					</c:if>
 					
-					<c:if test="${pedido.getListaPedidos().size() eq 0}">
+					<c:if test="${not empty pedido or pedido.getListaPedidos().size() eq 0}">
 						<div class="divCartItem">
 					        <a href="<spring:url value='/telaPrincipal' />">Que tal comprar umas coisinhas? VAMOS LÁ!!!</a>
 					    </div>
