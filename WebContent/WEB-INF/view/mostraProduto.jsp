@@ -7,6 +7,9 @@
 <html>
 <head>
 <!-- Latest compiled and minified CSS -->
+
+
+
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="res/css/mostraProdutoStyle.css">
@@ -69,7 +72,47 @@
 			</div>
 		</div>
 	</div>
-</body>
+	<div class="container">
+	<div class="card">
+
+<h1>COMMENT BOX</h1>
+<!-------Wrap------------>
+		<div id="wrap">
+			<div id="main">
+				<div class="row">
+					<div class="col-md-5">
+						<h3 class="heading">Comments and Responses</h3>
+					</div>
+					<div class="col-md-7">
+						<div id="upper_blank"></div>
+					</div>
+				</div>
+			</div>
+
+
+			<!------------Form Start---------->
+
+			<div id='form'>
+				<div class="row">
+					<div class="col-md-12">
+
+						<form action="" method="POST" id="commentform">
+
+							
+							<div id="comment-message" class="form-row">
+								<textarea name="comentario" placeholder="Digite seu comentario" id="comment" style="resize: none"rows="4" cols="100"	></textarea>
+							</div>
+							<a href="#"><input type="submit" name="dsubmit"
+								id="commentSubmit" value="Submit Comment"></a> 
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	
+	</body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
