@@ -2,8 +2,6 @@ package br.com.whitemarket.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import br.com.whitemarket.controller.*;
-import br.com.whitemarket.dao.PedidoDAO;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.whitemarket.dao.PedidoDAO;
 import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.ListaItensDoVendedor;
@@ -122,5 +122,19 @@ public class ControllerPedidos {
 		model.addAttribute("pedido", pedido);
 		return "mostraPedido";
 	}
+	
+		//BOTÃO GERAR PDF. FALTA ADICIONAR O BOTÃO NA JSP PASSANDO O CÓDIGO DO PEDIDO
+		@RequestMapping("/gerarPdf")
+		public String gerarPdf(Model model, HttpSession session, @RequestParam("cod_pedido") long codPedido) {
+			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+			
+			if(usuario == null) {
+				return "login";
+			}
+			
+			GerarPdfUtil.gerarPdf(dao.retornaProdutosDentroDePedido(codPedido));
+			
+	    	return "verPedidos";
+		}
 	
 }

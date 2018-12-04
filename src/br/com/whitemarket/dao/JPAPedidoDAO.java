@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.com.whitemarket.model.Foto;
+import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Produto;
 
@@ -36,6 +37,36 @@ public class JPAPedidoDAO implements PedidoDAO{
     	}
     	
 		return p;
+	}
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	@Override
+	//public List<Produto> retornaProdutosDentroDePedido(long codPedido) {
+	public Pedido retornaProdutosDentroDePedido(long codPedido) {
+		Produto p = new Produto();
+		
+		Query query = manager.createQuery("SELECT p FROM Pedido p "
+				+ "JOIN FETCH p.listaPedidos lp "
+				+ "JOIN FETCH lp.produto produto "
+				+ "JOIN FETCH p.usuario user WHERE p.cod_pedido = :codPedido");
+    	query.setParameter("codPedido", codPedido);
+		
+    	//List<Produto> pro = query.getResultList();
+    	List<Pedido> listPedido = query.getResultList();
+    	Pedido pedidoCompleto = new Pedido();
+    	for (Pedido pedido : listPedido) {
+    		pedidoCompleto = pedido; 
+    	}
+    	
+    	
+    	for (ItemPedido itemPedido : pedidoCompleto.getListaPedidos()) {
+    		Produto produto = itemPedido.getProduto();
+    		Query queryFotos = manager.createQuery("SELECT f FROM Foto f WHERE f.produto.codProduto = :codigo");
+        	query.setParameter("codigo", produto.getCodProduto());
+        	
+        	produto.setListaFotos(queryFotos.setMaxResults(1).getResultList());
+    	}
+    	return pedidoCompleto;
 	}
 
 	@SuppressWarnings("unchecked")
