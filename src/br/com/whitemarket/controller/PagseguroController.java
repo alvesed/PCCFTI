@@ -1,11 +1,13 @@
 package br.com.whitemarket.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +18,6 @@ import br.com.uol.pagseguro.domain.Address;
 import br.com.uol.pagseguro.domain.Credentials;
 import br.com.uol.pagseguro.domain.Item;
 import br.com.uol.pagseguro.domain.PaymentRequest;
-import br.com.uol.pagseguro.domain.Phone;
 import br.com.uol.pagseguro.domain.Sender;
 import br.com.uol.pagseguro.domain.Shipping;
 import br.com.uol.pagseguro.domain.Transaction;
@@ -24,6 +25,7 @@ import br.com.uol.pagseguro.enums.Currency;
 import br.com.uol.pagseguro.enums.ShippingType;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.service.NotificationService;
+import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Usuario;
 
 
@@ -38,6 +40,8 @@ public class PagseguroController {
 	public @ResponseBody
 	String criarPagamento(HttpSession session){
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		Address address = (Address) session.getAttribute("address");
+		List<Item> listItemPedido = (List<Item>) session.getAttribute("listItemPedido");
 		
 		
 		try {
@@ -45,8 +49,10 @@ public class PagseguroController {
 			request.setReference("VND01");
 			request.setCurrency(Currency.BRL);
 			request.setSender(getSender(usuario));
-			request.setShipping(getShipping()); //DEPENDE
-			request.addItem(getItem());
+			request.setShipping(getShipping(address)); //DEPENDE
+			for(Item i: listItemPedido) {
+				request.addItem(i);
+			 }
 			request.setNotificationURL("localhost:8080/WhiteMarket/pagseguro-notificacao");
 			request.setRedirectURL("localhost:8080/WhiteMarket/verPedidos");
 			
@@ -64,45 +70,18 @@ public class PagseguroController {
 		Sender sender = new Sender();
 		sender.setName(usuario.getNome());
 		sender.setEmail(usuario.getEmail());
-		sender.setPhone(new Phone(usuario.getTelefone().substring(0,2), usuario.getTelefone().substring(3, usuario.getTelefone().length())));
 		return sender;
 		
 	}
 	
 	
-	public Shipping getShipping(){
+	public Shipping getShipping(Address address){
 		Shipping shipping = new Shipping();
-		shipping.setAddress(getAddress());
+		shipping.setAddress(address);
 		shipping.setCost(new BigDecimal("9.00"));
 		shipping.setType(ShippingType.PAC);
 		return shipping;
 		
-	}
-	
-	
-	public Address getAddress(){
-		Address adress = new Address();
-		adress.setCity("Londrina");
-		adress.setComplement("Perto da Pizza Hut");
-		adress.setCountry("Brasil");
-		adress.setState("PR");
-		adress.setPostalCode("86050464");
-		adress.setNumber("15");
-		adress.setDistrict("Retiro");
-		
-		return adress;
-		
-	}
-	
-	public Item getItem() {
-		Item item = new Item();
-		item.setId("1");
-		item.setDescription("MEIA");
-		item.setQuantity(5);
-		item.setAmount(new BigDecimal("10.00"));
-		item.setShippingCost(new BigDecimal("10.00"));
-		
-		return item;
 	}
 	
 	

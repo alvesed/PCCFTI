@@ -1,7 +1,11 @@
 package br.com.whitemarket.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.uol.pagseguro.domain.Address;
+import br.com.uol.pagseguro.domain.Item;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
@@ -25,6 +31,9 @@ public class ControllerCarrinho {
 	public String cart(HttpSession session) {
 		return "cart";
 	}
+	
+
+	
 	
 	@RequestMapping(value = "alterarQuantidadeItemCarrinho", method = RequestMethod.POST)
 	public void refreshQuantityItemCart(HttpSession session, @RequestParam("codProduto") int codProduto, @RequestParam("qtdProduto") String qtdProduto) {
@@ -120,6 +129,50 @@ public class ControllerCarrinho {
 		
 		return "redirect:verPedidos";
 	}
+	
+	
+	
+	
+	@RequestMapping(value = "/cadastrarEndereco")
+	public String cadastrarEndereco(HttpSession session) {
+		
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		
+		session.setAttribute("carrinho", pedido);
+		
+		return "cadastrarEndereco";
+	}
+	
+	@RequestMapping(value = "/finalizarPagSeguro")
+	public String finalizarPagSeguro(Address adress, HttpSession session) {
+		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		
+		adress.setCountry("Brasil");
+
+		session.setAttribute("address", adress);
+		
+		List<Item> listItemPedido;
+		listItemPedido = new ArrayList<Item>();
+		
+
+		
+		for(ItemPedido itemPedido: pedido.getListaPedidos()) {
+			Item item = new Item();
+			item.setId(String.valueOf(itemPedido.getProduto().getCodProduto()));
+			item.setDescription(itemPedido.getProduto().getNome());
+			item.setQuantity((int)itemPedido.getQuantidade());
+			item.setAmount(itemPedido.getProduto().getValor());
+			listItemPedido.add(item);
+		   }
+		
+		session.setAttribute("listItemPedido", listItemPedido);
+		
+		return "redirect:pagseguro-criarpagamento";
+	}
+	
+	
 	
 	@RequestMapping(value = "/verificarLogin")
 	public Model verifyUserLogin(HttpSession session, Model model) {
