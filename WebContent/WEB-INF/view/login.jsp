@@ -16,7 +16,7 @@
 	<div id="divContainer">
 	
 		
-		<form action="autenticacao">
+		<form action="autenticacao" method="post">
 		
 		  <div class="form-group">
 		    <label for="InputEmail1">Email:</label>

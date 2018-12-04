@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -24,6 +25,13 @@ import br.com.whitemarket.controller.Util;
 @Entity
 @Table(name="produto")
 public class Produto {
+	
+//	@ManyToMany(mappedBy = "produto", targetEntity = Cupom.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	private List<Cupom> Cupons;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="fk_id_cupom")
+	private Cupom cupom;
 	
 	public Produto() {}
 	

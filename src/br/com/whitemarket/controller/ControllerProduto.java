@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.whitemarket.dao.FotoDAO;
 import br.com.whitemarket.dao.ProdutoDAO;
+import br.com.whitemarket.model.Cupom;
 import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.Produto;
 import br.com.whitemarket.model.Usuario;
@@ -136,4 +137,24 @@ public class ControllerProduto {
 		return "redirect:telaPrincipal";
 	}
 	
+	
+	/*
+	 * Funções para cadastro de cupons
+	 * Laura
+	 * 
+	 * */
+	
+	@RequestMapping("/cupom")
+	public String formcupom() {
+		return "cupom";
+	}
+	
+	@RequestMapping("/cadastrarCupom")
+	public String cadastrarCupom(Cupom cupom, HttpSession session) {
+		System.out.println("testando passagem de dados do form");
+		return "cupom";
+	}
+	
+	
+	//"cadastrarCupom"
 }

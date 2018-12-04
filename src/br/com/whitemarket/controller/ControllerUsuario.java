@@ -50,6 +50,12 @@ public class ControllerUsuario {
     	
 	}
 	
+	/*
+	 * Funções para login
+	 * Laura
+	 * 
+	 * */
+	
 	@RequestMapping("/login")
 	public String login() {
 		return "login";
@@ -108,6 +114,10 @@ public class ControllerUsuario {
 		
 
 	}
+	
+
+	
+	
 	
 	
 //	@RequestMapping("/verificarLoginRepetido")
