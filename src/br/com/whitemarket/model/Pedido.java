@@ -18,6 +18,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="pedido")
 public class Pedido {
@@ -26,7 +29,7 @@ public class Pedido {
 		this.listaPedidos = new ArrayList<ItemPedido>();
 	}
 	
-	public Pedido(Long cod_pedido, Date data_compra, BigDecimal valor_pago, long quantidadeItensPedido, Usuario usuario) {
+	public Pedido(Long cod_pedido, Date data_compra, BigDecimal valor_pago, Long quantidadeItensPedido, Usuario usuario) {
 		this.data_compra = data_compra;
 		this.valor_pago = valor_pago;
 		this.quantidadeItensPedido = quantidadeItensPedido;

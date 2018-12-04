@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Produto;
 
@@ -22,7 +23,11 @@ public class JPAPedidoDAO implements PedidoDAO{
 	public Pedido retornaPedidoCadastrado(long codigo) {
 		Pedido p = new Pedido();
 		
-		Query query = manager.createQuery("SELECT pedido FROM Pedido pedido JOIN FETCH pedido.listaPedidos.codProduto WHERE pedido.cod_pedido = :codigo");
+		Query query = manager.createQuery("SELECT pedido FROM Pedido pedido "
+				+ "JOIN FETCH pedido.listaPedidos lP "
+				+ "JOIN FETCH lP.produto produto "
+				+ "JOIN FETCH produto.usuario u "
+				+ "WHERE pedido.cod_pedido = :codigo");
     	query.setParameter("codigo", codigo);
 		
     	List<Pedido> temp = query.getResultList();
@@ -64,5 +69,16 @@ public class JPAPedidoDAO implements PedidoDAO{
  
 		List<Produto> listProdutos = query.getResultList();
 		return listProdutos;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Foto> retornaPrimeiraFoto(long codProduto) {
+		Query query = manager.createQuery("SELECT f FROM Foto f WHERE f.produto.codProduto = :codigo");
+		query.setParameter("codigo", codProduto);
+		
+		List<Foto> listaFotos = query.setMaxResults(1).getResultList();
+		
+		return listaFotos;
 	}
 }

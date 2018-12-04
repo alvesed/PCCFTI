@@ -1,14 +1,10 @@
 package br.com.whitemarket.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import br.com.whitemarket.controller.*;
 import br.com.whitemarket.dao.PedidoDAO;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.ItemPedido;
+import br.com.whitemarket.model.ListaItensDoVendedor;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Produto;
 import br.com.whitemarket.model.Usuario;
@@ -32,34 +28,20 @@ public class ControllerPedidos {
 	 * Método que lista os pedidos de um determinado usuário.
 	 * @Rafa Nonino
 	 */
-	@SuppressWarnings("unchecked")
+	
 	@RequestMapping("/verPedidos")
 	public String verPedidos(Model model, HttpSession session) {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-		EntityManager	manager	= factory.createEntityManager();
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		
 		if(usuario == null) {
 			return "login";
 		}
 		long codigo = usuario.getCod_usuario();
-		
-		Query query = manager.createQuery("select NEW Pedido(cod_pedido, data_compra, valor_pago," +
-				   		" (SELECT " + 
-				   		" SUM(i.quantidade) as quantidades " + 
-				   		" FROM ItemPedido i "
-				   		+ " WHERE i.pedido.cod_pedido = p.cod_pedido " + 
-				   		" ), usuario) from Pedido p WHERE"
-				   		+ " p.usuario.cod_usuario = :codigo");
-		
-			query.setParameter("codigo", codigo);
+		System.out.println(codigo);
 
-		   List<Pedido> listPedidos = query.getResultList();
+		List<Pedido> listPedidos = dao.retornaListaPedidos(codigo);
 		   
-		   model.addAttribute("listPedidos", listPedidos);
-		   
-		   manager.close();  
-		   factory.close();
+		model.addAttribute("listPedidos", listPedidos);
     	return "verPedidos";
 	}
 	
@@ -92,17 +74,44 @@ public class ControllerPedidos {
 	
 	@RequestMapping(value="/verCarrinhoJaCadastrado")
 	public String cartJaCadastrado(HttpSession session, Model model, String cod_pedido) {
-		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		
-		if(usuario != null && !usuario.getEmail().equals("")) {
-			model.addAttribute("usuario", usuario);
-			model.addAttribute("pedido", dao.retornaPedidoCadastrado(Long.parseLong(cod_pedido)));
-		} else {
-			model.addAttribute("usuario", new Usuario());
+		if (usuario == null || usuario.getEmail().equals("")) {
+			return "login";
 		}
 		
-		return "cartJaCadastrado";
+		Pedido pedido = dao.retornaPedidoCadastrado(Long.parseLong(cod_pedido));
+		
+		if(pedido == null) {
+			return "pedido404";
+		}
+		
+		ArrayList<ListaItensDoVendedor> listaDeVendedores = new ArrayList<ListaItensDoVendedor>();
+
+		ItemPedido itemPedido = pedido.getListaPedidos().get(0);
+		Usuario vendedor = pedido.getListaPedidos().get(0).getProduto().getUsuario();
+		ListaItensDoVendedor itensDoVendedor = new ListaItensDoVendedor(vendedor);
+		
+		itensDoVendedor.getListaItemPedido().add(itemPedido);
+		
+		for (int i = 1; i < pedido.getListaPedidos().size(); i++) {
+			itemPedido = pedido.getListaPedidos().get(i);
+			itemPedido.getProduto().setListaFotos(dao.retornaPrimeiraFoto(itemPedido.getProduto().getCodProduto())); //Faz a query para a primeira foto do produto, que não pode ser retornada na primeira query
+			vendedor = itemPedido.getProduto().getUsuario();
+			
+			if (vendedor.getCod_usuario() == itensDoVendedor.getVendedor().getCod_usuario()) {
+				itensDoVendedor.getListaItemPedido().add(itemPedido);
+			} else {
+				listaDeVendedores.add(itensDoVendedor);
+				itensDoVendedor = new ListaItensDoVendedor(vendedor);
+				itensDoVendedor.getListaItemPedido().add(itemPedido);
+			}
+		}
+		listaDeVendedores.add(itensDoVendedor);
+		
+		model.addAttribute("lista", listaDeVendedores);
+		model.addAttribute("pedido", pedido);
+		return "mostraPedido";
 	}
 	
 }

@@ -25,7 +25,7 @@ public class ItemPedido {
 	@GeneratedValue
 	long cod_item_pedido;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_cod_pedido")
 	private Pedido pedido;
 	

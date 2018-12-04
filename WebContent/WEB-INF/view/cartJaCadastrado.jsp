@@ -1,5 +1,5 @@
 <%@page import="br.com.whitemarket.model.ItemPedido"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -112,11 +112,21 @@
 	<body>
 	
 		<jsp:include page="header.jsp" />
-	
+		
 		<div id="divContainer">
-			
+		<c:forEach var="listaVendedor" items="${lista}">
+			======
+			<p>${listaVendedor.vendedor.nome}</p>
+			<c:forEach var="itemPedido" items="${listaVendedor.listaItemPedido}">
+				${itemPedido.produto.nome}<br/>
+				${itemPedido.quantidade}<br/>
+				${itemPedido.produto.valor}<br/>
+				${itemPedido.produto.valor * itemPedido.quantidade}<br/>
+				====<br/>
+			</c:forEach>
+		</c:forEach>
 			<c:choose>
-				<c:when test="${not empty usuario.nome}">
+				<c:when test="${not empty usuarioLogado.nome}">
 				
 					<c:if test="${not empty pedido and pedido.getListaPedidos().size() > 0}">
 				
@@ -124,8 +134,7 @@
 					
 						    <div class="divCartItem">
 						    
-						    	<img alt="" class="divCartItemImg" src="${itemPedido.produto.listaFotos[0].urlFoto}">
-						    	
+						    	<img alt="" class="divCartItemImg" src="${itemPedido.produto.nome}">
 						    	<h4 class="h4CartItemCod"> ${itemPedido.produto.codProduto} </h4>
 						    	<h4> - </h4>
 						    	<h4 class="h4CartItemNome"> ${itemPedido.produto.nome} </h4> <br>
