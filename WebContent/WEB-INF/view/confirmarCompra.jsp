@@ -39,7 +39,7 @@
 			$(document).ready(function() {
 				$('#confirmar').click(function(){
 					alert('Parabens!');
-					window.location.href = 'finalizarCompra';
+					window.location.href = 'cadastrarEndereco';
 				});
 			})
 		
