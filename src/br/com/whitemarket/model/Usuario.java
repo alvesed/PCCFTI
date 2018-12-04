@@ -1,11 +1,15 @@
 package br.com.whitemarket.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,6 +29,17 @@ public class Usuario {
 	String senha;
 	String endereco;
 	
+	
+	@OneToMany(mappedBy = "usuario", targetEntity = Comentario.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Comentario> comentario;
+	
+	
+	public List<Comentario> getComentario() {
+		return comentario;
+	}
+	public void setComentario(List<Comentario> comentario) {
+		this.comentario = comentario;
+	}
 	public long getCod_usuario() {
 		return cod_usuario;
 	}

@@ -17,17 +17,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>White Market</title>
-
-<style type="text/css">
-	.divHeaderMenuOptionSubContainer {
-		margin-top: -16px !important;
-	}
-</style>
-
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 </head>
 <body>
 <jsp:include page = "header.jsp" />
-<div id="divContainer">
 <input type="hidden" id="valorTotal">
 <div class="container">
 		<div class="card">
@@ -81,20 +75,7 @@
 	<div class="container">
 	<div class="card">
 
-<h1>COMMENT BOX</h1>
-<!-------Wrap------------>
-		<div id="wrap">
-			<div id="main">
-				<div class="row">
-					<div class="col-md-5">
-						<h3 class="heading">Comments and Responses</h3>
-					</div>
-					<div class="col-md-7">
-						<div id="upper_blank"></div>
-					</div>
-				</div>
-			</div>
-
+<h1>Comentarios</h1>
 
 			<!------------Form Start---------->
 
@@ -102,14 +83,13 @@
 				<div class="row">
 					<div class="col-md-12">
 
-						<form action="" method="POST" id="commentform">
-
-							
+						<form action="adicionarComentario" method="POST" id="commentform">
+								
+							<input type="hidden" name="codProduto" value ="${produto.codProduto}" >
 							<div id="comment-message" class="form-row">
-								<textarea name="comentario" placeholder="Digite seu comentario" id="comment" style="resize: none"rows="4" cols="100"	></textarea>
+								<textarea name="comentario" placeholder="Digite seu comentario" id="comment" style="resize: none"rows="4" cols="100"></textarea>
 							</div>
-							<a href="#"><input type="submit" name="dsubmit"
-								id="commentSubmit" value="Submit Comment"></a> 
+							<input type="submit" name="dsubmit" id="commentSubmit" value="Submit Comment">
 						</form>
 
 					</div>
@@ -117,7 +97,7 @@
 			</div>
 		</div>
 		</div>
-	</div>
+	
 	</body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

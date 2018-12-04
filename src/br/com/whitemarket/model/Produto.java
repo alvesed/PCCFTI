@@ -89,6 +89,9 @@ public class Produto {
 	@OneToMany(mappedBy = "produto", targetEntity = Foto.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Foto> listaFotos;
 	
+	@OneToMany(mappedBy = "produto", targetEntity = Comentario.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Comentario> comentario;
+	
 	@Transient
 	long quantidadeDeVendas;
 	
@@ -193,6 +196,16 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	public List<Comentario> getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(List<Comentario> comentario) {
+		this.comentario = comentario;
+	}
+	
+	
 	
 	
 

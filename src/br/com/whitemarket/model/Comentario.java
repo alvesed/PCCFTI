@@ -9,11 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-public class Comentario {
 
 	@Entity
 	@Table(name="comentario")
-	public class Foto {
+	public class Comentario {
 		
 		@Id
 		@GeneratedValue(strategy=GenerationType.AUTO)
@@ -66,5 +65,4 @@ public class Comentario {
 			this.produto = produto;
 		}
 	
-}
 }

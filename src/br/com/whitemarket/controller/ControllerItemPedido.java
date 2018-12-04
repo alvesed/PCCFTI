@@ -1,5 +1,7 @@
 package br.com.whitemarket.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -11,17 +13,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.whitemarket.dao.ComentarioDAO;
 import br.com.whitemarket.dao.ItemProdutoDAO;
+import br.com.whitemarket.model.Comentario;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Produto;
 import br.com.whitemarket.model.Usuario;
 
-import java.util.ArrayList;
-
 @Transactional
 @Controller
 public class ControllerItemPedido {
+	
+
+
+	@Autowired
+	ComentarioDAO daoComentario;
 	
 	@Autowired
 	ItemProdutoDAO dao;	
@@ -40,6 +47,26 @@ public class ControllerItemPedido {
 		
 		return "mostraProduto";
 	}
+	
+	@RequestMapping("adicionarComentario")
+	public String addComentario(String codProduto , Comentario comentario, HttpSession session, Model model) { //Comentario que vem do jsp e verificar se esta logado ou nao
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		if (usuario == null || usuario.getEmail().equals("")) {
+			return "redirect:login";
+		} else {
+			Produto produto = new Produto();
+			produto.setCodProduto(Long.parseLong(codProduto));
+			comentario.setProduto(produto);
+			comentario.setUsuario(usuario);
+			daoComentario.adicionaComentario(comentario);
+			
+			model.addAttribute("codigoProduto", codProduto);
+			return "redirect:verProduto";
+		}
+		
+
+	}
+	
 	
 	@RequestMapping(value="adicionaCarrinho", method=RequestMethod.POST)
 	public @ResponseBody String adicionaAoCarrinho(HttpSession session, String codProduto, String quantidade, String nome, String url, Model model) {
