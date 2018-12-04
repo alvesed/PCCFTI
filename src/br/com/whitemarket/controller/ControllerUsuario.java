@@ -2,6 +2,8 @@ package br.com.whitemarket.controller;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,6 +12,7 @@ import javax.persistence.Persistence;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.whitemarket.dao.JPAUsuarioDAO;
@@ -110,42 +113,29 @@ public class ControllerUsuario {
 			model.addAttribute("erroLogin", "Usuário ou Senha Inválidos");
 			return "login";
 		}
-		
-		
-
 	}
 	
-
-	
-	
-	
-	
-//	@RequestMapping("/verificarLoginRepetido")
-//	public String verificarLoginRepetido(String valor) {
-//		
-//		Connection conn = null;
-//		Statement stmt = null;
-//
-//		try {
-//			conn = db.obterConexao();
-//
-//			String sql = "SELECT * FROM usuario WHERE email = verificar_email";
-//			
-//			stmt = conn.createStatement();
-//			ResultSet rs = stmt.executeQuery(sql);
-//			while (rs.next()) {
-//			
-//			}
-//
-//		} catch (SQLException e) {
-//			System.out.println("Erro ao consultar");
-//			e.printStackTrace();
-//		}
-//		
-//		return verificar_email;
-//		
-//    	
-//	}
-	
-
+	@RequestMapping(value = "/cadastrarCliente/busca", method = RequestMethod.POST, produces = "aplication/JSON")
+	public String menu(@RequestParam("verificar_email") String verificar_email) {
+		System.out.println("VER SE ESTA CHEGANDO ======= "+ verificar_email);
+		
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+		EntityManager	manager	= factory.createEntityManager();
+			
+		
+		List<String> emails = new ArrayList<String>();
+		emails =
+				manager.createQuery("select email from usuario where email = verifica").getResultList();
+		
+		for (String email_verificar : emails ) {
+			
+		}
+		
+			manager.close();  
+			factory.close();
+			
+		
+		return "emails";
 }
+}
+	

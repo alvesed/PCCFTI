@@ -84,28 +84,34 @@
 			
 		   $("#email").blur(function(){
 			   
-			   var valor = $("#email").val();
-			   
+			   var verificar_email = $("#email").val();
+			
 			   verificarLoginRepetido(verificar_email);
 			   
 			});
 		});
 	   
 	   function verificarLoginRepetido(verificar_email){
-		  
+		   
+		 
+			$.ajax({
+				url:"verificarLoginRepetido",
+				type: "POST",
+				async:false,
+				data: data,
+				cache: true,
+				contentType: 'application/x-www-form-urlencoded; charset=iso-8859-1;', 
+				success: function(parametro){
+						
+					// como receber o retorno?
+				}
+			});
+			
+			if (verificar_email) {
+				alert("Este E-mail ja esta cadastrado, por favor escolha outro");
+			} 
+			// oq colocar no else?
 	   }
-	   
-		$.ajax({
-			url:"verificarLoginRepetido",
-			type: "POST",
-			async:false,
-			data: data,
-			cache: true,
-			contentType: 'application/x-www-form-urlencoded; charset=iso-8859-1;', 
-			success: function(parametro){
-					
-			}
-		});
 
 	   </script> 
 </body>
