@@ -35,6 +35,7 @@ public class PagseguroController {
 	
 	private final String EMAIL = "rafaelnonino@hotmail.com";
 	private final String TOKEN = "AD41533E2198496892041669ADECB0C3";
+	private final String TOKENSANDBOX = "1806ACC9B43D4792AF76AF1A0B12D16D";
 	
 	@RequestMapping("/pagseguro-criarpagamento")
 	public @ResponseBody
@@ -87,7 +88,7 @@ public class PagseguroController {
 	
 	private Credentials getCredentials() throws PagSeguroServiceException
 	{
-		return new AccountCredentials(EMAIL, TOKEN);
+		return new AccountCredentials(EMAIL, TOKEN, TOKENSANDBOX);
 	}
 	
 	

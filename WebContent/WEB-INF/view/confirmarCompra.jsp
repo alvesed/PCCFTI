@@ -3,6 +3,7 @@
 
 <html>
 	<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		
 		<script type="text/javascript">
@@ -29,20 +30,18 @@
 			</select>
 			Valor Total: <input readonly value="${pedido.valor_pago}">
 			</br>
-			 <input alt="Pague com PagSeguro" name="submit"  type="image" id="confirmar"   
-				src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>  
+			<input type="button" id="confirmar"/>
+			 <input alt="Pague com PagSeguro" name="submit"  type="image" id="confirmar" 
+			 src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>  
 			
 		</div>
 		
 		<script type="text/javascript">
-		
 			$(document).ready(function() {
 				$('#confirmar').click(function(){
-					alert('Parabens!');
 					window.location.href = 'cadastrarEndereco';
 				});
 			})
-		
 		</script>
 		
 	</body>

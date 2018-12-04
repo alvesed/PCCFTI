@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.ListaItensDoVendedor;
 import br.com.whitemarket.model.Pedido;
@@ -37,7 +38,6 @@ public class ControllerPedidos {
 			return "login";
 		}
 		long codigo = usuario.getCod_usuario();
-		System.out.println(codigo);
 
 		List<Pedido> listPedidos = dao.retornaListaPedidos(codigo);
 		   
@@ -87,16 +87,24 @@ public class ControllerPedidos {
 		}
 		
 		ArrayList<ListaItensDoVendedor> listaDeVendedores = new ArrayList<ListaItensDoVendedor>();
+		
+		String[] fotos = new String[pedido.getListaPedidos().size()];
 
 		ItemPedido itemPedido = pedido.getListaPedidos().get(0);
 		Usuario vendedor = pedido.getListaPedidos().get(0).getProduto().getUsuario();
 		ListaItensDoVendedor itensDoVendedor = new ListaItensDoVendedor(vendedor);
+		List<Foto> foto = dao.retornaPrimeiraFoto(itemPedido.getProduto().getCodProduto());
+		
+		fotos[0] = foto.get(0).getUrlFoto();
 		
 		itensDoVendedor.getListaItemPedido().add(itemPedido);
 		
 		for (int i = 1; i < pedido.getListaPedidos().size(); i++) {
 			itemPedido = pedido.getListaPedidos().get(i);
-			itemPedido.getProduto().setListaFotos(dao.retornaPrimeiraFoto(itemPedido.getProduto().getCodProduto())); //Faz a query para a primeira foto do produto, que não pode ser retornada na primeira query
+			foto = dao.retornaPrimeiraFoto(itemPedido.getProduto().getCodProduto());
+			
+			fotos[i] = foto.get(0).getUrlFoto();
+						
 			vendedor = itemPedido.getProduto().getUsuario();
 			
 			if (vendedor.getCod_usuario() == itensDoVendedor.getVendedor().getCod_usuario()) {
@@ -110,6 +118,7 @@ public class ControllerPedidos {
 		listaDeVendedores.add(itensDoVendedor);
 		
 		model.addAttribute("lista", listaDeVendedores);
+		model.addAttribute("foto", fotos);
 		model.addAttribute("pedido", pedido);
 		return "mostraPedido";
 	}
