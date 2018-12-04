@@ -4,279 +4,352 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-
 	<head>
-
-		<title> WhiteMarket Shop. 2018 </title>
-
+	
 		<link rel="stylesheet" type="text/css" href="<spring:url value='res/css/headerStyle.css' />">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+		<style type="text/css"> @font-face { font-family:'ubuntu'; src: url("<spring:url value='res/font/ubuntu.ttf' />"); font-weight:normal; font-style:normal; } </style>
 
 	</head>
-
+	
 	<body>
-		
 		<div id="divHeaderFull">
-
-			<div id="divHeaderTop">
-				
-				<a href="telaPrincipal"> <img id="imgHeaderTopLogo" src="<spring:url value='res/img/png/logo-novo.png' />" alt="white market" /> </a>
-					
-				<div id="busca">
-					<input type="text" id="searchtext" class="form-field form-field-text placeholder" name="q" value="" size="20" placeholder="Buscar por palavra-chave">
-					<input id="searchbutton" class="btn btn-search btn-green" type="submit" onclick="" value="Buscar">
-				</div>
-			
-				
-				
-				<c:choose>
-				
-					<c:when test="${ not empty usuarioLogado.email }">
-					
-						<a href="#"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/ico/logout.png' />" alt="white market" /> </a>
-					
-					</c:when>
-					
-					<c:otherwise>
-					
-						<a href="login"> <img id="imgHeaderTopLogin" src="<spring:url value='res/img/ico/login.png' />" alt="white market" /> </a>
-					
-					</c:otherwise>
-					
-				</c:choose>
-				
-
-
-				<a href="verCarrinho"> <div id="imgHeaderTopCart" style="background-image: url('<spring:url value="res/img/ico/cartVerified.png" />');" > </div> </a>
-
-				
-			</div>
-			
+		
 			<div id="divHeaderMenu">
-
-				<div class="divHeaderMenuOption">
+			
+			<c:choose>
+				<c:when test="${not empty usuarioLogado.email }">
 				
-		
-					<a href="#">
-						<p class="pHeaderMenuOption"> Categorias </p>
-					</a>
-
-					<div class="divHeaderSubMenuOption">
-
-						<a href="#">
-							<p class="pHeaderSubMenuOption"> SubOptionMenu 1 </p>
-						</a>
-
-						<div class="divHeaderInnerSubMenuOption">
-
-							<a href="#">
-								<p class="pHeaderInnerSubMenuOption"> Inner SubOption 1 </p>
-							</a>
-
+					<div class="divHeaderMenuOptionContainer">
+					
+					
+						<!-- Opções do menu -->
+						<div class="divHeaderMenuOption">
+						
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/card_buy.png' />"/>
+							</div>
+							
+							<!-- Imagem e tag de identificação -->
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/card_buy_white.png' />"/>
+								<p class="optionTag">Comprar</p>
+								
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<!-- Opções do submenu -->
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+										
+											<!-- Tag de identificação -->
+											<p class="subOptionTag">Categoria 1</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 2</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 3</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 4</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 5</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 6</p>
+										</div>
+									</a>
+									
+								</div>
+								
+								
+								
+							</div>
 						</div>
-
-
 					</div>
-
-					<div class="divHeaderSubMenuOption">
-
-						<a href="#">
-							<p class="pHeaderSubMenuOption"> SubOptionMenu 2 </p>
-						</a>
-
-						<div class="divHeaderInnerSubMenuOption">
-
-							<a href="#">
-								<p class="pHeaderInnerSubMenuOption"> Inner SubOption 1 </p>
-							</a>
-
-						</div>
-
-						<div class="divHeaderInnerSubMenuOption">
-
-							<a href="#">
-								<p class="pHeaderInnerSubMenuOption"> Inner SubOption 2 </p>
-							</a>
-
-						</div>
-
-					</div>
-
-					<div class="divHeaderSubMenuOption">
-
-						<a href="#">
-							<p class="pHeaderSubMenuOption"> SubOptionMenu 3 </p>
-						</a>
-
-					</div>
-
-				</div>
-
-				<div class="divHeaderMenuOption">
-		
-
-				</div>
-
-				<div class="divHeaderMenuOption">
-
-					<a href="#">
-						<p class="pHeaderMenuOption"> Ofertas </p>
-					</a>
-
-					<div class="divHeaderSubMenuOption">
-
-						<a href="#">
-							<p class="pHeaderSubMenuOption"> SubOptionMenu 1 </p>
-						</a>
-
-					</div>
-
-					<div class="divHeaderSubMenuOption">
-
-						<a href="#">
-							<p class="pHeaderSubMenuOption"> SubOptionMenu 2 </p>
-						</a>
-
-					</div>
-
-				</div>
-
-				<div class="divHeaderMenuOption">
-
-					<a href="#">
-						<p class="pHeaderMenuOption"> Promoções </p>
-					</a>
-
-					<div class="divHeaderSubMenuOption">
-
-						<a href="#">
-							<p class="pHeaderSubMenuOption"> SubOptionMenu 1 </p>
-						</a>
-
-						<div class="divHeaderInnerSubMenuOption"> 
-
-							<a href="#">
-								<p class="pHeaderInnerSubMenuOption"> Inner SubOption 1 </p>
-							</a>
-
-						</div>
-
-					</div>
-
-				</div>
 				
-				<div class="divHeaderMenuOption">
-
+				
+				
+					<div class="divHeaderMenuOptionContainer">
+						<div class="divHeaderMenuOption">
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/shop-facade.png' />"/>
+							</div>
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/shop-facade-white.png' />"/>
+								<p class="optionTag">Vender</p>
+								
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<a href="cadastrarItem">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Cadastrar novo</p>
+										</div>
+									</a>
+									
+									<a href="verProdutos">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Ver produtos</p>
+										</div>
+									</a>
+									
+								</div>
+								
+								
+								
+							</div>
+						</div>
+					</div>
+					
 					
 				
-				</div>
+					<div class="divHeaderMenuOptionContainer">
+						<div class="divHeaderMenuOption">
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/cart.png' />"/>
+							</div>
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/cart-white.png' />"/>
+								<p class="optionTag">Carrinho</p>
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<a href="verCarrinho">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Abrir carrinho</p>
+										</div>
+									</a>
+									
+									<a href="verPedidos">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Ver compras</p>
+										</div>
+									</a>
+									
+								</div>
+								
+								
+								
+							</div>
+						</div>
+					</div>
 
-				<c:choose>
+
+
+					<div class="divHeaderMenuOptionContainer">
+						<div class="divHeaderMenuOption">
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/investments-speech.png' />"/>
+							</div>
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/investments-speech-white.png' />"/>
+								<p class="optionTag">Ofertas</p>
+								
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Ver promoções</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Resgatar coupon</p>
+										</div>
+									</a>
+									
+								</div>
+								
+								
+								
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="divHeaderMenuOptionContainer">
+						<div class="divHeaderMenuOption">
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/user-white.png' />"/>
+							</div>
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/user-black.png' />"/>
+								<p class="optionTag">Perfil</p>
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Configurações</p>
+										</div>
+									</a>
+									
+									<a href="logout">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Desconectar</p>
+										</div>
+									</a>
+									
+								</div>
+								
+								
+							</div>
+						</div>
+					</div>
+
+				</c:when>
 				
-					<c:when test="${ not empty usuarioLogado.email }">
+				<c:otherwise>
+				
+					<div class="divHeaderMenuOptionContainer">
 					
 						<div class="divHeaderMenuOption">
-		
-							<a href="#">
-								<p class="pHeaderMenuOption"> Minha Conta </p>
-							</a>
-		
-							<div class="divHeaderSubMenuOption">
-		
-								<a href="verPedidos">
-									<p class="pHeaderMenuOption">Meus Pedidos</p>
-								</a>
-		
-							</div>
-		
-							<div class="divHeaderSubMenuOption">
-		
-								<a href="verProdutos">
-									<p class="pHeaderMenuOption">Meus Produtos</p>
-								</a>
-		
+							
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/card_buy.png' />"/>
 							</div>
 							
-							<div class="divHeaderSubMenuOption">
-		
-								<a href="cadastrarItem">
-									<p class="pHeaderMenuOption">Vender Produto</p>
-								</a>
-		
+							<!-- Imagem e tag de identificação -->
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/card_buy_white.png' />"/>
+								<p class="optionTag">Comprar</p>
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<!-- Opções do submenu -->
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+										
+											<!-- Tag de identificação -->
+											<p class="subOptionTag">Categoria 1</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 2</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 3</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 4</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 5</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 6</p>
+										</div>
+									</a>
+									
+								</div>
+									
+									
+									
 							</div>
-							
-							<div class="divHeaderSubMenuOption">
-		
-								<a href="logout">
-									<p class="pHeaderMenuOption">Sair</p>
-								</a>
-		
-							</div>
-		
 						</div>
+					</div>
 					
-					</c:when>
 					
-					<c:otherwise>
 					
-						<div class="divHeaderMenuOption">
-		
-							<a href="#">
-								<p class="pHeaderMenuOption"> Minha Conta </p>
-							</a>
-							
-							<div class="divHeaderSubMenuOption">
-		
-								<a href="login">
-									<p class="pHeaderMenuOption">Logar</p>
-								</a>
-		
+					<a href="cadastrarCliente">
+						<div class="divHeaderMenuOptionContainer">
+							<div class="divHeaderMenuOption">
+								<div class="front face">
+									<img src="<spring:url value='res/img/ico/pack/005-login-4.png' />"/>
+								</div>
+								<div class="back face center">
+									<img src="<spring:url value='res/img/ico/pack/005-login-4-white.png' />"/>
+									<p class="optionTag">Registrar</p>
+								</div>
 							</div>
-					
-							<div class="divHeaderSubMenuOption">
-							
-								<a href="cadastrarCliente">
-									<p class="pHeaderMenuOption">Crie a sua conta</p>
-								</a>
-		
-							</div>
-							
 						</div>
+					</a>
 					
-					</c:otherwise>
-					
-				</c:choose>
+					<a href="login">
+						<div class="divHeaderMenuOptionContainer">
+							<div class="divHeaderMenuOption">
+								<div class="front face">
+									<img src="<spring:url value='res/img/ico/pack/016-login.png' />"/>
+								</div>
+								<div class="back face center">
+									<img src="<spring:url value='res/img/ico/pack/016-login-white.png' />"/>
+									<p class="optionTag">Entrar</p>
+								</div>
+							</div>
+						</div>
+					</a>
+				
+				</c:otherwise>
+			</c:choose>
 				
 			</div>
-
-		</div>
-
-		<script type="text/javascript">
-
 		
-		$(document).ready(function() {
+		</div>
+		
+		
+		
+		<a href="telaPrincipal"><img id="imgLogo" src="<spring:url value='res/img/png/logo-novo.png' />"/></a>
+		
+		<script type="text/javascript">
+		
+			$(document).ready(function() {
 
-			$("#searchbutton").click(function() {
-				var find = {
-						busca: $(this).parent().find("#searchtext").val()
-					}
-				
-				$.ajax({
-					url: "telaPrincipal/busca",
-					type: "POST",
-					data: find,
-					contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;",
-					success: function(data){
-						
-						window.location.href="telaPrincipal";
-					}
-				});
+				$("#searchbutton").click(function() {
+					var find = {
+							busca: $(this).parent().find("#searchtext").val()
+						}
+					
+					$.ajax({
+						url: "telaPrincipal/busca",
+						type: "POST",
+						data: find,
+						contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;",
+						success: function(data){
+							
+							window.location.href="telaPrincipal";
+						}
+					});
 			});
 		
-		});
-
 		</script>
-
+		
 	</body>
-
 </html>
