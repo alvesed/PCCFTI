@@ -22,7 +22,6 @@
 				outline: none;
 			}
 			
-			
 			#divCartContainer {
 				position: relative;
 				float: top;
@@ -103,6 +102,11 @@
 				width: 500px;
 			}
 			
+			.divHeaderMenuOptionSubContainer {
+				margin-top: -47px !important;
+				left: 6px !important;
+			}
+			
 		</style>
 	
 	</head>
@@ -123,7 +127,7 @@
 					
 						    <div class="divCartItem">
 						    
-						    	<img alt="" class="divCartItemImg" src="${itemPedido.produto.descricao}">
+						    	<img alt="" class="divCartItemImg" src="${itemPedido.produto.listaFotos.get(0).urlFoto}">
 						    	
 						    	<h4 class="h4CartItemCod"> ${itemPedido.produto.codProduto} </h4>
 						    	<h4> - </h4>
