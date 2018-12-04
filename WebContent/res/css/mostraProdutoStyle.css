@@ -5,13 +5,9 @@
 }
 
 body {
-  font-family: 'open sans';
   overflow-x: hidden;
 }
 
-img {
-  max-width: 100%;
-}
 
 .tab-pane{
 	height: 370px;

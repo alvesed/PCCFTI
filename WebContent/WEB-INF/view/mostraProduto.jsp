@@ -17,11 +17,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>White Market</title>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+<style type="text/css">
+	.divHeaderMenuOptionSubContainer {
+		margin-top: -16px !important;
+	}
+</style>
+
 </head>
 <body>
 <jsp:include page = "header.jsp" />
+<div id="divContainer">
 <input type="hidden" id="valorTotal">
 <div class="container">
 		<div class="card">
@@ -111,7 +117,7 @@
 			</div>
 		</div>
 		</div>
-	
+	</div>
 	</body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

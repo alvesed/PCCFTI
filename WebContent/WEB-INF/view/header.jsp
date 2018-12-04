@@ -238,8 +238,6 @@
 								<img src="<spring:url value='res/img/ico/card_buy_white.png' />"/>
 								<p class="optionTag">Comprar</p>
 								
-								
-								
 								<div class="divHeaderMenuOptionSubContainer">
 								
 									<!-- Opções do submenu -->
@@ -326,9 +324,9 @@
 		
 		</div>
 		
-		<input type="text" id="inputFind" placeholder="Encontre algo..." /><img id="inputFindIcon" src="<spring:url value='res/img/ico/pack/005-login-4.png' />"/>
+		<input type="text" id="inputFind" placeholder="Encontre algo..." /><img id="inputFindIcon" src="<spring:url value='res/img/ico/magnifying-glass-finder.png' />"/>
 		
-		<a href="main"><img id="imgLogo" src="<spring:url value='res/img/png/logo-novo.png' />"/></a>
+		<a href="telaPrincipal"><img id="imgLogo" src="<spring:url value='res/img/png/logo-novo.png' />"/></a>
 		
 	</body>
 </html>
