@@ -29,6 +29,7 @@ public class Produto {
 //	@ManyToMany(mappedBy = "produto", targetEntity = Cupom.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //	private List<Cupom> Cupons;
 	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fk_id_cupom")
 	private Cupom cupom;

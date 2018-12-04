@@ -23,7 +23,7 @@
 	</div>
 	
 	<div class="col-md-6">
-		<button type="button" class="btn btn-warning">Cadastrar Cupom de Desconto</button>
+		<a href="cupom" url=""><button type="button" class="btn btn-warning">Cadastrar Cupom de Desconto</button></a>
 	</div>
 </div>
 
