@@ -14,9 +14,7 @@
 <body>
 <jsp:include page="header.jsp" ></jsp:include>
 	<div id="divContainer">
-	
-	
-		
+			
 		<form action="autenticacao" method="post">
 		
 		  <div class="form-group">

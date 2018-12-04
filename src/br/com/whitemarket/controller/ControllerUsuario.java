@@ -54,7 +54,6 @@ public class ControllerUsuario {
 	 * Funções para login
 	 * Laura
 	 * 
-	 * 
 	 * */
 	
 	@RequestMapping("/login")

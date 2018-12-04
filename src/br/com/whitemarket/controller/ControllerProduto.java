@@ -137,11 +137,9 @@ public class ControllerProduto {
 		return "redirect:telaPrincipal";
 	}
 	
-	
 	/*
 	 * Funções para cadastro de cupons
 	 * Laura
-	 * 
 	 * 
 	 * */
 	

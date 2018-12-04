@@ -47,7 +47,6 @@ public class Cupom {
 	private Date data_expiracao;
 	
 	
-	
 	//Integer qnt_cupons;
 	Integer qnt_cupons; //número máximo de vezes que cupom pode ser usado
 	
