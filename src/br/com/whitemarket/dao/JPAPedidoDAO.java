@@ -78,7 +78,7 @@ public class JPAPedidoDAO implements PedidoDAO{
 		query.setParameter("codigo", codProduto);
 		
 		List<Foto> listaFotos = query.setMaxResults(1).getResultList();
-		
+
 		return listaFotos;
 	}
 }
