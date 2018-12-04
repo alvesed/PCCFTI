@@ -70,6 +70,23 @@ public class ControllerCarrinho {
 		
 		pedido.setValor_pagoDouble(sum);
 		
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		
+		if (!usuario.getEmail().equals("") && usuario != null) {
+			pedido.setFinalizado(false);
+			pedido.setData_compra(new Date());
+			
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+			EntityManager manager = factory.createEntityManager();
+			
+			manager.getTransaction().begin();
+			manager.persist(pedido);
+			manager.getTransaction().commit();
+			
+			manager.close();
+			factory.close();
+		}
+		
 		model.addAttribute("pedido", pedido);
 			
 		return "confirmarCompra";
@@ -83,7 +100,6 @@ public class ControllerCarrinho {
 		
 		if (!usuario.getEmail().equals("") && usuario != null) {
 			pedido.setFinalizado(true);
-			pedido.setData_compra(new Date());
 			
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
 			EntityManager manager = factory.createEntityManager();

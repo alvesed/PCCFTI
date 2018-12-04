@@ -28,7 +28,9 @@
 			<option>Outro</option>
 			</select>
 			Valor Total: <input readonly value="${pedido.valor_pago}">
-			<input type="button" id="confirmar" value="Confirmar">
+			</br>
+			 <input alt="Pague com PagSeguro" name="submit"  type="image" id="confirmar"   
+				src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>  
 			
 		</div>
 		

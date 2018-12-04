@@ -17,7 +17,6 @@
 
 <script type="text/javascript" src="res/js/jquery.js"></script>
 <script type="text/javascript" src="res/js/bootstrap.js"></script>
-<link rel="stylesheet" type="text/css" href="<spring:url value='res/css/headerStyle.css' />">
 
 <style>
 .container img {
@@ -32,6 +31,9 @@
 </head>
 <body>
 <jsp:include page = "headerH.jsp" />
+
+
+
 
 <div id="divContainer">
 	<div class="container" style="width: 92% !important;">

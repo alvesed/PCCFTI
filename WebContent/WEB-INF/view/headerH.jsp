@@ -6,6 +6,8 @@
 <html>
 	<head>
 	
+		<title> WhiteMarket Shop. 2018 </title>
+	
 		<link rel="stylesheet" type="text/css" href="<spring:url value='res/css/headerH.css' />">
 		<style type="text/css"> @font-face { font-family:'ubuntu'; src: url("<spring:url value='res/font/ubuntu.ttf' />"); font-weight:normal; font-style:normal; } </style>
 
@@ -19,103 +21,291 @@
 			<c:choose>
 				<c:when test="${empty usuarioLogado.email }">
 				
-					<a href="">
-						<div class="divHeaderMenuOptionContainer">
-							<div class="divHeaderMenuOption" class="shadow">
-								<div class="front face">
-									<img src="<spring:url value='res/img/ico/card_buy.png' />"/>
-								</div>
-								<div class="back face center">
-									<img src="<spring:url value='res/img/ico/card_buy_white.png' />"/>
-									<p>Comprar</p>
-									<div class="divHeaderMenuOptionSubContainer">Ola</div>
-								</div>
-							</div>
-						</div>
-					</a>
+					<div class="divHeaderMenuOptionContainer">
 					
-					<a href="">
-						<div class="divHeaderMenuOptionContainer">
-							<div class="divHeaderMenuOption" class="shadow">
-								<div class="front face">
-									<img src="<spring:url value='res/img/ico/shop-facade.png' />"/>
-								</div>
-								<div class="back face center">
-									<img src="<spring:url value='res/img/ico/shop-facade-white.png' />"/>
-									<p>Vender</p>
-								</div>
-							</div>
-						</div>
-					</a>
 					
-					<a href="">
-						<div class="divHeaderMenuOptionContainer">
-							<div class="divHeaderMenuOption" class="shadow">
-								<div class="front face">
-									<img src="<spring:url value='res/img/ico/user-white.png' />"/>
+						<!-- Opções do menu -->
+						<div class="divHeaderMenuOption">
+						
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/card_buy.png' />"/>
+							</div>
+							
+							<!-- Imagem e tag de identificação -->
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/card_buy_white.png' />"/>
+								<p class="optionTag">Comprar</p>
+								
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<!-- Opções do submenu -->
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+										
+											<!-- Tag de identificação -->
+											<p class="subOptionTag">Categoria 1</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 2</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 3</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 4</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 5</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 6</p>
+										</div>
+									</a>
+									
 								</div>
-								<div class="back face center">
-									<img src="<spring:url value='res/img/ico/user-black.png' />"/>
-									<p>Perfil</p>
-								</div>
+								
+								
+								
 							</div>
 						</div>
-					</a>
+					</div>
+				
+				
+				
+					<div class="divHeaderMenuOptionContainer">
+						<div class="divHeaderMenuOption">
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/shop-facade.png' />"/>
+							</div>
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/shop-facade-white.png' />"/>
+								<p class="optionTag">Vender</p>
+								
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Cadastrar novo</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Ver produtos</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Vendas feitas</p>
+										</div>
+									</a>
+									
+								</div>
+								
+								
+								
+							</div>
+						</div>
+					</div>
 					
-					<a href="">
-						<div class="divHeaderMenuOptionContainer">
-							<div class="divHeaderMenuOption" class="shadow">
-								<div class="front face">
-									<img src="<spring:url value='res/img/ico/cart.png' />"/>
-								</div>
-								<div class="back face center">
-									<img src="<spring:url value='res/img/ico/cart-white.png' />"/>
-									<p>Carrinho</p>
-								</div>
-							</div>
-						</div>
-					</a>
 					
-					<a href="">
-						<div class="divHeaderMenuOptionContainer">
-							<div class="divHeaderMenuOption" class="shadow">
-								<div class="front face">
-									<img src="<spring:url value='res/img/ico/investments-speech.png' />"/>
+				
+					<div class="divHeaderMenuOptionContainer">
+						<div class="divHeaderMenuOption">
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/cart.png' />"/>
+							</div>
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/cart-white.png' />"/>
+								<p class="optionTag">Carrinho</p>
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Abrir carrinho</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Ver compras</p>
+										</div>
+									</a>
+									
 								</div>
-								<div class="back face center">
-									<img src="<spring:url value='res/img/ico/investments-speech-white.png' />"/>
-									<p>Ofertas</p>
-								</div>
+								
+								
+								
 							</div>
 						</div>
-					</a>
+					</div>
+
+
+
+					<div class="divHeaderMenuOptionContainer">
+						<div class="divHeaderMenuOption">
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/investments-speech.png' />"/>
+							</div>
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/investments-speech-white.png' />"/>
+								<p class="optionTag">Ofertas</p>
+								
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Ver promoções</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Resgatar coupon</p>
+										</div>
+									</a>
+									
+								</div>
+								
+								
+								
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="divHeaderMenuOptionContainer">
+						<div class="divHeaderMenuOption">
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/user-white.png' />"/>
+							</div>
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/user-black.png' />"/>
+								<p class="optionTag">Perfil</p>
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Configurações</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Desconectar</p>
+										</div>
+									</a>
+									
+								</div>
+								
+								
+							</div>
+						</div>
+					</div>
+
 				</c:when>
 				
 				<c:otherwise>
 				
-					<a href="">
-						<div class="divHeaderMenuOptionContainer">
-							<div class="divHeaderMenuOption" class="shadow">
-								<div class="front face">
-									<img src="<spring:url value='res/img/ico/card_buy.png' />"/>
+					<div class="divHeaderMenuOption">
+						
+							<div class="front face">
+								<img src="<spring:url value='res/img/ico/card_buy.png' />"/>
+							</div>
+							
+							<!-- Imagem e tag de identificação -->
+							<div class="back face center">
+								<img src="<spring:url value='res/img/ico/card_buy_white.png' />"/>
+								<p class="optionTag">Comprar</p>
+								
+								
+								
+								<div class="divHeaderMenuOptionSubContainer">
+								
+									<!-- Opções do submenu -->
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+										
+											<!-- Tag de identificação -->
+											<p class="subOptionTag">Categoria 1</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 2</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 3</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 4</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 5</p>
+										</div>
+									</a>
+									
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Categoria 6</p>
+										</div>
+									</a>
+									
 								</div>
-								<div class="back face center">
-									<img src="<spring:url value='res/img/ico/card_buy_white.png' />"/>
-									<p>Comprar</p>
-								</div>
+								
+								
+								
 							</div>
 						</div>
-					</a>
+					</div>
+					
+					
 					
 					<a href="">
 						<div class="divHeaderMenuOptionContainer">
-							<div class="divHeaderMenuOption" class="shadow">
+							<div class="divHeaderMenuOption">
 								<div class="front face">
 									<img src="<spring:url value='res/img/ico/pack/005-login-4.png' />"/>
 								</div>
 								<div class="back face center">
 									<img src="<spring:url value='res/img/ico/pack/005-login-4-white.png' />"/>
-									<p>Registrar</p>
+									<p class="optionTag">Registrar</p>
 								</div>
 							</div>
 						</div>
@@ -123,13 +313,13 @@
 					
 					<a href="">
 						<div class="divHeaderMenuOptionContainer">
-							<div class="divHeaderMenuOption" class="shadow">
+							<div class="divHeaderMenuOption">
 								<div class="front face">
 									<img src="<spring:url value='res/img/ico/pack/016-login.png' />"/>
 								</div>
 								<div class="back face center">
 									<img src="<spring:url value='res/img/ico/pack/016-login-white.png' />"/>
-									<p>Entrar</p>
+									<p class="optionTag">Entrar</p>
 								</div>
 							</div>
 						</div>
@@ -138,11 +328,13 @@
 				</c:otherwise>
 			</c:choose>
 				
-				
 			</div>
-			
-			
 		
 		</div>
+		
+		<input type="text" id="inputFind" placeholder="Encontre algo..." /><img id="inputFindIcon" src="<spring:url value='res/img/ico/magnifying-glass-finder.png' />"/>
+		
+		<a href="main"><img id="imgLogo" src="<spring:url value='res/img/png/logo-novo.png' />"/></a>
+		
 	</body>
 </html>
