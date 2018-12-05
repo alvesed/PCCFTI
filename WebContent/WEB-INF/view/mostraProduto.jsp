@@ -15,6 +15,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+<style type="text/css">
+    	.divHeaderMenuOptionSubContainer {
+    		margin-top: -15px !important;
+    	}
+    </style>
+
 </head>
 <body>
 <jsp:include page = "header.jsp" />
