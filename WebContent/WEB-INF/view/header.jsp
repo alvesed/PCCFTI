@@ -324,7 +324,7 @@
 		
 		</div>
 		
-		
+		<input type="text" id="inputFind" placeholder="Encontrar algo..."><img alt="" src="<spring:url value='res/img/ico/magnifying-glass-finder.png' />" id="inputFindIcon">
 		
 		<a href="telaPrincipal"><img id="imgLogo" src="<spring:url value='res/img/png/logo-novo.png' />"/></a>
 		

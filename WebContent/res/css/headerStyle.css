@@ -60,7 +60,7 @@ body * {
 
 #divContainer {
 	position: absolute;
-	margin-top: 50px;
+	margin-top: 150px;
 	margin-bottom: 25px;
 	width: calc(90% - 100px);
 	left: 150px;
