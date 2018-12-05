@@ -41,7 +41,7 @@ public class Produto {
 		this.dataCadastro = dataCadastro;
 		this.codProduto = codProduto;
 		this.usuario = usuario;
-	}
+		}
 	
 	public Produto(String nome, String descricao, String condicao, BigDecimal valor, long codProduto) {
 		this.valor = valor;
@@ -50,7 +50,12 @@ public class Produto {
 		this.nome = nome;
 		this.codProduto = codProduto;
 	}
-	
+
+
+	public Produto(String nome, long codProduto) {
+		this.nome = nome;
+		this.codProduto = codProduto;
+	}
 	
 	@Id
 	@GeneratedValue()

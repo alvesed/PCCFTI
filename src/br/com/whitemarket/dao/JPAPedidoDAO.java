@@ -85,10 +85,13 @@ public class JPAPedidoDAO implements PedidoDAO{
 		List<Pedido> listPedidos = query.getResultList();
    		return listPedidos;
 	}
+	
+	
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Produto> retornaListaProdutosCadastrados(long codigo) {
+		System.out.println("testando erro banco 1");	
 		Query query = manager.createQuery("select NEW Produto(valor," +
 		   		" (SELECT " + 
 		   		" count(i.quantidade) as quantidades " + 
@@ -102,6 +105,28 @@ public class JPAPedidoDAO implements PedidoDAO{
 		return listProdutos;
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Produto> retornaListaNomeProdutos(long codigo) {
+		System.out.println("testando erro banco 1");
+		
+		Query query = manager.createQuery("select NEW Produto(valor," +
+		   		" (SELECT " + 
+		   		" count(i.quantidade) as quantidades " + 
+		   		" FROM ItemPedido i "
+		   		+ " WHERE i.produto.codProduto = p.codProduto " + 
+		   		" ), dataCadastro, codProduto, usuario, p.nome) from Produto p "
+		   		+ "WHERE p.ativo = 1 AND p.usuario.cod_usuario = :codigo");
+		query.setParameter("codigo", codigo);
+		
+		System.out.println("testando erro banco 2");
+ 
+		List<Produto> listProdutos = query.getResultList();
+		return listProdutos;
+	}
+
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Foto> retornaPrimeiraFoto(long codProduto) {
