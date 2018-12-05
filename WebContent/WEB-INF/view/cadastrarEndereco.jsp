@@ -81,10 +81,6 @@
                <label for="senha">Número</label>
                <input type="text" class="form-control" id="number" placeholder="Número da sua casa" name="number">
             </div>
-            <div class="form-group col col-sm-6  col-md-4">
-               <label for="senha">Bairro</label>
-               <input type="text" class="form-control" id="district" placeholder="Bairro" name="district">
-            </div>
          </div>
        
          <button type="submit" class="btn btn btn-primary" id="botao" >Confirmar Endereço</button>

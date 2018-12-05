@@ -14,7 +14,6 @@
 	<style type="text/css">
 		.table {border: 1px solid #d7cec7; margin-top: 20px;}
 		.table tr:nth-child(even) {background: #d7cec7;}
-		}
 	</style>
 
 </head>
