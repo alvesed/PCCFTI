@@ -1,6 +1,8 @@
 package br.com.whitemarket.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -36,6 +38,8 @@ public class ControllerItemPedido {
 	@RequestMapping("verProduto")
 	public String mostraProduto(@RequestParam String codigoProduto, Model model, HttpSession session) {
 		Produto p = dao.buscaPorCodigo(Long.parseLong(codigoProduto));
+		List<Comentario> comentario = daoComentario.listaComentarioPorCodigo(Long.parseLong(codigoProduto));
+
 		
 		if (p.getCodProduto() == 0) {
 			return "produto404";
@@ -44,6 +48,7 @@ public class ControllerItemPedido {
 		session.setAttribute("produto", p);
 
 		model.addAttribute("fotos", p.getListaFotos());
+		model.addAttribute("comentario", comentario);
 		
 		return "mostraProduto";
 	}
@@ -58,7 +63,10 @@ public class ControllerItemPedido {
 			produto.setCodProduto(Long.parseLong(codProduto));
 			comentario.setProduto(produto);
 			comentario.setUsuario(usuario);
+			comentario.setData_comentario(new Date());
+			
 			daoComentario.adicionaComentario(comentario);
+			
 			
 			model.addAttribute("codigoProduto", codProduto);
 			return "redirect:verProduto";

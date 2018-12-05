@@ -99,7 +99,39 @@
 					</div>
 				</div>
 			</div>
-		</div>
+			<hr>
+
+				<!--  Comentarios passado dos usuarios -->
+				
+				<c:forEach items="${comentario}" var="comentario" begin="0" varStatus="i">
+							
+				<div class="row">
+					<div class="col-sm10">
+						<div class="panel panel-white post panel-shadow">
+							<div class="post-heading">
+
+								<div class="pull-left meta">
+									<div class="title h5">
+										<b>${comentario.usuario.nome}</b> made a post.<h6 class="text-muted time">1 minute ago</h6>
+									</div>
+									
+								</div>
+							</div>
+							
+								
+							<div class="area-comentario">
+								<p> ${comentario.comentario}</p>
+
+							</div>
+							
+							
+						</div>
+					</div>
+				</div>
+				<hr>
+			</c:forEach>
+
+			</div>
 		</div>
 		
 		</div>
