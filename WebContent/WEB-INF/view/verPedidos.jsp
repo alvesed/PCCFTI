@@ -47,6 +47,7 @@
                   <button type="submit" class="btn btn-default">
 			  		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 				  </button>
+				  <a href="gerarPdf?cod_pedido=${listPedidos.cod_pedido}" class="btn btn-primary">Gerar PDF</a>
       </form>
 
 	  </td>
