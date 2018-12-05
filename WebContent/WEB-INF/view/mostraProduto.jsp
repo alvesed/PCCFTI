@@ -6,9 +6,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
-<!-- Latest compiled and minified CSS -->
-
-
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
@@ -16,12 +13,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>White Market</title>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 </head>
 <body>
 <jsp:include page = "header.jsp" />
+<div id="divContainer">
 <input type="hidden" id="valorTotal">
 <div class="container">
 		<div class="card">
@@ -96,6 +93,8 @@
 				</div>
 			</div>
 		</div>
+		</div>
+		
 		</div>
 	
 	</body>
