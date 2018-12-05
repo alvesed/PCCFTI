@@ -14,10 +14,14 @@
 		
 		  	<style type="text/css">
 		  	
-					.error {
-						border: 1px solid #F00;
-					}
-					
+				.error {
+					border: 1px solid #F00;
+				}
+				
+	        	.divHeaderMenuOptionSubContainer {
+	        		margin-top: -15px !important;
+	        	}
+				
   			</style>
   			
 	</head>
