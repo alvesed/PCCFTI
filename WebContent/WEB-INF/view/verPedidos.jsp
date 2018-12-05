@@ -10,10 +10,21 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Meus Pedidos</title>
+
+	<style type="text/css">
+		.table {border: 1px solid #d7cec7; margin-top: 20px;}
+		.table tr:nth-child(even) {background: #d7cec7;}
+		}
+	</style>
+
 </head>
 <body>
 <jsp:include page = "header.jsp" />
+
+<div id="divContainer">
+
+<h2>Meus pedidos</h2>
+
 <div id="container"></div>
 <table class="table table-striped" style="position: relative;float: top">
   <thead>
@@ -35,16 +46,15 @@
       <form action="verCarrinhoJaCadastrado" method="post">
 	      <input type="hidden" value="${listPedidos.cod_pedido}" name="cod_pedido"/>  
                   <button type="submit" class="btn btn-default">
-				  		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					  </button>
+			  		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				  </button>
       </form>
-      
 
 	  </td>
     </tr>
  </c:forEach>
   </tbody>
 </table>
-
+</div>
 </body>
 </html>

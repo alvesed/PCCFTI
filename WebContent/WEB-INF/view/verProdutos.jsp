@@ -15,6 +15,7 @@
 <body>
 <jsp:include page = "header.jsp" />
 
+<div id="divContainer">
 <div class="container">
 
 <div class="row btn-header">
@@ -60,6 +61,7 @@
  </c:forEach>
   </tbody>
 </table>
+</div>
 </div>
 </body>
 </html>
