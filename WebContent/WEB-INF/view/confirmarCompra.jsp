@@ -8,18 +8,6 @@
 		
 		<style type="text/css">
 			
-			.inputForm {
-				height: 50px;
-				width: 700px;
-				margin-top: 20px;
-				margin-left: 20px;
-				line-height: 50px;
-				font-size: 30px;
-				padding-left: 10px;
-				border-radius: 8px;
-				color: rgba(20, 20, 20, 1);
-			}
-			
 			.divHeaderMenuOptionSubContainer {
         		margin-top: -47px !important;
         		margin-left: 106px !important;
@@ -29,6 +17,31 @@
         	.divHeaderMenuOptionSubOption {
         		width: calc(100% - 18px) !important;
         	}
+        	
+        	.label {
+        		position: relative;
+        		float: left;
+        		height: 50px;
+        		width: 15%;
+        		margin-left: 2.5%;
+        		margin-left: 2.5%;
+        		margin-top: 20px;
+        	}
+        	
+        	.inputForm {
+        		position: relative;
+        		float: left;
+				height: 50px;
+				width: 75%;
+				margin-top: 20px;
+				margin-left: 2.5%;
+				margin-left: 2.5%;
+				line-height: 50px;
+				font-size: 30px;
+				padding-left: 10px;
+				border-radius: 8px;
+				color: rgba(20, 20, 20, 1);
+			}
 			
 		</style>
 		
@@ -39,16 +52,20 @@
 		
 		<div id="divContainer">
 			
-			Usuario: <input class="inputForm" readonly value="${carrinho.usuario.nome}">
-			<br><br>Quantidade de Itens: <input class="inputForm" style="width: 150px !important;" readonly value="${carrinho.listaPedidos.size()}">
-			Valor Total: <input class="inputForm" style="width: 350px !important;"  readonly value="${carrinho.valor_pago}">
-			<br><br>Endereço: 
+			<p class="label">Usuario:</p> <input class="inputForm" readonly value="${carrinho.usuario.nome}">
+			
+			<br><br><br><br><br>
+			
+			<p class="label">Quantidade de Itens:</p> <input class="inputForm" style="width: 10% !important;" readonly value="${carrinho.listaPedidos.size()}">
+			<p class="label" style="margin-left: 10%;">Valor Total:</p> <input class="inputForm" style="width: 37.5% !important; margin-left: 1.5%;"  readonly value="${carrinho.valor_pago}"><br><br><br><br><br><br><br><br>
+			<p class="label">Endereço:</p> 
 			<select class="inputForm" id="address">
 				<option> ${carrinho.usuario.endereco}</option>
 				<option>Outro</option>
 			</select>
 			
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br>
+			
 			<input type="button" id="confirmar"/>
 			 <input alt="Pague com PagSeguro" name="submit"  type="image" id="confirmar" 
 			 src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>  
