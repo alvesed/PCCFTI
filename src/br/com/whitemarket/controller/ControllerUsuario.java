@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.whitemarket.dao.JPAUsuarioDAO;
+import br.com.whitemarket.model.Endereco;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
 import javax.servlet.http.HttpSession;
@@ -37,13 +38,16 @@ public class ControllerUsuario {
 	}
 	
 	@RequestMapping("/efetivarCadastroCliente")
-	public String itemForm(Usuario usuario) {
+	public String itemForm(Usuario usuario, Endereco endereco) {
 		
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
         EntityManager manager = factory.createEntityManager();
         
+        endereco.setUsuario(usuario);
+        
         manager.getTransaction().begin();
         manager.persist(usuario);
+        manager.persist(endereco);
 		manager.getTransaction().commit();
 		
 		manager.close();

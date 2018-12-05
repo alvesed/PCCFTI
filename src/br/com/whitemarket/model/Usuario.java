@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -29,11 +30,16 @@ public class Usuario {
 	String senha;
 	String endereco;
 	
-	
 	@OneToMany(mappedBy = "usuario", targetEntity = Comentario.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Comentario> comentario;
 	
 	
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 	public List<Comentario> getComentario() {
 		return comentario;
 	}
@@ -88,13 +94,7 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-	
+
 	
 	
 }

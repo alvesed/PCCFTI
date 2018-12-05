@@ -71,6 +71,59 @@
                </select>
             </div>
          </div>
+         
+         <div class="row">
+            <div class="form-group col col-sm-6 col-md-4">
+               <label for="nome">Cidade</label>
+               <input type="text" class="form-control" id="nome" placeholder="Nome da sua Cidade" name="city">
+            </div>
+            <div class="form-group col col-sm-6 col-md-4">
+               <label for="cpf">Complementos</label>
+               <input type="text" class="form-control" id="cpf" placeholder="opcional" name="complement">
+            </div>
+            
+		            <div class="form-group col col-sm-6 col-md-4">
+		            <label>Estado</label>
+				   <select class="form-control" id="exampleFormControlSelect1" name="state">
+						<option value="AC">Acre</option>
+						<option value="AL">Alagoas</option>
+						<option value="AP">Amapá</option>
+						<option value="AM">Amazonas</option>
+						<option value="BA">Bahia</option>
+						<option value="CE">Ceará</option>
+						<option value="DF">Distrito Federal</option>
+						<option value="ES">Espírito Santo</option>
+						<option value="GO">Goiás</option>
+						<option value="MA">Maranhão</option>
+						<option value="MT">Mato Grosso</option>
+						<option value="MS">Mato Grosso do Sul</option>
+						<option value="MG">Minas Gerais</option>
+						<option value="PA">Pará</option>
+						<option value="PB">Paraíba</option>
+						<option value="PR">Paraná</option>
+						<option value="PE">Pernambuco</option>
+						<option value="PI">Piauí</option>
+						<option value="RJ">Rio de Janeiro</option>
+						<option value="RN">Rio Grande do Norte</option>
+						<option value="RS">Rio Grande do Sul</option>
+						<option value="RO">Rondônia</option>
+						<option value="RR">Roraima</option>
+						<option value="SC">Santa Catarina</option>
+						<option value="SP">São Paulo</option>
+						<option value="SE">Sergipe</option>
+						<option value="TO">Tocantins</option>
+					</select>
+		 	 </div>
+            
+            <div class="form-group col col-sm-6 col-md-4">
+               <label for="email">CEP</label>
+               <input type="text" class="form-control" id="postalCode" placeholder="#####-###" name="postalCode">
+            </div>
+            <div class="form-group col col-sm-6  col-md-4">
+               <label for="senha">Número</label>
+               <input type="text" class="form-control" id="number" placeholder="Número da sua casa" name="number">
+            </div>
+         </div>
          <button type="submit" class="btn btn btn-primary" id="botao" >Cadastrar</button>
       </form>
    </div>

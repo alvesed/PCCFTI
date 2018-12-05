@@ -1,8 +1,10 @@
 package br.com.whitemarket.controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
@@ -24,6 +26,7 @@ import br.com.uol.pagseguro.domain.Transaction;
 import br.com.uol.pagseguro.enums.Currency;
 import br.com.uol.pagseguro.enums.ShippingType;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
+import br.com.uol.pagseguro.properties.PagSeguroConfig;
 import br.com.uol.pagseguro.service.NotificationService;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Usuario;
@@ -39,26 +42,30 @@ public class PagseguroController {
 	
 	@RequestMapping("/pagseguro-criarpagamento")
 	public @ResponseBody
-	String criarPagamento(HttpSession session){
+	String criarPagamento(HttpSession session, HttpServletResponse response){
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		Address address = (Address) session.getAttribute("address");
 		List<Item> listItemPedido = (List<Item>) session.getAttribute("listItemPedido");
-		
-		
 		try {
+			PagSeguroConfig.setSandboxEnvironment();
 			PaymentRequest request = new PaymentRequest();
 			request.setReference("VND01");
+			
 			request.setCurrency(Currency.BRL);
 			request.setSender(getSender(usuario));
 			request.setShipping(getShipping(address)); //DEPENDE
 			for(Item i: listItemPedido) {
 				request.addItem(i);
 			 }
-			request.setNotificationURL("localhost:8080/WhiteMarket/pagseguro-notificacao");
-			request.setRedirectURL("localhost:8080/WhiteMarket/verPedidos");
 			
 			
-			return request.register(getCredentials());
+			try {
+				response.sendRedirect(request.register(getCredentials()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return request.register(getCredentials());  
 		}catch (PagSeguroServiceException e) {
 			// TODO: handle exception
 			return e.getMessage();
@@ -106,19 +113,22 @@ public class PagseguroController {
 			
 			switch (transaction.getStatus()) {
 			case PAID:
-				
+				System.out.println("PAID");
 				break;
 				
 			case CANCELLED:
-				
+				System.out.println("CANCELLED");
 				break;
 			case WAITING_PAYMENT:
+				System.out.println("WAITING_PAYMENT");
 				break;
 				
 			case IN_ANALYSIS:
+				System.out.println("IN_ANALYSIS");
 				break;
 
 			default:
+				System.out.println("default");
 				break;
 			}
 			
@@ -126,7 +136,7 @@ public class PagseguroController {
 			// TODO: handle exception
 		}
 		
-		return "";
+		return "telaInicial";
 		
 		
 	}
