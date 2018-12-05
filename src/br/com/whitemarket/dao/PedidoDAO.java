@@ -13,4 +13,5 @@ public interface PedidoDAO {
 	public List<Produto> retornaListaNomeProdutos(long codigo);
 	public List<Foto> retornaPrimeiraFoto(long codProduto);
 	public Pedido retornaProdutosDentroDePedido(long codPedido);
+	
 }

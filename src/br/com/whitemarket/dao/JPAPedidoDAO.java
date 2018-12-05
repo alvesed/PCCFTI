@@ -111,12 +111,7 @@ public class JPAPedidoDAO implements PedidoDAO{
 	public List<Produto> retornaListaNomeProdutos(long codigo) {
 		System.out.println("testando erro banco 1");
 		
-		Query query = manager.createQuery("select NEW Produto(valor," +
-		   		" (SELECT " + 
-		   		" count(i.quantidade) as quantidades " + 
-		   		" FROM ItemPedido i "
-		   		+ " WHERE i.produto.codProduto = p.codProduto " + 
-		   		" ), dataCadastro, codProduto, usuario, p.nome) from Produto p "
+		Query query = manager.createQuery("select NEW Produto(codProduto, p.nome) from Produto p "
 		   		+ "WHERE p.ativo = 1 AND p.usuario.cod_usuario = :codigo");
 		query.setParameter("codigo", codigo);
 		

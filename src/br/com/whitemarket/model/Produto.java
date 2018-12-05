@@ -51,7 +51,6 @@ public class Produto {
 		this.codProduto = codProduto;
 	}
 
-
 	public Produto(String nome, long codProduto) {
 		this.nome = nome;
 		this.codProduto = codProduto;
