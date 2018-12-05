@@ -28,15 +28,17 @@ public class GerarPdfUtil {
 	
 	public static void gerarPdf(Pedido pedido) {
 		 // criação do documento
-	       Rectangle pageSize = new Rectangle(PageSize.A4);
+	       Rectangle pageSize = new Rectangle(PageSize.A3);
 	       pageSize.setBackgroundColor(new BaseColor(215, 206, 199));
 	       Document document = new Document(pageSize);
 	       try {
-	           PdfWriter.getInstance(document, new FileOutputStream("C:\\PDF_Teste.pdf"));
+	           PdfWriter.getInstance(document, new FileOutputStream("D:\\PDF_Teste.pdf"));
 	           document.open();
-	           Paragraph p = new Paragraph("Pedido Confirmado");
-	           p.setIndentationLeft(200);
-	           document.add(p);
+	           //Paragraph p = new Paragraph("Dados do Pedido");
+	           //p.setIndentationLeft(200);
+	           //document.add(p);
+	           //document.add(new Paragraph(" "));
+	           document.add(createTableUsuario(pedido));
 	           document.add(new Paragraph(" "));
 	           document.add(createTableProdutos(pedido));
 	       }
@@ -50,34 +52,31 @@ public class GerarPdfUtil {
 	}
 	
 	public static PdfPTable createTableUsuario(Pedido pedido) {
-		// CRIA UMA TABELA COM 5 COLUNAS
-        PdfPTable table = new PdfPTable(8);
+		// CRIA UMA TABELA COM 4 COLUNAS
+        PdfPTable table = new PdfPTable(4);
+        table.setWidthPercentage(100);
         // CRIA UM OBJETO CELL
         PdfPCell cell;
         // ADICIONA AS COLUNAS
-        cell = new PdfPCell(new Phrase("Fotos"));
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Código"));
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Produto"));
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Descrição"));
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Condição"));
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Estado"));
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Qtd."));
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Valor"));
-        table.addCell(cell);
-        
+        if (pedido != null) {
+	        cell = new PdfPCell(new Phrase(pedido.getUsuario().getNome()));
+	        cell.setColspan(3);
+	        table.addCell(cell);
+	        cell = new PdfPCell(new Phrase("CPF: " + pedido.getUsuario().getCpf()));
+	        table.addCell(cell);
+	        cell = new PdfPCell(new Phrase("Pedido: N° " + pedido.getCod_pedido()));
+	        table.addCell(cell);
+	        cell = new PdfPCell(new Phrase("E-Mail: " + pedido.getUsuario().getEmail()));
+	        cell.setColspan(3);
+	        table.addCell(cell);
+        }
         return table;
 	}
 	
 	public static PdfPTable createTableProdutos(Pedido pedido) {
-		// CRIA UMA TABELA COM 5 COLUNAS
+		// CRIA UMA TABELA COM 8 COLUNAS
         PdfPTable table = new PdfPTable(8);
+        table.setWidthPercentage(100);
         // CRIA UM OBJETO CELL
         PdfPCell cell;
         // ADICIONA AS COLUNAS
@@ -87,9 +86,9 @@ public class GerarPdfUtil {
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Produto"));
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Descrição"));
+        cell = new PdfPCell(new Phrase("Descri."));
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Condição"));
+        cell = new PdfPCell(new Phrase("Condi."));
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Estado"));
         table.addCell(cell);
@@ -121,7 +120,11 @@ public class GerarPdfUtil {
 	            table.addCell(prod.getNome());
 	            table.addCell(prod.getDescricao());
 	            table.addCell(prod.getCondicao());
-	            table.addCell(prod.getEstadoProduto());
+	            if (prod.getCondicao().equals("Usado")) {
+		            table.addCell(prod.getEstadoProduto());
+	            } else {
+	            	table.addCell("N/A");
+	            }
 	            
 	            //VALOR DO PRODUTO
 	            String valor = String.valueOf(prod.getValor());
