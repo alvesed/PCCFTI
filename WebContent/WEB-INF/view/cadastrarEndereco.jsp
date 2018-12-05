@@ -42,6 +42,7 @@
             </div>
             
 		            <div class="form-group col col-sm-6 col-md-4">
+		            <label>Estado</label>
 				   <select class="form-control" id="exampleFormControlSelect1" name="state">
 						<option value="AC">Acre</option>
 						<option value="AL">Alagoas</option>
