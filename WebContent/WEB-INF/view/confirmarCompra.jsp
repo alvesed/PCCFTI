@@ -6,30 +6,39 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		
-		<script type="text/javascript">
-			function verificaSessao() {
-				<c:if test="${empty usuarioLogado.email.length()}">
-					window.location.href="<c:url value='/login'/>";
-	    		</c:if>
-	    	}
-		</script>
+		<style type="text/css">
+			
+			.inputForm {
+				height: 50px;
+				width: 700px;
+				margin-top: 20px;
+				margin-left: 20px;
+				line-height: 50px;
+				font-size: 30px;
+				padding-left: 10px;
+				border-radius: 8px;
+				color: rgba(20, 20, 20, 1);
+			}
+			
+		</style>
 		
 	</head>
 	
-	<body  onload="javascript:verificaSessao()">
+	<body>
 		<jsp:include page="header.jsp"></jsp:include>
 		
 		<div id="divContainer">
 			
-			Usuario: <input readonly value="${pedido.usuario.nome}">
-			Quantidade de Itens: <input readonly value="${pedido.listaPedidos.size()}">
-			Endereço: 
-			<select>
-			<option> ${pedido.usuario.endereco}</option>
-			<option>Outro</option>
+			Usuario: <input class="inputForm" readonly value="${carrinho.usuario.nome}">
+			<br><br>Quantidade de Itens: <input class="inputForm" style="width: 150px !important;" readonly value="${carrinho.listaPedidos.size()}">
+			Valor Total: <input class="inputForm" style="width: 350px !important;"  readonly value="${carrinho.valor_pago}">
+			<br><br>Endereço: 
+			<select class="inputForm" id="address">
+				<option> ${carrinho.usuario.endereco}</option>
+				<option>Outro</option>
 			</select>
-			Valor Total: <input readonly value="${pedido.valor_pago}">
-			</br>
+			
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			<input type="button" id="confirmar"/>
 			 <input alt="Pague com PagSeguro" name="submit"  type="image" id="confirmar" 
 			 src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>  
@@ -40,6 +49,12 @@
 			$(document).ready(function() {
 				$('#confirmar').click(function(){
 					window.location.href = 'cadastrarEndereco';
+				});
+				
+				$('#address').change(function(){
+					if($(this).val() === "Outro") {
+						window.location.href = 'cadastrarEndereco';
+					}
 				});
 			})
 		</script>
