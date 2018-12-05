@@ -74,7 +74,7 @@ public class ControllerCarrinho {
 	}
 	
 	@RequestMapping(value = "/confirmaCompra")
-	public String confirmBuy(HttpSession session, Model model) {
+	public String confirmBuy(HttpSession session) {
 		
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
@@ -90,7 +90,7 @@ public class ControllerCarrinho {
 			
 			pedido.setValor_pagoDouble(sum);
 			
-			if (!usuario.getEmail().equals("") && usuario != null) {
+			if (usuario != null && !usuario.getEmail().equals("")) {
 				pedido.setFinalizado(false);
 				pedido.setData_compra(new Date());
 				
@@ -105,11 +105,11 @@ public class ControllerCarrinho {
 				factory.close();
 			}
 			
-			model.addAttribute("pedido", pedido);
 		} catch (Exception e) {
 			Logger.getLogger(e.toString());
 		}
-		return (usuario != null && usuario.getEmail().equals("")) ? "confirmarCompra" : "login";
+		
+		return (usuario != null && !usuario.getEmail().equals("")) ? "confirmarCompra" : "login";
 	}
 	
 	@RequestMapping(value = "/finalizarCompra")
@@ -143,7 +143,7 @@ public class ControllerCarrinho {
 			Logger.getLogger(e.toString());
 		}
 		
-		return (usuario != null && usuario.getEmail().equals("")) ? "redirect:verPedidos" : "login";
+		return (usuario != null && !usuario.getEmail().equals("")) ? "redirect:verPedidos" : "login";
 	}
 	
 	@RequestMapping(value = "/cadastrarEndereco")
@@ -158,7 +158,7 @@ public class ControllerCarrinho {
 			Logger.getLogger(e.toString());
 		}
 		
-		return (usuario != null && usuario.getEmail().equals("")) ? "cadastrarEndereco" : "login";
+		return (usuario != null && !usuario.getEmail().equals("")) ? "cadastrarEndereco" : "login";
 	}
 	
 	@RequestMapping(value = "/finalizarPagSeguro")
@@ -191,7 +191,7 @@ public class ControllerCarrinho {
 			Logger.getLogger(e.toString());
 		}
 		
-		return (usuario != null && usuario.getEmail().equals("")) ? "redirect:pagseguro-criarpagamento" : "login";
+		return (usuario != null && !usuario.getEmail().equals("")) ? "redirect:pagseguro-criarpagamento" : "login";
 
 	}
 	
