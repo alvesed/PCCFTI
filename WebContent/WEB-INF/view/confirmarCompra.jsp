@@ -20,6 +20,16 @@
 				color: rgba(20, 20, 20, 1);
 			}
 			
+			.divHeaderMenuOptionSubContainer {
+        		margin-top: -47px !important;
+        		margin-left: 106px !important;
+        		width: calc(100% - 109px) !important;
+        	}
+        	
+        	.divHeaderMenuOptionSubOption {
+        		width: calc(100% - 18px) !important;
+        	}
+			
 		</style>
 		
 	</head>

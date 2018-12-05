@@ -104,8 +104,13 @@
 			
 			.divHeaderMenuOptionSubContainer {
 				margin-top: -47px !important;
-				left: 6px !important;
+				width: calc(100% - 109px) !important;
+				margin-left: 106px !important;
 			}
+			
+			.divHeaderMenuOptionSubOption {
+        		width: calc(100% - 18px) !important;
+        	}
 			
 		</style>
 	
