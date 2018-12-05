@@ -10,6 +10,8 @@ public interface PedidoDAO {
 	public Pedido retornaPedidoCadastrado(long codigo);
 	public List<Pedido> retornaListaPedidos(long codigo);
 	public List<Produto> retornaListaProdutosCadastrados(long codigo);
+	public List<Produto> retornaListaNomeProdutos(long codigo);
 	public List<Foto> retornaPrimeiraFoto(long codProduto);
 	public Pedido retornaProdutosDentroDePedido(long codPedido);
+	
 }

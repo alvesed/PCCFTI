@@ -23,6 +23,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.whitemarket.dao.FotoDAO;
+import br.com.whitemarket.dao.JPAPedidoDAO;
 import br.com.whitemarket.dao.ProdutoDAO;
 import br.com.whitemarket.model.Cupom;
 import br.com.whitemarket.model.Foto;
@@ -144,13 +145,25 @@ public class ControllerProduto {
 	 * */
 	
 	@RequestMapping("/cupom")
-	public String formcupom() {
+	public String formcupom(HttpSession session, Model model) {
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		JPAPedidoDAO dao = new JPAPedidoDAO();
+		 List<Produto> listProdutos = dao.retornaListaProdutosCadastrados(usuario.getCod_usuario());
+		 model.addAttribute("produtos", listProdutos);
+		 System.out.println("buscou produtos qnt = " + listProdutos.size());
 		return "cupom";
 	}
+	
 	
 	@RequestMapping("/cadastrarCupom")
 	public String cadastrarCupom(Cupom cupom, HttpSession session) {
 		System.out.println("testando passagem de dados do form");
+		System.out.println(cupom.getDescricao());
+		System.out.println(cupom.getCod_cupom());
+		System.out.println(cupom.getTipo_desconto());
+		System.out.println(cupom.getValor_desconto());
+		System.out.println(cupom.getValor_minimo());
+		System.out.println(cupom.getValor_percent());
 		return "cupom";
 	}
 	

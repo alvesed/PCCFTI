@@ -41,7 +41,7 @@ public class Cupom {
 	
 	private double valor_minimo;
 
-	private boolean tipo_desconto; //true = reais false = percent
+	private char tipo_desconto; //r = reais p = percent
 	
 	@Temporal(TemporalType.DATE)
 	private Date data_expiracao;
@@ -75,11 +75,11 @@ public class Cupom {
 		this.descricao = descricao;
 	}
 
-	public boolean isTipo_desconto() {
+	public char getTipo_desconto() {
 		return tipo_desconto;
 	}
 
-	public void setTipo_desconto(boolean tipo_desconto) {
+	public void setTipo_desconto(char tipo_desconto) {
 		this.tipo_desconto = tipo_desconto;
 	}
 
