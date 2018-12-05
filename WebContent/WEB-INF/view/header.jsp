@@ -43,7 +43,7 @@
 										<div class="divHeaderMenuOptionSubOption">
 										
 											<!-- Tag de identificação -->
-											<p class="subOptionTag">Categoria 1</p>
+											<p class="subOptionTag" >Categoria 1</p>
 										</div>
 									</a>
 									
@@ -244,40 +244,68 @@
 									<a href="">
 										<div class="divHeaderMenuOptionSubOption">
 										
+										<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 											<!-- Tag de identificação -->
-											<p class="subOptionTag">Categoria 1</p>
+											<p class="subOptionTag" id="automotivo" >Automotivo</p>
 										</div>
 									</a>
 									
 									<a href="">
 										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Categoria 2</p>
+											<p class="subOptionTag">Vestuario</p>
 										</div>
 									</a>
 									
 									<a href="">
 										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Categoria 3</p>
+											<p class="subOptionTag">Brinquedos</p>
 										</div>
 									</a>
 									
 									<a href="">
 										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Categoria 4</p>
+											<p class="subOptionTag">Celulares</p>
+										</div>
+									</a>
+
+									<a href="">
+										<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Informatica</p>
 										</div>
 									</a>
 									
 									<a href="">
 										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Categoria 5</p>
+											<p class="subOptionTag">Eletrodomésticos</p>
 										</div>
 									</a>
 									
 									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Categoria 6</p>
+									<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Eletrônicos</p>
 										</div>
 									</a>
+									
+									
+									<a href="">
+									<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Móveis</p>
+										</div>
+									</a>
+									
+									<a href="">
+									<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Moda e decoração</p>
+										</div>
+									</a>
+									
+									<a href="">
+									<div class="divHeaderMenuOptionSubOption">
+											<p class="subOptionTag">Games e Livros</p>
+										</div>
+									</a>
+									
+									
 									
 								</div>
 									
@@ -347,6 +375,32 @@
 							window.location.href="telaPrincipal";
 						}
 					});
+					
+				});
+				
+				
+				$("#automotivo").click(function() {
+					var find = {
+							buscaCategoria: 1
+						}
+					
+					$.ajax({
+						url: "telaPrincipal/buscaCategoria",
+						type: "POST",
+						data: find,
+						contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;",
+						success: function(data){
+							
+							window.location.href="telaPrincipal";
+						}
+					});
+				});
+				
+				
+				
+				
+				
+				
 			});
 		
 		</script>

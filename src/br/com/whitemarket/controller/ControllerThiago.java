@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.com.whitemarket.dao.ItemProdutoDAO;
 import br.com.whitemarket.model.Produto;
 import br.com.whitemarket.model.Foto;
+import br.com.whitemarket.model.Pedido;
 
 @Controller
 public class ControllerThiago {
@@ -71,5 +73,36 @@ public class ControllerThiago {
 			
 		
 		return "telaInicial";
+		
+	}
+		
+		
+		@RequestMapping(value = "/telaPrincipal/buscaCategoria", method = RequestMethod.POST, produces = "aplication/JSON")
+		public String buscaPorCategoria(@RequestParam("buscaCategoria") long buscaCategoria, Model model) {
+			System.out.println("PARAMETRO DO BUSCA POR CATEGORIA     "+ buscaCategoria);
+			
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+			EntityManager	manager	= factory.createEntityManager();
+				
+			// p.produto.categoria - aqui referencia o atributo categoria da model nao a coluna do banco "fk_categoria
+			Query query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :buscaCategoria");
+			query.setParameter("buscaCategoria", buscaCategoria);
+
+	
+			List<Produto> listProdutos = query.getResultList();
+			
+			
+		   for(Produto produto: listProdutos) {
+			   //if (!util.pegarPrimeiraFoto(produto.getCodProduto()).equals("")) produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
+		   }
+
+
+		   model.addAttribute("produto", listProdutos);
+	   
+			manager.close();  
+			factory.close();
+				
+			
+			return "telaInicial";
 	}
 }
