@@ -6,14 +6,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		
-		<script type="text/javascript">
-			function verificaSessao() {
-				<c:if test="${empty usuarioLogado.email.length()}">
-					window.location.href="<c:url value='/login'/>";
-	    		</c:if>
-	    	}
-		</script>
-		
 	</head>
 	
 	<body  onload="javascript:verificaSessao()">
