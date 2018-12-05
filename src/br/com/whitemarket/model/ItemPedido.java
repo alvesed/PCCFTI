@@ -38,8 +38,6 @@ public class ItemPedido {
 	private long quantidade;
 	
 	private boolean avaliado;
-	
-	private Cupom cupom;
 
 	public boolean isAvaliado() {
 		return avaliado;
@@ -71,14 +69,6 @@ public class ItemPedido {
 
 	public void setQuantidade(long quantidade) {
 		this.quantidade = quantidade;
-	}
-
-	public Cupom getCupom() {
-		return cupom;
-	}
-
-	public void setCupom(Cupom cupom) {
-		this.cupom = cupom;
 	}
 	
 }
