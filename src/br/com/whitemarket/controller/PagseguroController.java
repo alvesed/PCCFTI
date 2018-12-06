@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,8 +30,8 @@ import br.com.uol.pagseguro.domain.Transaction;
 import br.com.uol.pagseguro.enums.Currency;
 import br.com.uol.pagseguro.enums.ShippingType;
 import br.com.uol.pagseguro.exception.PagSeguroServiceException;
-import br.com.uol.pagseguro.properties.PagSeguroConfig;
 import br.com.uol.pagseguro.service.NotificationService;
+import br.com.whitemarket.model.Endereco;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
@@ -50,7 +49,16 @@ public class PagseguroController {
 	public @ResponseBody
 	String criarPagamento(HttpSession session, HttpServletResponse response){
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-		Address address = (Address) session.getAttribute("address");
+		Util util = new Util();
+		Address address = new Address();
+		Endereco endereco = util.getEnderecoUsuarioLogado(usuario.getCod_usuario());
+		address.setCity(endereco.getCity());
+		address.setComplement(endereco.getComplement());
+		address.setCountry("Brasil");
+		address.setNumber(endereco.getNumber());
+		address.setPostalCode(endereco.getPostalCode());
+		address.setState(endereco.getState());
+		address.setStreet(endereco.getLogradouro());
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
 		
 		List<Item> listItemPedido = (List<Item>) session.getAttribute("listItemPedido");
