@@ -3,6 +3,7 @@ package br.com.whitemarket.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,16 +127,16 @@ public class ControllerPedidos {
 	
 		//BOTÃO GERAR PDF. FALTA ADICIONAR O BOTÃO NA JSP PASSANDO O CÓDIGO DO PEDIDO
 		@RequestMapping("/gerarPdf")
-		public String gerarPdf(Model model, HttpSession session, @RequestParam("cod_pedido") long codPedido) {
+		public String gerarPdf(Model model, HttpSession session, @RequestParam("cod_pedido") long codPedido, HttpServletResponse response) {
+			Util util = new Util();
 			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 			
 			if(usuario == null) {
 				return "login";
 			}
 			
-			GerarPdfUtil.gerarPdf(dao.retornaProdutosDentroDePedido(codPedido));
-			
-	    	return "verPedidos";
+			GerarPdfUtil.gerarPdf(dao.retornaProdutosDentroDePedido(codPedido), util.getEnderecoUsuarioLogado(usuario.getCod_usuario()));
+	    	return "redirect:verPedidos";
 		}
 	
 }

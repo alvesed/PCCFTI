@@ -32,6 +32,7 @@
       <th scope="col">Valor do Pedido</th>
       <th scope="col">Qtd. Itens</th>
       <th scope="col">Ver Mais</th>
+      <th scope="col">Documento</th>
     </tr>
   </thead>
   <tbody>
@@ -47,9 +48,12 @@
                   <button type="submit" class="btn btn-default">
 			  		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 				  </button>
-				  <a href="gerarPdf?cod_pedido=${listPedidos.cod_pedido}" class="btn btn-primary">Gerar PDF</a>
+				 
       </form>
 
+	  </td>
+	  <td>
+	  	 <a href="gerarPdf?cod_pedido=${listPedidos.cod_pedido}" class="btn btn-primary">Gerar PDF</a>
 	  </td>
     </tr>
  </c:forEach>
