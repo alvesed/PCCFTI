@@ -1,4 +1,5 @@
 	package br.com.whitemarket.controller;
+	
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.uol.pagseguro.domain.Address;
 import br.com.uol.pagseguro.domain.Item;
+import br.com.whitemarket.model.Endereco;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
-
+import br.com.whitemarket.controller.Util;
 @Controller
 public class ControllerCarrinho {
 	
@@ -76,8 +78,17 @@ public class ControllerCarrinho {
 	@RequestMapping(value = "/confirmaCompra")
 	public String confirmBuy(HttpSession session) {
 		
+		Util util = new Util();
+		
+		
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		try {
+			session.setAttribute("endereco", util.getEnderecoUsuarioLogado(usuario.getCod_usuario()));
+		} catch (Exception e) {
+			session.setAttribute("endereco", new Endereco());
+		}
+		
 		
 		try {
 			

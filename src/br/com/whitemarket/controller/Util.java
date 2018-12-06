@@ -9,13 +9,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import org.apache.commons.lang.time.DateUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.Minutes;
 import org.joda.time.Seconds;
 
+import br.com.whitemarket.model.Endereco;
 import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.Produto;
 
@@ -98,7 +98,30 @@ public class Util {
 		manager.close();  
 		factory.close();
 		
-		return (foto.get(0) != null && !foto.get(0).getUrlFoto().equals("")) ? foto.get(0).getUrlFoto() : "";
+		try {
+			return (foto.get(0) != null && !foto.get(0).getUrlFoto().equals("")) ? foto.get(0).getUrlFoto() : "";
+		} catch (Exception e) {
+			return "";
+		}
 		
 	}
+	
+	
+	public Endereco getEnderecoUsuarioLogado(long codigo) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+		EntityManager	manager	= factory.createEntityManager();
+		
+		TypedQuery<Endereco> a = manager.createQuery("SELECT e FROM Endereco e WHERE e.usuario.cod_usuario = :codigo", Endereco.class);
+		a.setParameter("codigo", codigo);
+		List<Endereco> endereco = a.getResultList();
+
+		manager.close();  
+		factory.close();
+		
+		try {
+			return endereco.get(0);
+		} catch (Exception e) {
+			return new Endereco();
+		}
+	}	
 }

@@ -60,7 +60,7 @@
 			<p class="label" style="margin-left: 10%;">Valor Total:</p> <input class="inputForm" style="width: 37.5% !important; margin-left: 1.5%;"  readonly value="${carrinho.valor_pago}"><br><br><br><br><br><br><br><br>
 			<p class="label">Endereço:</p> 
 			<select class="inputForm" id="address">
-				<option> ${carrinho.usuario.endereco}</option>
+				<option> ${endereco.city}</option>
 				<option>Outro</option>
 			</select>
 			
