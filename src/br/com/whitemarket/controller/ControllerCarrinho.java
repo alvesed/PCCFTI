@@ -159,9 +159,15 @@ public class ControllerCarrinho {
 	
 	@RequestMapping(value = "/cadastrarEndereco")
 	public String cadastrarEndereco(HttpSession session) {
+		Util util = new Util();
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		try {
+			session.setAttribute("endereco", util.getEnderecoUsuarioLogado(usuario.getCod_usuario()));
+		} catch (Exception e) {
+			session.setAttribute("endereco", new Endereco());
+		}
 		
 		try {
 			session.setAttribute("carrinho", pedido);

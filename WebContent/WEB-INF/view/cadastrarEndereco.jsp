@@ -30,20 +30,24 @@
 	  <div id="divContainer">
    <div id="main" class="container-fluid">
       <h3 class="page-header" align="center">Cadastrar Endereço</h3>
-      <form id="form" action="finalizarPagSeguro" method="post">
+      <form id="form" action="confirmaCompra">
          <div class="row">
             <div class="form-group col col-sm-6 col-md-4">
                <label for="nome">Cidade</label>
-               <input type="text" class="form-control" id="nome" placeholder="Nome da sua Cidade" name="city">
+               <input readonly value="${endereco.city}" type="text" class="form-control" id="nome" placeholder="Nome da sua Cidade">
+            </div>
+            <div class="form-group col col-sm-6 col-md-4">
+               <label for="nome">Logradouro</label>
+               <input readonly value="${endereco.logradouro}" type="text" class="form-control" id="logradouro" placeholder="Nome da sua Cidade" >
             </div>
             <div class="form-group col col-sm-6 col-md-4">
                <label for="cpf">Complementos</label>
-               <input type="text" class="form-control" id="cpf" placeholder="opcional" name="complement">
+               <input readonly value="${endereco.complement}" type="text" class="form-control" id="cpf" placeholder="opcional" >
             </div>
             
 		            <div class="form-group col col-sm-6 col-md-4">
 		            <label>Estado</label>
-				   <select class="form-control" id="exampleFormControlSelect1" name="state">
+				   <select  disabled="disabled" class="form-control" id="state" name="state">
 						<option value="AC">Acre</option>
 						<option value="AL">Alagoas</option>
 						<option value="AP">Amapá</option>
@@ -76,26 +80,27 @@
             
             <div class="form-group col col-sm-6 col-md-4">
                <label for="email">CEP</label>
-               <input type="text" class="form-control" id="postalCode" placeholder="#####-###" name="postalCode">
+               <input readonly value="${endereco.postalCode}"  readonly type="text" class="form-control" id="postalCode" placeholder="#####-###" >
             </div>
             <div class="form-group col col-sm-6  col-md-4">
                <label for="senha">Número</label>
-               <input type="text" class="form-control" id="number" placeholder="Número da sua casa" name="number">
+               <input readonly value="${endereco.number}" type="text" class="form-control" id="number" placeholder="Número da sua casa">
             </div>
          </div>
        
-         <button type="submit" class="btn btn btn-primary" id="botao" >Confirmar Endereço</button>
+         <button type="submit" class="btn btn btn-primary" id="botao" ><- Voltar</button>
       </form>
    </div>
 </div>
 </body>
+
 	<script type="text/javascript">
+	document.getElementById('state').value = '${endereco.state}';
 			$(document).ready(function() {
 				$('#confirmar').click(function(){
 					alert('Parabens!');
 					window.location.href = 'cadastrarEndereco';
 				});		
-				
 			})
 			
 			

@@ -59,30 +59,31 @@
 			<p class="label">Quantidade de Itens:</p> <input class="inputForm" style="width: 10% !important;" readonly value="${carrinho.listaPedidos.size()}">
 			<p class="label" style="margin-left: 10%;">Valor Total:</p> <input class="inputForm" style="width: 37.5% !important; margin-left: 1.5%;"  readonly value="${carrinho.valor_pago}"><br><br><br><br><br><br><br><br>
 			<p class="label">Endereço:</p> 
-			<select class="inputForm" id="address">
-				<option> ${endereco.city}</option>
+			<select style="width: 65% !important;" class="inputForm">
+				<option> ${endereco.logradouro}</option>
 				<option>Outro</option>
 			</select>
+			<input style="margin: 35px;" value="Ver Mais" type="button" id="verMais"/>
+
+<hr>
+<p class="label">Formas de Pagamento:</p><br><br><br><br>	<br>
 			
-			<br><br><br><br><br>
-			
-			<input type="button" id="confirmar"/>
-			 <input alt="Pague com PagSeguro" name="submit"  type="image" id="confirmar" 
-			 src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>  
+			 <input style="align: left" alt="Pague com PagSeguro" name="submit"  type="image" id="confirmar" 
+			 	src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>  
 			
 		</div>
 		
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('#confirmar').click(function(){
+				$('#verMais').click(function(){
 					window.location.href = 'cadastrarEndereco';
 				});
 				
-				$('#address').change(function(){
-					if($(this).val() === "Outro") {
-						window.location.href = 'cadastrarEndereco';
-					}
+				$('#confirmar').click(function(){
+					alert('Obrigado por nós escolher, seu pedido será finalizado no Pagseguro!')
+					window.location.href = 'finalizarPagSeguro';
 				});
+				
 			})
 		</script>
 		

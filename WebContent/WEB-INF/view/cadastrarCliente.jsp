@@ -41,8 +41,7 @@
                <input type="text" class="form-control" id="cpf" placeholder="000.000.000-00" name="cpf">
             </div>
             <div class="form-group col col-sm-6 col-md-4">
-               <label for="endereco">Endereço</label>
-               <input type="text" class="form-control" id="endereco" placeholder="" name="endereco">
+               <input type="hidden" value="endereco" class="form-control" id="endereco" placeholder="" name="endereco">
             </div>
             <div class="form-group col col-sm-6 col-md-4">
                <label for="email">E-mail</label>
@@ -76,6 +75,10 @@
             <div class="form-group col col-sm-6 col-md-4">
                <label for="nome">Cidade</label>
                <input type="text" class="form-control" id="nome" placeholder="Nome da sua Cidade" name="city">
+            </div>
+            <div class="form-group col col-sm-6  col-md-4">
+               <label for="senha">Logradouro</label>
+               <input type="text" class="form-control" id="logradouro" placeholder="Número da sua casa" name="logradouro">
             </div>
             <div class="form-group col col-sm-6 col-md-4">
                <label for="cpf">Complementos</label>

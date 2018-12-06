@@ -2,8 +2,13 @@ package br.com.whitemarket.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +34,7 @@ import br.com.uol.pagseguro.exception.PagSeguroServiceException;
 import br.com.uol.pagseguro.properties.PagSeguroConfig;
 import br.com.uol.pagseguro.service.NotificationService;
 import br.com.whitemarket.model.ItemPedido;
+import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
 
 
@@ -45,9 +51,10 @@ public class PagseguroController {
 	String criarPagamento(HttpSession session, HttpServletResponse response){
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		Address address = (Address) session.getAttribute("address");
+		Pedido pedido = (Pedido) session.getAttribute("carrinho");
+		
 		List<Item> listItemPedido = (List<Item>) session.getAttribute("listItemPedido");
 		try {
-			PagSeguroConfig.setSandboxEnvironment();
 			PaymentRequest request = new PaymentRequest();
 			request.setReference("VND01");
 			
@@ -57,6 +64,33 @@ public class PagseguroController {
 			for(Item i: listItemPedido) {
 				request.addItem(i);
 			 }
+			
+			
+			try {
+				if (!usuario.getEmail().equals("") && usuario != null) {
+					pedido.setFinalizado(true);
+					
+					EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+					EntityManager manager = factory.createEntityManager();
+					
+					manager.getTransaction().begin();
+					manager.merge(pedido);
+					manager.getTransaction().commit();
+					
+					manager.close();
+					factory.close();
+				}
+				
+				pedido = new Pedido();
+				pedido.setUsuario(usuario);
+				pedido.setListaPedidos(new ArrayList<ItemPedido>());
+				
+				session.setAttribute("carrinho", pedido);
+			
+			} catch (Exception e) {
+				Logger.getLogger(e.toString());
+			}
+			
 			
 			
 			try {
@@ -114,6 +148,7 @@ public class PagseguroController {
 			switch (transaction.getStatus()) {
 			case PAID:
 				System.out.println("PAID");
+				//É aqui que deveria chamar um método que deveria finalizar o pedido.
 				break;
 				
 			case CANCELLED:
@@ -136,7 +171,7 @@ public class PagseguroController {
 			// TODO: handle exception
 		}
 		
-		return "telaInicial";
+		return "verPedidos";
 		
 		
 	}

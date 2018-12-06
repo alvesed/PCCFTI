@@ -27,6 +27,16 @@ public class Endereco {
 	String state;
 	String postalCode;
 	String number;
+	String logradouro;
+	
+	
+	
+	public String getLogradouro() {
+		return logradouro;
+	}
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
 	public Long getCod_endereco() {
 		return cod_endereco;
 	}

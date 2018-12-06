@@ -34,12 +34,7 @@
 <div id="divContainer">
 	<div class="container" style="width: 92% !important;">
 	
-	      <form action="pagseguro-criarpagamento" method="get">
-	
-            <button  type="submit" class="btn btn-default">
-  		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-	  </button>
-      </form>
+	      
 	
 
 		<div class="row">
