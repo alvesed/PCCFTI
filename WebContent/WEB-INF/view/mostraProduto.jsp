@@ -82,6 +82,26 @@
 <h1>Comentarios</h1>
 
 <hr>
+
+					<!------------Box comentario---------->
+
+			<div id='form'>
+				<div class="row">
+					<div class="col-md-12">
+
+						<form action="adicionarComentario" method="POST" id="commentform">
+								
+							<input type="hidden" name="codProduto" value ="${produto.codProduto}" >
+							<div id="comment-message" class="form-row">
+								<textarea name="comentario" placeholder="Digite seu comentario" id="comment" style="resize: none"rows="4" cols="100"></textarea>
+							</div>
+							<input type="submit" name="dsubmit" id="commentSubmit" value="Submit Comment">
+						</form>
+
+					</div>
+				</div>
+			</div>
+		<hr>
 				<!--  Comentarios passado dos usuarios -->
 				
 				<c:forEach items="${comentario}" var="comentario" begin="0" varStatus="i">
@@ -93,7 +113,7 @@
 
 								<div class="pull-left meta">
 									<div class="title h5">
-										<b>${comentario.usuario.nome}</b> made a post.<h6 class="text-muted time">${comentario.dataAposComentario} ago</h6>
+										<b>${comentario.usuario.nome}</b> comentou.<h6 class="text-muted time">${comentario.dataAposComentario} ago</h6>
 									</div>
 									
 								</div>
@@ -112,25 +132,7 @@
 				<hr>
 			</c:forEach>
 			
-						<!------------Form Start---------->
-
-			<div id='form'>
-				<div class="row">
-					<div class="col-md-12">
-
-						<form action="adicionarComentario" method="POST" id="commentform">
-								
-							<input type="hidden" name="codProduto" value ="${produto.codProduto}" >
-							<div id="comment-message" class="form-row">
-								<textarea name="comentario" placeholder="Digite seu comentario" id="comment" style="resize: none"rows="4" cols="100"></textarea>
-							</div>
-							<input type="submit" name="dsubmit" id="commentSubmit" value="Submit Comment">
-						</form>
-
-					</div>
-				</div>
-			</div>
-		
+	
 
 			</div>
 		</div>

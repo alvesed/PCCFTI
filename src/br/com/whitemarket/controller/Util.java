@@ -59,11 +59,7 @@ public class Util {
 			DateTime dt1 = new DateTime(d1);
 			DateTime dt2 = new DateTime(d2);
 
-			System.out.println(Days.daysBetween(dt1, dt2).getDays() + " days, ");
-			System.out.println((Hours.hoursBetween(dt1, dt2).getHours() % 24) + " hours, ");
-			System.out.println(Minutes.minutesBetween(dt1, dt2).getMinutes() % 60 + " minutes, ");
-			System.out.println(Seconds.secondsBetween(dt1, dt2).getSeconds() % 60 + " seconds");
-			
+					
 			
 			if((Days.daysBetween(dt1, dt2).getDays() > 0)){
 				dataAposComentario = Days.daysBetween(dt1, dt2).getDays() + " days ";
@@ -79,7 +75,6 @@ public class Util {
 		 } catch (Exception e) {
 			e.printStackTrace();
 		 }
-		System.out.println(dataAposComentario);
 		return dataAposComentario;
 	  }
 		

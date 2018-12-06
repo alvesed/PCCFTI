@@ -28,7 +28,7 @@ public class JPAComentarioDAO implements ComentarioDAO{
 		
 		
 		
-		Query query = manager.createQuery("SELECT comentario FROM Comentario comentario WHERE comentario.produto.codProduto = :codigo");
+		Query query = manager.createQuery("SELECT comentario FROM Comentario comentario WHERE comentario.produto.codProduto = :codigo ORDER BY comentario.data_comentario DESC");
    
 		query.setParameter("codigo", codigo);
 		
