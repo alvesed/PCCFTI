@@ -29,7 +29,7 @@
 								<img src="<spring:url value='res/img/ico/card_buy.png' />"/>
 							</div>
 							
-							<!-- Imagem e tag de identificação -->
+							<!-- Imagem e tag de identificação   -->
 							<div class="back face center">
 								<img src="<spring:url value='res/img/ico/card_buy_white.png' />"/>
 								<p class="optionTag">Comprar</p>
