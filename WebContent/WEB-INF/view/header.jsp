@@ -34,53 +34,17 @@
 								<img src="<spring:url value='res/img/ico/card_buy_white.png' />"/>
 								<p class="optionTag">Comprar</p>
 								
-								
-								
 								<div class="divHeaderMenuOptionSubContainer">
-								
 									<!-- Opções do submenu -->
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-										
-											<!-- Tag de identificação -->
-											<p class="subOptionTag" >Categoria 1</p>
-										</div>
-									</a>
-									
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Categoria 2</p>
-										</div>
-									</a>
-									
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Categoria 3</p>
-										</div>
-									</a>
-									
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Categoria 4</p>
-										</div>
-									</a>
-									
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Categoria 5</p>
-										</div>
-									</a>
-									
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Categoria 6</p>
-										</div>
-									</a>
-									
+									<c:forEach items="${listaCategorias}" var="categoria">
+										<a href="">
+											<div class="divHeaderMenuOptionSubOption">
+												<!-- Tag de identificação -->
+												<a href="<spring:url value='filtrarPorCategoria?idCategoria=${categoria.id}'/>"><p class="subOptionTag">${categoria.descricao}</p></a>
+											</div>
+										</a>
+									</c:forEach>
 								</div>
-								
-								
-								
 							</div>
 						</div>
 					</div>
@@ -239,83 +203,20 @@
 								<p class="optionTag">Comprar</p>
 								
 								<div class="divHeaderMenuOptionSubContainer">
-								
 									<!-- Opções do submenu -->
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-										
-										<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-											<!-- Tag de identificação -->
-											<p class="subOptionTag" id="automotivo" >Automotivo</p>
-										</div>
-									</a>
-									
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Vestuario</p>
-										</div>
-									</a>
-									
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Brinquedos</p>
-										</div>
-									</a>
-									
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Celulares</p>
-										</div>
-									</a>
-
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Informatica</p>
-										</div>
-									</a>
-									
-									<a href="">
-										<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Eletrodomésticos</p>
-										</div>
-									</a>
-									
-									<a href="">
-									<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Eletrônicos</p>
-										</div>
-									</a>
-									
-									
-									<a href="">
-									<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Móveis</p>
-										</div>
-									</a>
-									
-									<a href="">
-									<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Moda e decoração</p>
-										</div>
-									</a>
-									
-									<a href="">
-									<div class="divHeaderMenuOptionSubOption">
-											<p class="subOptionTag">Games e Livros</p>
-										</div>
-									</a>
-									
-									
-									
+									<c:forEach items="${listaCategorias}" var="categoria">
+										<a href="">
+											<div class="divHeaderMenuOptionSubOption">
+												<!-- Tag de identificação -->
+												<!-- no codigo filtrarPorCategoria?idCategoria, depois do ? ja é parametro e não mapeamento -->
+												<a href="<spring:url value='filtrarPorCategoria?idCategoria=${categoria.id}'/>"><p class="subOptionTag">${categoria.descricao}</p></a>
+											</div>
+										</a>
+									</c:forEach>
 								</div>
-									
-									
-									
 							</div>
 						</div>
 					</div>
-					
-					
 					
 					<a href="cadastrarCliente">
 						<div class="divHeaderMenuOptionContainer">
@@ -377,30 +278,6 @@
 					});
 					
 				});
-				
-				
-				$("#automotivo").click(function() {
-					var find = {
-							buscaCategoria: 1
-						}
-					
-					$.ajax({
-						url: "telaPrincipal/buscaCategoria",
-						type: "POST",
-						data: find,
-						contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;",
-						success: function(data){
-							
-							window.location.href="telaPrincipal";
-						}
-					});
-				});
-				
-				
-				
-				
-				
-				
 			});
 		
 		</script>

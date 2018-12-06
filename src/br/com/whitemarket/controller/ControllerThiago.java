@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.whitemarket.dao.ItemProdutoDAO;
 import br.com.whitemarket.model.Produto;
+import br.com.whitemarket.model.Categoria;
 import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.Pedido;
 
@@ -44,6 +45,10 @@ public class ControllerThiago {
 
 
 		model.addAttribute("produto", listProdutos);
+		
+		List<Categoria> listCategorias = manager.createQuery("select c from Categoria c").getResultList();
+		model.addAttribute("listaCategorias", listCategorias);
+		
 		   
 		manager.close();  
 		factory.close();
@@ -51,54 +56,31 @@ public class ControllerThiago {
 		return "telaInicial";
 	}
 	
-	@RequestMapping(value = "/telaPrincipal/busca", method = RequestMethod.POST, produces = "aplication/JSON")
-	public String menu(@RequestParam("busca") String buscarProduto, Model model) {
-		System.out.println("PARAMETRO BUSCA ======== ========================= "+ buscarProduto);
-		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-		EntityManager	manager	= factory.createEntityManager();
-			
-		List<Produto> listProdutos =
-				manager.createQuery("select NEW Produto(descricao) from Produto p where descricao = buscarProduto").getResultList();
-		
-		   for(Produto produto: listProdutos) {
-			   //if (!util.pegarPrimeiraFoto(produto.getCodProduto()).equals("")) produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
-		   }
-
-
-		   model.addAttribute("produto", listProdutos);
-	   
-			manager.close();  
-			factory.close();
-			
-		
-		return "telaInicial";
-		
-	}
-		
-		
-		@RequestMapping(value = "/telaPrincipal/buscaCategoria", method = RequestMethod.POST, produces = "aplication/JSON")
-		public String buscaPorCategoria(@RequestParam("buscaCategoria") long buscaCategoria, Model model) {
-			System.out.println("PARAMETRO DO BUSCA POR CATEGORIA     "+ buscaCategoria);
+	@RequestMapping(value = "/filtrarPorCategoria")
+	public String filtrarPorCategoria(@RequestParam("idCategoria") long idCategoria, Model model) {
+			System.out.println("PARAMETRO DO BUSCA POR CATEGORIA: "+ idCategoria);
 			
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
 			EntityManager	manager	= factory.createEntityManager();
 				
 			// p.produto.categoria - aqui referencia o atributo categoria da model nao a coluna do banco "fk_categoria
-			Query query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :buscaCategoria");
-			query.setParameter("buscaCategoria", buscaCategoria);
+			Query query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoria");
+			query.setParameter("idCategoria", idCategoria);
 
 	
 			List<Produto> listProdutos = query.getResultList();
 			
-			
+			Util util = new Util();
 		   for(Produto produto: listProdutos) {
-			   //if (!util.pegarPrimeiraFoto(produto.getCodProduto()).equals("")) produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
+			   if (!util.pegarPrimeiraFoto(produto.getCodProduto()).equals("")) produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
 		   }
 
-
 		   model.addAttribute("produto", listProdutos);
-	   
+
+		   // Esse codigo esta sendo replicado para que quando ele selecionar um categoria e visualizar os seus itens ele remontar essa esse menu novamente!
+		   List<Categoria> listCategorias = manager.createQuery("select c from Categoria c").getResultList();
+			model.addAttribute("listaCategorias", listCategorias);
+
 			manager.close();  
 			factory.close();
 				
