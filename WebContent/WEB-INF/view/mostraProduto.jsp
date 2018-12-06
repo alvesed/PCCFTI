@@ -93,7 +93,17 @@
 								
 							<input type="hidden" name="codProduto" value ="${produto.codProduto}" >
 							<div id="comment-message" class="form-row">
-								<textarea name="comentario" placeholder="Digite seu comentario" id="comment" style="resize: none"rows="4" cols="100"></textarea>
+							
+							
+								<c:if test="${empty usuarioLogado}">
+								<textarea name="comentario" placeholder="Por favor logar antes de comentar" id="comment" style="resize: none"rows="4" cols="100"></textarea>
+							</c:if>
+							
+							<c:if test="${not empty usuarioLogado}">
+							<textarea name="comentario" placeholder="Digite seu comentario" id="comment" style="resize: none"rows="4" cols="100"></textarea>
+							</c:if>
+							
+								
 							</div>
 							<input type="submit" name="dsubmit" id="commentSubmit" value="Submit Comment">
 						</form>
