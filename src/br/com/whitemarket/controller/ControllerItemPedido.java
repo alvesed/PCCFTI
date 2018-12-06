@@ -37,13 +37,20 @@ public class ControllerItemPedido {
 	
 	@RequestMapping("verProduto")
 	public String mostraProduto(@RequestParam String codigoProduto, Model model, HttpSession session) {
+		Util util =new Util();
+		
 		Produto p = dao.buscaPorCodigo(Long.parseLong(codigoProduto));
-		List<Comentario> comentario = daoComentario.listaComentarioPorCodigo(Long.parseLong(codigoProduto));
-
 		
 		if (p.getCodProduto() == 0) {
 			return "produto404";
 		}
+		
+		List<Comentario> comentario = daoComentario.listaComentarioPorCodigo(Long.parseLong(codigoProduto));
+		
+		for (int i = 0; i < comentario.size(); i++) {
+			comentario.get(i).setDataAposComentario(util.diasAposComentario(comentario.get(i).getData_comentario()));
+		}
+		
 		
 		session.setAttribute("produto", p);
 

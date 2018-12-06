@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 
 	@Entity
@@ -37,7 +38,18 @@ import javax.persistence.TemporalType;
 		
 		private Date data_comentario;
 		
+		@Transient
+		String dataAposComentario;
 		
+		
+		public String getDataAposComentario() {
+			return dataAposComentario;
+		}
+
+		public void setDataAposComentario(String dataAposComentario) {
+			this.dataAposComentario = dataAposComentario;
+		}
+
 		public Long getId() {
 			return id;
 		}

@@ -1,6 +1,5 @@
 package br.com.whitemarket.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -28,8 +27,6 @@ public class JPAComentarioDAO implements ComentarioDAO{
 	public List<Comentario> listaComentarioPorCodigo(Long codigo) {
 		
 		
-		//Query query = manager.createQuery("SELECT c FROM Comentario c JOIN FETCH c.usuario.nome u WHERE c.produto.codProduto = :codigo");
-    	//query.setParameter("codigo", codigo);
 		
 		Query query = manager.createQuery("SELECT comentario FROM Comentario comentario WHERE comentario.produto.codProduto = :codigo");
    
