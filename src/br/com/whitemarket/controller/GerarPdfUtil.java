@@ -6,9 +6,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
@@ -36,10 +39,6 @@ public class GerarPdfUtil {
 	       try {
 	           PdfWriter.getInstance(document, new FileOutputStream("C:\\PDF_Teste.pdf"));
 	           document.open();
-	           //Paragraph p = new Paragraph("Dados do Pedido");
-	           //p.setIndentationLeft(200);
-	           //document.add(p);
-	           //document.add(new Paragraph(" "));
 	           document.add(createTableUsuario(pedido, endereco));
 	           document.add(new Paragraph(" "));
 	           document.add(createTableProdutos(pedido));
@@ -56,6 +55,7 @@ public class GerarPdfUtil {
 	}
 	
 	public static PdfPTable createTableUsuario(Pedido pedido, Endereco endereco) {
+		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.BLACK);
 		// CRIA UMA TABELA COM 3 COLUNAS
 		float[] columnWidths = {3, 5, 3};
 		PdfPTable table = new PdfPTable(columnWidths);
@@ -64,7 +64,7 @@ public class GerarPdfUtil {
         PdfPCell cell;
         // ADICIONA AS COLUNAS
         if (pedido != null) {
-	        cell = new PdfPCell(new Phrase(pedido.getUsuario().getNome()));
+	        cell = new PdfPCell(new Phrase(pedido.getUsuario().getNome(), titleFont));
 	        cell.setColspan(2);
 	        table.addCell(cell);
 	        cell = new PdfPCell(new Phrase("CPF: " + pedido.getUsuario().getCpf()));
@@ -92,42 +92,44 @@ public class GerarPdfUtil {
 	}
 	
 	public static PdfPTable createTableProdutos(Pedido pedido) {
+		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA, 10, BaseColor.BLACK);
 		// CRIA UMA TABELA COM 8 COLUNAS
-		float[] columnWidths = {5, 3, 4, 7, 5, 5, 3, 5, 5};
+		float[] columnWidths = {5, 2, 4, 7, 5, 5, 2, 5, 5};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(100);
         // CRIA UM OBJETO CELL
         PdfPCell cell;
         // ADICIONA AS COLUNAS
-        cell = new PdfPCell(new Phrase("Fotos"));
+        cell = new PdfPCell(new Phrase("Fotos", titleFont));
         cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Cód."));
+        cell = new PdfPCell(new Phrase("Cód.", titleFont));
         cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Nome"));
+        cell = new PdfPCell(new Phrase("Nome",titleFont));
         cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Descrição"));
-        cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Condição"));
+        cell = new PdfPCell(new Phrase("Descrição", titleFont));
         cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Estado de Conserva."));
-        cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
-        table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Qtd."));
+        cell = new PdfPCell(new Phrase("Condição", titleFont));
         cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Valor Unit."));
+        cell = new PdfPCell(new Phrase("Estado de Conserva.", titleFont));
         cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Valor Total"));
+        cell = new PdfPCell(new Phrase("Qtd.", titleFont));
+        cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(cell);
+        cell = new PdfPCell(new Phrase("Valor Unit.", titleFont));
+        cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
+        table.addCell(cell);
+        cell = new PdfPCell(new Phrase("Valor Total", titleFont));
         cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
         table.addCell(cell);
         // CRIA UMA LISTA DE PRODUTOS
@@ -141,7 +143,9 @@ public class GerarPdfUtil {
         if (listaProdutos != null) {
         	for (ItemPedido item : pedido.getListaPedidos()) {
 	            try {
-					table.addCell(criarCellImagem("C:\\Users\\FTI\\git\\PCCFTI\\WebContent\\" + item.getProduto().getListaFotos().get(0).getUrlFoto()));
+	            	cell = new PdfPCell(criarCellImagem("C:\\Users\\FTI\\git\\PCCFTI\\WebContent\\" + item.getProduto().getListaFotos().get(0).getUrlFoto()));
+	            	cell.setPadding(2);
+					table.addCell(cell);
 				} catch (DocumentException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -150,36 +154,41 @@ public class GerarPdfUtil {
 	            
 	            //CÓDIGO DO PRODUTO
 	            String codP = String.valueOf(item.getProduto().getCodProduto());
-	            cell = new PdfPCell(new Phrase(codP));
+	            cell = new PdfPCell(new Phrase(codP, titleFont));
 	            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 	            table.addCell(cell);
-	            table.addCell(item.getProduto().getNome());
-	            table.addCell(item.getProduto().getDescricao());
-	            cell = new PdfPCell(new Phrase(item.getProduto().getCondicao()));
+	            cell = new PdfPCell(new Phrase(item.getProduto().getNome(), titleFont));
+	            table.addCell(cell);
+	            cell = new PdfPCell(new Phrase(item.getProduto().getDescricao(), titleFont));
+	            table.addCell(cell);
+	            cell = new PdfPCell(new Phrase(item.getProduto().getCondicao(),titleFont));
 	            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 	            table.addCell(cell);
 	            if (item.getProduto().getCondicao().equals("usado")) {
-		            table.addCell(item.getProduto().getEstadoProduto());
+	            	cell = new PdfPCell(new Phrase(item.getProduto().getEstadoProduto(),titleFont));
+		            table.addCell(cell);
 	            } else {
-	            	cell = new PdfPCell(new Phrase("-"));
+	            	cell = new PdfPCell(new Phrase("-", titleFont));
 		            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 	            	table.addCell(cell);
 	            }
 	            
 	            //QUANTIDADE DE ITENS
 		        String qtd = String.valueOf(item.getQuantidade());
-		        cell = new PdfPCell(new Phrase(qtd));
+		        cell = new PdfPCell(new Phrase(qtd, titleFont));
 	            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 		        table.addCell(cell);
 	            
 	            //VALOR DO PRODUTO
 	            String valor = String.valueOf(item.getProduto().getValor());
-	            table.addCell("R$ " + valor);
+	            cell = new PdfPCell(new Phrase("R$ " + valor, titleFont));
+	            table.addCell(cell);
 	            
 	            //VALOR TOTAL DO PRODUTO
 	            BigDecimal valorTotal = item.getProduto().getValor().multiply(BigDecimal.valueOf(item.getQuantidade()));
-	            String valorTotalStr = String.valueOf(valorTotal);
-	            table.addCell("R$ " + valorTotalStr);
+	            String valorTotalStr = "R$ " + String.valueOf(valorTotal);
+	            cell = new PdfPCell(new Phrase(valorTotalStr, titleFont));
+	            table.addCell(cell);
 	        }
         }
         return table;

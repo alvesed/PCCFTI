@@ -144,18 +144,19 @@ public class ControllerPedidos {
 		return "mostraPedido";
 	}
 	
-		//BOTÃO GERAR PDF. FALTA ADICIONAR O BOTÃO NA JSP PASSANDO O CÓDIGO DO PEDIDO
-		@RequestMapping("/gerarPdf")
-		public String gerarPdf(Model model, HttpSession session, @RequestParam("cod_pedido") long codPedido, HttpServletResponse response) {
-			Util util = new Util();
-			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-			
-			if(usuario == null) {
-				return "login";
-			}
-			
-			GerarPdfUtil.gerarPdf(dao.retornaProdutosDentroDePedido(codPedido), util.getEnderecoUsuarioLogado(usuario.getCod_usuario()));
-	    	return "redirect:verPedidos";
+	//BOTÃO GERAR PDF. Lucas
+	@RequestMapping("/gerarPdf")
+	public String gerarPdf(Model model, HttpSession session, @RequestParam("cod_pedido") long codPedido, HttpServletResponse response) {
+		Util util = new Util();
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+				
+		if(usuario == null) {
+			return "login";
 		}
+				
+		GerarPdfUtil.gerarPdf(dao.retornaProdutosDentroDePedido(codPedido), util.getEnderecoUsuarioLogado(usuario.getCod_usuario()));
+		
+		return "redirect:verPedidos";
+	}
 		
 }
