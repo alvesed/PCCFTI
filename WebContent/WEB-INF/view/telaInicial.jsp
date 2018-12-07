@@ -53,12 +53,14 @@
 					<h1>NOVOS PRODUTOS</h1>
 				</div>
 					<div>
+					<input type="hidden" id="idCategoria" ${Categoria.id}>
 					 <p align="right">
 					 <label style="font-family: Arial; font-size: 8pt; width: 120px;">Listar por:</label>
 					   <select id="ordenar" size="1" style="font-family: Arial; font-size: 8pt; width: 120px; background-color:#d7cec7" >
-						   <option value="" disabled hidden >Selecione</option>
+						   <option value="" selected="selected" disabled hidden >Selecione</option>
 						  <option id="maiorpreco" value="">Maior Preço</option>
-						  <option href="<spring:url value='filtrarPorMenorValor'/">Menor Preço</option> <!-- Preciso passar o codigo do produto? -->
+						  <option id="menorpreco">Menor Preço</option> 
+						  <!-- onchange="window.location = '? -->
 						  <option id="maisvendido" value="">Mais Vendido</option>
 					   </select>
 					   </p>

@@ -49,8 +49,6 @@
 						</div>
 					</div>
 				
-				
-				
 					<div class="divHeaderMenuOptionContainer">
 						<div class="divHeaderMenuOption">
 							<div class="front face">
@@ -59,9 +57,7 @@
 							<div class="back face center">
 								<img src="<spring:url value='res/img/ico/shop-facade-white.png' />"/>
 								<p class="optionTag">Vender</p>
-								
-								
-								
+												
 								<div class="divHeaderMenuOptionSubContainer">
 								
 									<a href="cadastrarItem">
@@ -177,10 +173,7 @@
 											<p class="subOptionTag">Desconectar</p>
 										</div>
 									</a>
-									
 								</div>
-								
-								
 							</div>
 						</div>
 					</div>

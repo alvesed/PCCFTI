@@ -80,6 +80,10 @@ public class ControllerThiago {
 		   List<Categoria> listCategorias = manager.createQuery("select c from Categoria c").getResultList();
 			model.addAttribute("listaCategorias", listCategorias);
 
+			
+			//id para fazer o filtro de menor preço
+			model.addAttribute("idCategoria", idCategoria);
+			
 			manager.close();  
 			factory.close();
 				
