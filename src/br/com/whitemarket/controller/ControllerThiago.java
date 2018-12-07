@@ -58,8 +58,7 @@ public class ControllerThiago {
 	
 	@RequestMapping(value = "/filtrarPorCategoria")
 	public String filtrarPorCategoria(@RequestParam("idCategoria") long idCategoria, Model model) {
-			System.out.println("PARAMETRO DO BUSCA POR CATEGORIA: "+ idCategoria);
-			
+					
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
 			EntityManager	manager	= factory.createEntityManager();
 				
@@ -85,6 +84,30 @@ public class ControllerThiago {
 			factory.close();
 				
 			
+			return "telaInicial";
+	}
+	
+	
+	@RequestMapping(value = "/filtrarPorMenorValor")
+	public String filtrarPorMenorValor(Model model) {
+					
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+			EntityManager	manager	= factory.createEntityManager();
+				
+			Query query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto as p order by p.valor asc");
+	
+			List<Produto> listProdutos = query.getResultList();
+			
+			Util util = new Util();
+		   for(Produto produto: listProdutos) {
+			   if (!util.pegarPrimeiraFoto(produto.getCodProduto()).equals("")) produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
+		   }
+
+		   model.addAttribute("produto", listProdutos);
+
+			manager.close();  
+			factory.close();
+		
 			return "telaInicial";
 	}
 }
