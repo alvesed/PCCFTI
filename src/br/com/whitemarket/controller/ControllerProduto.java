@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.whitemarket.dao.FotoDAO;
 import br.com.whitemarket.dao.JPAPedidoDAO;
+import br.com.whitemarket.dao.PedidoDAO;
 import br.com.whitemarket.dao.ProdutoDAO;
 import br.com.whitemarket.model.Cupom;
 import br.com.whitemarket.model.Foto;
@@ -37,6 +38,9 @@ public class ControllerProduto {
 
 	@Autowired
 	ProdutoDAO dao;
+	
+	@Autowired
+	PedidoDAO daoPedido;
 
 	@Autowired
 	FotoDAO daoFoto;
@@ -147,10 +151,25 @@ public class ControllerProduto {
 	@RequestMapping("/cupom")
 	public String formcupom(HttpSession session, Model model) {
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
-		JPAPedidoDAO dao = new JPAPedidoDAO();
-		 List<Produto> listProdutos = dao.retornaListaProdutosCadastrados(usuario.getCod_usuario());
-		 model.addAttribute("produtos", listProdutos);
-		 System.out.println("buscou produtos qnt = " + listProdutos.size());
+		
+		long codigo = usuario.getCod_usuario();
+		Util util = new Util();
+		//JPAPedidoDAO dao = new JPAPedidoDAO();
+		
+		try {
+			 List<Produto> listProdutos = daoPedido.retornaListaProdutosCadastrados(codigo);
+			   for(Produto produto: listProdutos) {
+				   produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
+			   }
+			   
+			   model.addAttribute("listProdutos", listProdutos);
+			 System.out.println("buscou produtos qnt = " + listProdutos.size());
+			
+		} catch (Exception e) {
+			System.out.println("caiu no catch cupom");
+		}
+		
+
 		return "cupom";
 	}
 	

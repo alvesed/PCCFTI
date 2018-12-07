@@ -91,7 +91,6 @@ public class JPAPedidoDAO implements PedidoDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Produto> retornaListaProdutosCadastrados(long codigo) {
-		System.out.println("testando erro banco 1");	
 		Query query = manager.createQuery("select NEW Produto(valor," +
 		   		" (SELECT " + 
 		   		" count(i.quantidade) as quantidades " + 
