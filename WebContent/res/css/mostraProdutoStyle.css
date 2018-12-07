@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.hidden{
+	display:none;
+}
+
 .area-comentario{
 	position:relative;
 	float:left;

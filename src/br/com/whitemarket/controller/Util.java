@@ -77,13 +77,13 @@ public class Util {
 					
 			
 			if((Days.daysBetween(dt1, dt2).getDays() > 0)){
-				dataAposComentario = Days.daysBetween(dt1, dt2).getDays() + " days ";
+				dataAposComentario = Days.daysBetween(dt1, dt2).getDays() + " days ago.";
 			} else if ((Hours.hoursBetween(dt1, dt2).getHours() % 24) >0) {
-				dataAposComentario =Hours.hoursBetween(dt1, dt2).getHours() % 24 + " hours";
+				dataAposComentario =Hours.hoursBetween(dt1, dt2).getHours() % 24 + " hours ago.";
 			} else if ((Minutes.minutesBetween(dt1, dt2).getMinutes() % 60) >0 ) {
-				dataAposComentario =Minutes.minutesBetween(dt1, dt2).getMinutes() % 60 + " minutes";
+				dataAposComentario =Minutes.minutesBetween(dt1, dt2).getMinutes() % 60 + " minutes ago.";
 			} else {
-				dataAposComentario =Seconds.secondsBetween(dt1, dt2).getSeconds() % 60 + " seconds";
+				dataAposComentario ="Just now.";
 			}
 			
 

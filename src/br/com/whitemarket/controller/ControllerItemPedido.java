@@ -60,6 +60,7 @@ public class ControllerItemPedido {
 		return "mostraProduto";
 	}
 	
+	
 	@RequestMapping("adicionarComentario")
 	public String addComentario(String codProduto , Comentario comentario, HttpSession session, Model model) { //Comentario que vem do jsp e verificar se esta logado ou nao
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
@@ -77,6 +78,28 @@ public class ControllerItemPedido {
 			
 			model.addAttribute("codigoProduto", codProduto);
 			return "redirect:verProduto";
+		}
+		
+	}
+	 
+	
+	@RequestMapping("addComentarioAjax")
+	public @ResponseBody  String addComentarioAjax(String codProduto , Comentario comentario, HttpSession session, Model model) { //Comentario que vem do jsp e verificar se esta logado ou nao
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		if (usuario == null || usuario.getEmail().equals("")) {
+			return "redirect:login";
+		} else {
+			Produto produto = new Produto();
+			produto.setCodProduto(Long.parseLong(codProduto));
+			comentario.setProduto(produto);
+			comentario.setUsuario(usuario);
+			comentario.setData_comentario(new Date());
+			
+			daoComentario.adicionaComentario(comentario);
+			
+			model.addAttribute("comentario", comentario);
+			model.addAttribute("codigoProduto", codProduto);
+			return "sucesso";
 		}
 		
 

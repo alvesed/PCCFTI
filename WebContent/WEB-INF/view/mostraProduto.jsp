@@ -90,73 +90,120 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-	<div class="card">
+	
+	
+	
+	<!--  Sessao comentarios -->
 
-<h1>Comentarios</h1>
+		<div class="container">
+			<div class="card">
 
-<hr>
+				<h1>Comentarios</h1>
 
-					<!------------Box comentario---------->
+				<hr>
 
-			<div id='form'>
-				<div class="row">
-					<div class="col-md-12">
+				<!------------Box comentar---------->
 
-						<form action="adicionarComentario" method="POST" id="commentform">
-								
-							<input type="hidden" name="codProduto" value ="${produto.codProduto}" >
+				<div id='form'>
+					<div class="row">
+						<div class="col-md-12">
+
+
+
+							<input type="hidden" name="codProduto"
+								value="${produto.codProduto}">
 							<div id="comment-message" class="form-row">
-							
-							
+
+
 								<c:if test="${empty usuarioLogado}">
-								<textarea name="comentario" placeholder="Por favor logar antes de comentar" id="comment" style="resize: none"rows="4" cols="100"></textarea>
-							</c:if>
-							
-							<c:if test="${not empty usuarioLogado}">
-							<textarea name="comentario" placeholder="Digite seu comentario" id="comment" style="resize: none"rows="4" cols="100"></textarea>
-							</c:if>
-							
-								
-							</div>
-							<input type="submit" name="dsubmit" id="commentSubmit" value="Submit Comment">
-						</form>
+									<textarea name="comentario"
+										placeholder="Por favor logar antes de comentar" id="comment"
+										style="resize: none" rows="4" cols="100" disabled></textarea>
+								</c:if>
 
-					</div>
-				</div>
-			</div>
-		<hr>
-				<!--  Comentarios passado dos usuarios -->
-				
-				<c:forEach items="${comentario}" var="comentario" begin="0" varStatus="i">
-							
-				<div class="row">
-					<div class="col-sm10">
-						<div class="panel panel-white post panel-shadow">
-							<div class="post-heading">
+								<c:if test="${not empty usuarioLogado}">
+									<textarea name="comentario" placeholder="Digite seu comentario"
+										id="comment" style="resize: none" rows="4" cols="100"></textarea>
+								</c:if>
 
-								<div class="pull-left meta">
-									<div class="title h5">
-										<b>${comentario.usuario.nome}</b> comentou.<h6 class="text-muted time">${comentario.dataAposComentario} ago</h6>
-									</div>
-									
-								</div>
-							</div>
-							
-								
-							<div class="area-comentario">
-								<p> ${comentario.comentario}</p>
 
 							</div>
-							
-							
+							<button onclick="comentar()" class="add-to-cart btn btn-outline-primary" type="button">Comentar</button>
+
+
 						</div>
 					</div>
 				</div>
 				<hr>
-			</c:forEach>
-			
-	
+
+				<!--  modelo ajax de comentarios -->
+
+				<div class="modelo hidden">
+
+					<div class="row">
+						<div class="col-sm10">
+							<div class="panel panel-white post panel-shadow">
+								<div class="post-heading">
+
+									<div class="pull-left meta">
+										<div class="title h5">
+											<b>${usuarioLogado.nome}</b> comentou.
+											<h6 class="text-muted time">Just now.</h6>
+										</div>
+
+									</div>
+								</div>
+
+
+								<div class="area-comentario">
+									<p class="comentarioNovo"></p>
+
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+					<hr>
+
+				</div>
+
+
+				<!--  Comentarios passado dos usuarios -->
+
+				<c:forEach items="${comentario}" var="comentario" begin="0"
+					varStatus="i">
+
+					<div class="row">
+						<div class="col-sm10">
+							<div class="panel panel-white post panel-shadow">
+								<div class="post-heading">
+
+									<div class="pull-left meta">
+										<div class="title h5">
+											<b>${comentario.usuario.nome}</b> comentou.
+											<h6 class="text-muted time">${comentario.dataAposComentario}</h6>
+										</div>
+
+									</div>
+								</div>
+
+
+								<div class="area-comentario">
+									<p>${comentario.comentario}</p>
+
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+					<hr>
+
+
+				</c:forEach>
+
+
 
 			</div>
 		</div>
@@ -209,7 +256,7 @@
 	})
 	
 	$(function(){
-		var notaInicial = ${produto.usuario.nota};
+		var notaInicial = 1; // ${produto.usuario.nota}; valor nao esta sendo recebido
 		var doubleInicial = parseFloat(notaInicial);
 		$('.avaliacao').barrating({
             theme: 'fontawesome-stars-o',
@@ -242,5 +289,38 @@
 			}
 		});
 	}
+	
+	
+
+	function comentar() {
+		var codproduto = "${produto.codProduto}";
+		var comentario = $("[name='comentario']").val(); 
+		
+		var data = {
+			   codProduto: codproduto,
+			   comentario: comentario,
+	 	};   
+					   
+		$.ajax({
+			url:"addComentarioAjax",
+			type: "POST",
+			data: data,
+			cache: true,
+			contentType: 'application/x-www-form-urlencoded; charset=iso-8859-1;', 
+			success: function(resultado){
+				
+					var novoComentario = $(".modelo").clone();
+					novoComentario.removeClass("modelo hidden").addClass("nova");
+					novoComentario.find(".comentarioNovo").html(comentario);
+					novoComentario.insertAfter(".modelo");
+					
+	
+				
+			}
+		});
+	}
+	
+	
+	
 </script>
 </html>
