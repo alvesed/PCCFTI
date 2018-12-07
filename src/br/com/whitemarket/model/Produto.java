@@ -35,12 +35,13 @@ public class Produto {
 	
 	public Produto() {}
 	
-	public Produto(BigDecimal valor, long quantidadeDeVendas, Date dataCadastro, long codProduto, Usuario usuario) {
+	public Produto(BigDecimal valor, long quantidadeDeVendas, Date dataCadastro, long codProduto, Usuario usuario, String nome) {
 		this.valor = valor;
 		this.quantidadeDeVendas = quantidadeDeVendas;
 		this.dataCadastro = dataCadastro;
 		this.codProduto = codProduto;
 		this.usuario = usuario;
+		this.nome = nome;
 		}
 	
 	public Produto(String nome, String descricao, String condicao, BigDecimal valor, long codProduto) {
@@ -51,9 +52,10 @@ public class Produto {
 		this.codProduto = codProduto;
 	}
 
-	public Produto(String nome, long codProduto) {
+	public Produto(String nome, long codProduto, Usuario usuario) {
 		this.nome = nome;
 		this.codProduto = codProduto;
+		this.usuario = usuario;
 	}
 	
 	@Id

@@ -91,15 +91,16 @@ public class JPAPedidoDAO implements PedidoDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Produto> retornaListaProdutosCadastrados(long codigo) {
+
 		Query query = manager.createQuery("select NEW Produto(valor," +
 		   		" (SELECT " + 
 		   		" count(i.quantidade) as quantidades " + 
 		   		" FROM ItemPedido i "
 		   		+ " WHERE i.produto.codProduto = p.codProduto " + 
-		   		" ), dataCadastro, codProduto, usuario) from Produto p "
+		   		" ), dataCadastro, codProduto, usuario, p.nome) from Produto p "
 		   		+ "WHERE p.ativo = 1 AND p.usuario.cod_usuario = :codigo");
 		query.setParameter("codigo", codigo);
- 
+
 		List<Produto> listProdutos = query.getResultList();
 		return listProdutos;
 	}
