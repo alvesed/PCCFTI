@@ -50,6 +50,9 @@ public class ControllerProduto {
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
     	    EntityManager manager = factory.createEntityManager();
     	    model.addAttribute("produto", manager.find(Produto.class, Long.parseLong(codProduto)));
+    	    
+    	    manager.close();
+    	    factory.close();
     	    return "verProdutoJaCadastrado";
 
 	}
@@ -66,6 +69,9 @@ public class ControllerProduto {
     	    EntityManager manager = factory.createEntityManager();
     	    manager.getTransaction().begin();
     	    model.addAttribute("produto", manager.find(Produto.class, produto.getCodProduto()));
+    	    
+    	    manager.close();
+    	    factory.close();
 		}
 	    return "cadastrarItem";
 	}

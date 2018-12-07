@@ -18,17 +18,21 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import com.sun.istack.internal.Nullable;
 
 @Entity
 @Table(name="cupom")
 public class Cupom {
 	
-	
 	@Id
 	@GeneratedValue
 	private Long cupom_id;
 	
+	@NotNull
 	private String cod_cupom;
+	
 	private String descricao;
 	
 	@OneToOne(fetch = FetchType.LAZY)
@@ -48,7 +52,10 @@ public class Cupom {
 	
 	
 	//Integer qnt_cupons;
-	Integer qnt_cupons; //número máximo de vezes que cupom pode ser usado
+	Integer qnt_cupons; //número máximo de vezes que cupom pode ser usado (Decrementável a cada uso)
+	
+	@NotNull
+	Integer qnt_cupons_inicial; //número de Cupons inicial (Nunca alterável)
 	
 //	@ManyToMany
 //	 @JoinTable(name="ProdutoCupom", joinColumns=
@@ -105,6 +112,14 @@ public class Cupom {
 
 	public void setValor_minimo(double valor_minimo) {
 		this.valor_minimo = valor_minimo;
+	}
+
+	public Integer getQnt_cupons_inicial() {
+		return qnt_cupons_inicial;
+	}
+
+	public void setQnt_cupons_inicial(Integer qnt_cupons_inicial) {
+		this.qnt_cupons_inicial = qnt_cupons_inicial;
 	}
 
 	//@Transient
