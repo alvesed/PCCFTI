@@ -14,6 +14,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="res/css/fontawesome-stars-o.css">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 
 <style type="text/css">
@@ -58,6 +59,19 @@
 							<span style="font-size: 12px; padding-top: 2px;">Estado de conservação do produto: ${produto.estadoProduto}</span>
 						</c:if>
 						<br/>
+						<div class="vendedor" style="display: inline-block;">
+							<h6 style="float:left;">Vendedor: ${produto.usuario.nome}   &nbsp</h6>
+							<div class="divAvaliacao" style="float:none;">
+									<select class="avaliacao" >
+								  		<option value="1">1</option>
+								  		<option value="2">2</option>
+								  		<option value="3">3</option>
+								  		<option value="4">4</option>
+								  		<option value="5">5</option>
+									</select>
+							</div>
+							
+						</div>
 						<h4 class="price">Preço unitário: R$ <span id="valorProduto" class="spanPreco"></span></h4>
 						<h5 class="sizes">quantidade: <input class="form-control col-2" type="number" id="quantidade" value="1" max="99">
 						</h5>
@@ -153,6 +167,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="res/js/jquery.barrating.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 <script src="res/js/maskMoney.js"></script>
 <script type="text/javascript">
@@ -191,6 +206,14 @@
 				}
 			}
 		});
+	})
+	
+	$(function(){
+		$('.avaliacao').barrating({
+            theme: 'fontawesome-stars-o',
+            initialRating: ${produto.usuario.nota},
+            readonly: true
+    	});
 	})
 	
 	function adicionaCarrinho(quant) {
