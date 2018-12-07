@@ -11,8 +11,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="res/css/mostraProdutoStyle.css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/	font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="res/css/mostraPedidoStyle.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <link rel="stylesheet" href="res/css/fontawesome-stars-o.css">
 
 <title>White Market</title>
@@ -102,11 +102,17 @@
 	        var cod_vendedor = $(this).attr('data-vendedor');
 	        console.log(cod_vendedor);
 	        var foiAvaliado = $(this).attr('data-avaliado');
+	        var bAvaliado;
+	        if (foiAvaliado == "false"){
+	        	bAvaliado = false;
+	        } else {
+	        	bAvaliado = true;
+	        }
 	        $('#'+cod_vendedor).barrating({
 	            theme: 'fontawesome-stars-o',
 	            showSelectedRating: true,
 	            initialRating: notaAtualDoVendedor,
-	            readonly: foiAvaliado,
+	            readonly: bAvaliado,
 	            onSelect: function(value, text){
 	            	enviaAvaliacao(value, cod_vendedor)
 	            }
