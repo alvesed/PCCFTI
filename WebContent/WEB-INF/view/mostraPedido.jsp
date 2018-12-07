@@ -60,7 +60,7 @@
 					</c:forEach>
 					</tbody>
 					<tfoot>
-						<tr>
+						<tr class="trVendedor">
 							<td colspan="5"><div><table style="border: none !important;"><tr>
 							<td style="border: none !important;">Vendedor: ${listaVendedor.vendedor.nome}</td>
 							</td>
@@ -75,6 +75,7 @@
 										</select>
 									</div>
 							</td>
+							<td class="tdAviso"><span class="aviso"></span></td>
 							</tr></table></div>
 						</tr>
 					</tfoot>
@@ -105,8 +106,10 @@
 	        var bAvaliado;
 	        if (foiAvaliado == "false"){
 	        	bAvaliado = false;
+	        	$(this).closest(".trVendedor").find(".tdAviso").find(".aviso").html("Avalie o vendedor")
 	        } else {
 	        	bAvaliado = true;
+	        	$(this).closest(".trVendedor").find(".tdAviso").find(".aviso").html("Vendedor já avaliado")
 	        }
 	        $('#'+cod_vendedor).barrating({
 	            theme: 'fontawesome-stars-o',

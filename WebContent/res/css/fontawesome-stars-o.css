@@ -11,19 +11,19 @@
 }
 .br-theme-fontawesome-stars-o .br-widget a:after {
   content: '\f006';
-  color: #d2d2d2;
+  color: black;
 }
 .br-theme-fontawesome-stars-o .br-widget a.br-active:after {
   content: '\f005';
-  color: #50E3C2;
+  color: #F8C43D;
 }
 .br-theme-fontawesome-stars-o .br-widget a.br-selected:after {
   content: '\f005';
-  color: #50E3C2;
+  color: #F8C43D;
 }
 .br-theme-fontawesome-stars-o .br-widget a.br-fractional:after {
   content: '\f123';
-  color: #50E3C2;
+  color: #F8C43D;
 }
 .br-theme-fontawesome-stars-o .br-widget .br-current-rating {
   display: none;

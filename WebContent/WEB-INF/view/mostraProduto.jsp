@@ -209,8 +209,12 @@
 	})
 	
 	$(function(){
+		var notaInicial = ${produto.usuario.nota};
+		var doubleInicial = parseFloat(notaInicial);
 		$('.avaliacao').barrating({
-            theme: 'fontawesome-stars-o', readonly: true,
+            theme: 'fontawesome-stars-o',
+            initialRating: doubleInicial,
+            readonly: true
     	});
 	})
 	

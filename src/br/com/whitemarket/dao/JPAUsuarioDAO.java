@@ -45,7 +45,8 @@ public class JPAUsuarioDAO implements UsuarioDAO{
 
 	@Override
 	public void avaliarVendedor(Avaliacao avaliacao) {
-		manager.persist(avaliacao);
+		
+		if(decideOQueFazerComAvaliacao(avaliacao));
 		
 		long codVendedor = avaliacao.getVendedor().getCod_usuario();
 		Usuario u = retornaUsuarioCompleto(codVendedor);
@@ -78,6 +79,31 @@ public class JPAUsuarioDAO implements UsuarioDAO{
 	
 	public void atualizaNotaUsuario(Usuario usuario) {
 		manager.merge(usuario);
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public boolean decideOQueFazerComAvaliacao(Avaliacao avaliacao) {
+		boolean editouAvaliacao = false;
+		
+		long codComprador = avaliacao.getComprador().getCod_usuario();
+		long codVendedor = avaliacao.getVendedor().getCod_usuario();
+		long codPedido = avaliacao.getPedido().getCod_pedido();
+		
+		Query query = manager.createQuery("SELECT a FROM Avaliacao a WHERE a.comprador.cod_usuario = :codComprador "
+				+ "AND a.vendedor.cod_usuario = :codVendedor AND a.pedido.cod_pedido = :codPedido");
+		query.setParameter("codComprador", codComprador).setParameter("codVendedor", codVendedor).setParameter("codPedido", codPedido);
+		List<Avaliacao> temp = query.setMaxResults(1).getResultList();
+		if (temp.size() > 0) {
+			temp.get(0).setNota(avaliacao.getNota());
+			manager.merge(temp.get(0));
+			System.out.println("DEU MERGE NA NOTA");
+			editouAvaliacao = true;
+		} else {
+			manager.persist(avaliacao);
+			System.out.println("NOVA NOTA");
+		}
+		return editouAvaliacao;
 	}
 
 	@SuppressWarnings("unchecked")
