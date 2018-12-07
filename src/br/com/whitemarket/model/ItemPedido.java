@@ -9,11 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.criterion.CountProjection;
-
 @Entity
 @Table(name="item_pedido")
-public class ItemPedido {
+public class ItemPedido implements Comparable<ItemPedido> {
 	
 	public ItemPedido() {}
 	
@@ -36,16 +34,6 @@ public class ItemPedido {
 	private Produto produto;
 	
 	private long quantidade;
-	
-	private boolean avaliado;
-
-	public boolean isAvaliado() {
-		return avaliado;
-	}
-
-	public void setAvaliado(boolean avaliado) {
-		this.avaliado = avaliado;
-	}
 
 	public Pedido getPedido() {
 		return pedido;
@@ -69,6 +57,19 @@ public class ItemPedido {
 
 	public void setQuantidade(long quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public long getCod_item_pedido() {
+		return cod_item_pedido;
+	}
+
+	public void setCod_item_pedido(long cod_item_pedido) {
+		this.cod_item_pedido = cod_item_pedido;
+	}
+
+	@Override
+	public int compareTo(ItemPedido o) {
+		return Long.compare(this.getProduto().getUsuario().getCod_usuario(), o.getProduto().getUsuario().getCod_usuario());
 	}
 	
 }

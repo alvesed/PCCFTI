@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.whitemarket.model.Avaliacao;
 import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
@@ -131,4 +132,19 @@ public class JPAPedidoDAO implements PedidoDAO{
 
 		return listaFotos;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Avaliacao> retornaVendedoresAvalidosNoPedido(long codPedido, long codComprador) {
+		Query query = manager.createQuery("SELECT a FROM Avaliacao a "
+				+ "JOIN FETCH a.pedido p "
+				+ "JOIN FETCH a.vendedor u "
+				+ "WHERE a.pedido.cod_pedido = :codPedido AND a.comprador.cod_usuario = :codComprador");
+		query.setParameter("codPedido", codPedido).setParameter("codComprador", codComprador);
+		
+		List<Avaliacao> avaliacao = query.getResultList();
+		
+		return avaliacao;
+	}
+	
+	
 }

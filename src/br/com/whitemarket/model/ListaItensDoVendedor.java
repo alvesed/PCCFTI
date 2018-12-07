@@ -7,6 +7,7 @@ public class ListaItensDoVendedor {
 	
 	private List<ItemPedido> listaItemPedido;
 	private Usuario vendedor;
+	private boolean avaliado;
 	
 	public ListaItensDoVendedor(Usuario vendedor) {
 		this.listaItemPedido = new ArrayList<ItemPedido>();
@@ -16,13 +17,24 @@ public class ListaItensDoVendedor {
 	public List<ItemPedido> getListaItemPedido() {
 		return listaItemPedido;
 	}
-	public void setListaItemPedido(ArrayList<ItemPedido> listaItemPedido) {
-		this.listaItemPedido = listaItemPedido;
-	}
+	
 	public Usuario getVendedor() {
 		return vendedor;
 	}
 	public void setVendedor(Usuario vendedor) {
 		this.vendedor = vendedor;
 	}
+
+	public boolean isAvaliado() {
+		return avaliado;
+	}
+
+	public void setAvaliado(boolean avaliado) {
+		this.avaliado = avaliado;
+	}
+
+	public void setListaItemPedido(List<ItemPedido> listaItemPedido) {
+		this.listaItemPedido = listaItemPedido;
+	}
+	
 }

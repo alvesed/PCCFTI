@@ -1,29 +1,30 @@
 package br.com.whitemarket.controller;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.whitemarket.dao.JPAUsuarioDAO;
+import br.com.whitemarket.dao.UsuarioDAO;
+import br.com.whitemarket.model.Avaliacao;
 import br.com.whitemarket.model.Endereco;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
-
+@Transactional
 @Controller
 public class ControllerUsuario {
+	
+	@Autowired
+	UsuarioDAO dao;
 	
 	@RequestMapping("/cadastrarCliente")
 	public String cadastrarCliente() {
@@ -40,18 +41,7 @@ public class ControllerUsuario {
 	@RequestMapping("/efetivarCadastroCliente")
 	public String itemForm(Usuario usuario, Endereco endereco) {
 		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-        EntityManager manager = factory.createEntityManager();
-        
-        endereco.setUsuario(usuario);
-        
-        manager.getTransaction().begin();
-        manager.persist(usuario);
-        manager.persist(endereco);
-		manager.getTransaction().commit();
-		
-		manager.close();
-		factory.close();
+		dao.cadastraUsuario(usuario, endereco);
 
     	return "login";
     	
@@ -82,17 +72,14 @@ public class ControllerUsuario {
 //		
 //		System.out.println("o que veio pelo form é: " + senha);
 //		user.autentica(email, senha);
-		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-		EntityManager	manager	= factory.createEntityManager();
+
 		Usuario usuario = new Usuario();
 		
 		//System.out.println("entrou no controller com email = " + email);
+		
 		try {
 			System.out.println("entrou no try");
-			usuario = manager.createQuery(
-				  "SELECT u from Usuario u WHERE u.email = :email and u.senha = :senha", Usuario.class).
-				  setParameter("email", email).setParameter("senha", senha).getSingleResult();
+			usuario = dao.autenticaLogin(email, senha);
 			if(usuario.getCod_usuario() == 0) {
 				model.addAttribute("erroLogin", "Usuário não encontrado.");
 				return "login";
@@ -109,38 +96,50 @@ public class ControllerUsuario {
 			//model.addAttribute("carrinho", pedido);
 			session.setAttribute("carrinho", pedido);
 			
-			manager.close();  
-			factory.close();
-			
 			return "redirect:telaPrincipal";
 			
 		} catch (Exception e) {
 			model.addAttribute("erroLogin", "Usuário ou Senha Inválidos");
 			return "login";
 		}
+
 	}
 	
 	@RequestMapping(value = "/cadastrarCliente/busca", method = RequestMethod.POST, produces = "aplication/JSON")
 	public String menu(@RequestParam("verificar_email") String verificar_email) {
 		System.out.println("VER SE ESTA CHEGANDO ======= "+ verificar_email);
-		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-		EntityManager	manager	= factory.createEntityManager();
 			
-		
 		List<String> emails = new ArrayList<String>();
-		emails =
-				manager.createQuery("select email from usuario where email = verifica").getResultList();
+		emails = dao.buscaEmailsCadastrado(verificar_email);
+				
 		
 		for (String email_verificar : emails ) {
 			
-		}
-		
-			manager.close();  
-			factory.close();
-			
+		}		
 		
 		return "emails";
 }
+	
+	@RequestMapping(value="avaliarVendedor", method = RequestMethod.POST)
+	public @ResponseBody String avaliaVendedor(HttpSession session, String codPedido, String codVendedor, String nota) {
+		Avaliacao a = new Avaliacao();
+		
+		Usuario comprador = (Usuario) session.getAttribute("usuarioLogado");
+		Usuario vendedor = new Usuario();
+		Pedido pedido = new Pedido();
+		
+		vendedor.setCod_usuario(Long.parseLong(codVendedor));
+		pedido.setCod_pedido(Long.parseLong(codPedido));	
+		
+		a.setComprador(comprador);
+		a.setVendedor(vendedor);
+		a.setPedido(pedido);
+		a.setNota(Integer.parseInt(nota));
+		
+		dao.avaliarVendedor(a);
+		
+		return "Usuário avaliado com nota " + a.getNota();
+	}
+	
 }
 	

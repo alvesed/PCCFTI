@@ -1,6 +1,7 @@
 package br.com.whitemarket.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.whitemarket.dao.PedidoDAO;
+import br.com.whitemarket.model.Avaliacao;
 import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.ListaItensDoVendedor;
@@ -74,8 +76,8 @@ public class ControllerPedidos {
     	return "verProdutos";
 	}
 	
-	@RequestMapping(value="/verCarrinhoJaCadastrado")
-	public String cartJaCadastrado(HttpSession session, Model model, String cod_pedido) {
+	@RequestMapping(value="/mostraPedido")
+	public String verPedidoFechado(HttpSession session, Model model, String cod_pedido) {
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 		
 		if (usuario == null || usuario.getEmail().equals("")) {
@@ -87,6 +89,8 @@ public class ControllerPedidos {
 		if(pedido == null) {
 			return "pedido404";
 		}
+		
+		Collections.sort(pedido.getListaPedidos());
 		
 		ArrayList<ListaItensDoVendedor> listaDeVendedores = new ArrayList<ListaItensDoVendedor>();
 		
@@ -117,11 +121,26 @@ public class ControllerPedidos {
 				itensDoVendedor.getListaItemPedido().add(itemPedido);
 			}
 		}
+		
 		listaDeVendedores.add(itensDoVendedor);
+		
+		List<Avaliacao> listaAvaliacoes = dao.retornaVendedoresAvalidosNoPedido(pedido.getCod_pedido(), usuario.getCod_usuario());
+		
+		for(Avaliacao a : listaAvaliacoes) {
+			for (ListaItensDoVendedor listaVendedor : listaDeVendedores) {
+				long codVendedorAvaliado = a.getVendedor().getCod_usuario();
+				long codVendedorDaVez = listaVendedor.getVendedor().getCod_usuario();
+				
+				if(codVendedorAvaliado == codVendedorDaVez) {
+					listaVendedor.setAvaliado(true);
+				}
+			}
+		}
 		
 		model.addAttribute("lista", listaDeVendedores);
 		model.addAttribute("foto", fotos);
-		model.addAttribute("pedido", pedido);
+		model.addAttribute("codPedido", pedido.getCod_pedido());
+		
 		return "mostraPedido";
 	}
 	
@@ -138,5 +157,5 @@ public class ControllerPedidos {
 			GerarPdfUtil.gerarPdf(dao.retornaProdutosDentroDePedido(codPedido), util.getEnderecoUsuarioLogado(usuario.getCod_usuario()));
 	    	return "redirect:verPedidos";
 		}
-	
+		
 }

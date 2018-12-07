@@ -1,5 +1,6 @@
 package br.com.whitemarket.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -29,6 +29,8 @@ public class Usuario {
 	String email;
 	String senha;
 	String endereco;
+	
+	private BigDecimal nota;
 	
 	@OneToMany(mappedBy = "usuario", targetEntity = Comentario.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Comentario> comentario;
@@ -93,6 +95,12 @@ public class Usuario {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public BigDecimal getNota() {
+		return nota;
+	}
+	public void setNota(BigDecimal nota) {
+		this.nota = nota;
 	}
 
 	

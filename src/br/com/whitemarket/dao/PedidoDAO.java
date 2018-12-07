@@ -2,6 +2,7 @@ package br.com.whitemarket.dao;
 
 import java.util.List;
 
+import br.com.whitemarket.model.Avaliacao;
 import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Produto;
@@ -13,5 +14,6 @@ public interface PedidoDAO {
 	public List<Produto> retornaListaNomeProdutos(long codigo);
 	public List<Foto> retornaPrimeiraFoto(long codProduto);
 	public Pedido retornaProdutosDentroDePedido(long codPedido);
+	public List<Avaliacao> retornaVendedoresAvalidosNoPedido(long codPedido, long codComprador);
 	
 }
