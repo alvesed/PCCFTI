@@ -105,10 +105,12 @@
 							contentType: 'application/x-www-form-urlencoded; charset=iso-8859-1;',
 							success: function(data) {
 								
-								if(data === "true") {
-									$('#inputCupom').css("background-color", "PaleGreen");
+								if(data === "valid") {
+									$('#inputCupom').css("background-color", "rgba(153, 255, 153, 1)");
+								} else if(data === "expirated") {
+									$('#inputCupom').css("background-color", "rgba(255, 255, 128, 1)");
 								} else {
-									$('#inputCupom').css("background-color", "Salmon");
+									$('#inputCupom').css("background-color", "rgba(255, 153, 128, 1)");
 								}
 							
 							}

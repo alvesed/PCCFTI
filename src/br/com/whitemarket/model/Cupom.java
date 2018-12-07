@@ -52,10 +52,10 @@ public class Cupom {
 	
 	
 	//Integer qnt_cupons;
-	Integer qnt_cupons; //número máximo de vezes que cupom pode ser usado (Decrementável a cada uso)
+	private Integer qnt_cupons; //número máximo de vezes que cupom pode ser usado (Decrementável a cada uso)
 	
 	@NotNull
-	Integer qnt_cupons_inicial; //número de Cupons inicial (Nunca alterável)
+	private Integer qnt_cupons_inicial; //número de Cupons inicial (Nunca alterável)
 	
 //	@ManyToMany
 //	 @JoinTable(name="ProdutoCupom", joinColumns=
@@ -120,6 +120,22 @@ public class Cupom {
 
 	public void setQnt_cupons_inicial(Integer qnt_cupons_inicial) {
 		this.qnt_cupons_inicial = qnt_cupons_inicial;
+	}
+
+	public Integer getQnt_cupons() {
+		return qnt_cupons;
+	}
+
+	public void setQnt_cupons(Integer qnt_cupons) {
+		this.qnt_cupons = qnt_cupons;
+	}
+
+	public Date getData_expiracao() {
+		return data_expiracao;
+	}
+
+	public void setData_expiracao(Date data_expiracao) {
+		this.data_expiracao = data_expiracao;
 	}
 
 	//@Transient

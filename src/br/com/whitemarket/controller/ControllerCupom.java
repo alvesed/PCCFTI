@@ -1,5 +1,7 @@
 package br.com.whitemarket.controller;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,22 @@ public class ControllerCupom {
 	@ResponseBody String verificaCupom(@RequestParam("codCupom") String strCupom) {
 		
 		Cupom c = cupom.encontrarCupom(strCupom);
+		Date date = c.getData_expiracao();
+		Date actualDate = new Date();
 		
 		if(c != null) {
 			if(c.getCod_cupom() != null) {
-				return "true";
+				if(c.getQnt_cupons() > 0) {
+					if(actualDate.before(date)) {
+						return "valid";
+					}
+				}
+				return "expirated";
 			}
 		}
-		return "false";
+		return "invalid";
 	}
+	
+	
 	
 }

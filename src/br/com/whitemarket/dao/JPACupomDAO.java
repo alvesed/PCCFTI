@@ -32,14 +32,10 @@ public class JPACupomDAO implements CupomDAO {
 		
 		List<Cupom> list = query.getResultList();
 		
-		
-		System.out.println("PASSEI AQUI!");
 		if(!list.isEmpty()) {
 			c = list.get(0);
-			System.out.println(c.getCod_cupom());
-			
 		} else {
-			System.out.println("FALHOU");
+			System.out.println("FALHOU AO TENTAR BUSCAR CUPOM ESPECIFICO!");
 		}
 		return c;
 	}
