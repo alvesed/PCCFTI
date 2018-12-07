@@ -161,11 +161,11 @@ public class GerarPdfUtil {
 	            table.addCell(cell);
 	            cell = new PdfPCell(new Phrase(item.getProduto().getDescricao(), titleFont));
 	            table.addCell(cell);
-	            cell = new PdfPCell(new Phrase(item.getProduto().getCondicao(),titleFont));
+	            cell = new PdfPCell(new Phrase(item.getProduto().getCondicao(), titleFont));
 	            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 	            table.addCell(cell);
 	            if (item.getProduto().getCondicao().equals("usado")) {
-	            	cell = new PdfPCell(new Phrase(item.getProduto().getEstadoProduto(),titleFont));
+	            	cell = new PdfPCell(new Phrase(item.getProduto().getEstadoProduto(), titleFont));
 		            table.addCell(cell);
 	            } else {
 	            	cell = new PdfPCell(new Phrase("-", titleFont));

@@ -75,6 +75,9 @@ public class ControllerProduto {
 	public String addItem(Produto produto, Model model) {
 		produto.setDataCadastro(new Date());
 		produto.setAtivo(false);
+		if (produto.getCondicao().equals("novo")) {
+			produto.setEstadoProduto(null);
+		}
 		dao.adiciona(produto);
 		return "redirect:cadastrarItem?codProduto=" + produto.getCodProduto();
 	}
@@ -109,6 +112,9 @@ public class ControllerProduto {
 		produto.setListaFotos(fotinha);
 		produto.setDataCadastro(new Date());
 		produto.setAtivo(true);
+		if (produto.getCondicao().equals("novo")) {
+			produto.setEstadoProduto(null);
+		}
 		dao.edita(produto);
 		
 		return new ModelAndView("redirect:cadastrarItem?codProduto=" + produto.getCodProduto() + "&fotos=" + produto.getQtdFiles());

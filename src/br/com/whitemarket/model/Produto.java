@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -170,7 +169,8 @@ public class Produto {
 		this.descricao = descricao;
 	}
 	public String getEstadoProduto() {
-		return estadoProduto;
+		Util util = new Util();
+		return util.mostraEstadoProduto(this.estadoProduto);
 	}
 	public void setEstadoProduto(String estadoProduto) {
 		this.estadoProduto = estadoProduto;

@@ -32,6 +32,21 @@ public class Util {
 		}
 	}
 	
+	public String mostraEstadoProduto(String estado) {
+		if (!estado.equals("") && estado != null) {
+			if (estado.equals("seminovo")) {
+				estado = "Menos de 3 meses de uso.";
+			} else if (estado.equals("usado")) {
+				estado = "3 à 6 meses de uso.";
+			} else if (estado.equals("muitousado")) {
+				estado = "6 à 12 meses de uso.";
+			} else if (estado.equals("velho")) {
+				estado = "Acima de 1 ano de uso.";
+			}
+		}		
+		return estado;
+	}
+	
 	public BigDecimal removeMascaraValor(String valor) {
 		BigDecimal money;
 		if (valor.contains(",") || valor.contains(".")) {
