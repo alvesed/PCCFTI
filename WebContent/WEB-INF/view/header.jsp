@@ -40,7 +40,10 @@
 										<a href="">
 											<div class="divHeaderMenuOptionSubOption">
 												<!-- Tag de identificação -->
+												
+												
 												<a href="<spring:url value='filtrarPorCategoria?idCategoria=${categoria.id}'/>"><p class="subOptionTag">${categoria.descricao}</p></a>
+												
 											</div>
 										</a>
 									</c:forEach>

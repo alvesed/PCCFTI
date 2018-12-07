@@ -50,18 +50,17 @@
 		<div class="row">
 			<div class="row">
 				<div class="col-md-9">
-					<h1>NOVOS PRODUTOS</h1>
+					<h1>${titulo}</h1>  <!-- este titulo vem da controler que monta dinamicamente pela opção de ordenar -->
 				</div>
 					<div>
-					<input type="hidden" id="idCategoria" ${Categoria.id}>
+					<input type="hidden" id="idCategoria" value="${idCategoria}">
 					 <p align="right">
 					 <label style="font-family: Arial; font-size: 8pt; width: 120px;">Listar por:</label>
 					   <select id="ordenar" size="1" style="font-family: Arial; font-size: 8pt; width: 120px; background-color:#d7cec7" >
-						   <option value="" selected="selected" disabled hidden >Selecione</option>
-						  <option id="maiorpreco" value="">Maior Preço</option>
-						  <option id="menorpreco">Menor Preço</option> 
-						  <!-- onchange="window.location = '? -->
-						  <option id="maisvendido" value="">Mais Vendido</option>
+						   <option value="" selected="selected">Selecione</option>
+						  <option  value="maior_preco">Maior Preço</option>
+						  <option  value="menor_preco">Menor Preço</option> 
+						  <option id="maisvendido" value="mais_vendido">Mais Vendido</option>
 					   </select>
 					   </p>
 					</div>
@@ -245,13 +244,27 @@
 							
 						</c:forEach>
 						</div>
-		
-		
 	</div>
 	
 	
 </div>			
 	
+	<script type="text/javascript">
+	
+	
+			$(document).ready(function() {
+				
+				$( "#ordenar" ).change(function() {
+					
+					
+					window.location = "filtrarPorCategoria?idCategoria=${idCategoria}&ordenar="+$(this).val();
+					
+				
+					});
+			});
+
+	
+	</script>
 
 </body>
 </html>

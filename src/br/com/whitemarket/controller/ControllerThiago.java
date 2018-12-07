@@ -44,10 +44,12 @@ public class ControllerThiago {
 			   }
 
 
-		model.addAttribute("produto", listProdutos);
+		model.addAttribute("produto", listProdutos); 
 		
 		List<Categoria> listCategorias = manager.createQuery("select c from Categoria c").getResultList();
 		model.addAttribute("listaCategorias", listCategorias);
+		
+		
 		
 		   
 		manager.close();  
@@ -57,23 +59,76 @@ public class ControllerThiago {
 	}
 	
 	@RequestMapping(value = "/filtrarPorCategoria")
-	public String filtrarPorCategoria(@RequestParam("idCategoria") long idCategoria, Model model) {
+	public String filtrarPorCategoria(@RequestParam("idCategoria") String idCategoria, String ordenar, Model model) {
 					
 			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
 			EntityManager	manager	= factory.createEntityManager();
 				
-			// p.produto.categoria - aqui referencia o atributo categoria da model nao a coluna do banco "fk_categoria
-			Query query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoria");
-			query.setParameter("idCategoria", idCategoria);
+			Query query = null;
+			
+			String titulo = "Novos Produtos";
+			
+			long idCategoriaLong = 0;
+			if (idCategoria != null && !idCategoria.equalsIgnoreCase("")) {
+				idCategoriaLong = Long.parseLong(idCategoria);
+			}
+				 
+			
+			
+			if (idCategoriaLong == 0 && (ordenar == null || ordenar.equals(""))) {
+				
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto");
+			
+			}else if(idCategoriaLong != 0 && ordenar == null) {
+				
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoria");
+				query.setParameter("idCategoria", idCategoria);
+					
+			}else if(idCategoriaLong == 0 && ordenar == "menor_preco") {
+			
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p ORDER BY valor desc");
+				titulo = "Produtos com Menor Preço";		
+			
+				
+			}else if(idCategoriaLong == 0 && ordenar == "maior_preco") {
+				
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p ORDER BY valor asc");
+				titulo = "Produtos com Maior Preço";	
+				
 
-	
+			}else if(ordenar.equals("mais_vendido")) {
+				
+				titulo = "Produtos Mais Vendidos";
+				query = manager.createQuery("select NEW Produto(valor," +
+				   		" (SELECT " + 
+				   		" count(i.quantidade) as quantidades " + 
+				   		" FROM ItemPedido i "
+				   		+ " WHERE i.produto.codProduto = p.codProduto " + 
+				   		" ) as quantidadeDeVendas, dataCadastro, codProduto, usuario) from Produto p "
+				   		+ "WHERE p.ativo = 1" // "WHERE p.ativo = 1 AND p.categoria.id ="  PARA FAZER A PROXIMA QUERY
+				   		+ "ORDER BY quantidadeDeVendas desc");
+			
+			
+			
+			// quando categoria e ordenar preenchidos
+			
+			} else if(idCategoriaLong != 0 && ordenar.equalsIgnoreCase("menor_preco")) {
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoria ORDER BY valor desc");
+				query.setParameter("idCategoria", idCategoria);
+			
+			}
+			
+			
+
 			List<Produto> listProdutos = query.getResultList();
+
 			
 			Util util = new Util();
 		   for(Produto produto: listProdutos) {
-			   if (!util.pegarPrimeiraFoto(produto.getCodProduto()).equals("")) produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
+			   //if (!util.pegarPrimeiraFoto(produto.getCodProduto()).equals("")) produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
 		   }
 
+		   model.addAttribute("titulo",titulo);
 		   model.addAttribute("produto", listProdutos);
 
 		   // Esse codigo esta sendo replicado para que quando ele selecionar um categoria e visualizar os seus itens ele remontar essa esse menu novamente!
@@ -82,7 +137,7 @@ public class ControllerThiago {
 
 			
 			//id para fazer o filtro de menor preço
-			model.addAttribute("idCategoria", idCategoria);
+			model.addAttribute("idCategoria", idCategoria); // chave || categoria
 			
 			manager.close();  
 			factory.close();
