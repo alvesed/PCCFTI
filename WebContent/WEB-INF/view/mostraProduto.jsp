@@ -210,9 +210,7 @@
 	
 	$(function(){
 		$('.avaliacao').barrating({
-            theme: 'fontawesome-stars-o',
-            initialRating: ${produto.usuario.nota},
-            readonly: true
+            theme: 'fontawesome-stars-o', readonly: true,
     	});
 	})
 	

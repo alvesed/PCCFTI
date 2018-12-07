@@ -74,15 +74,15 @@
          <div class="row">
             <div class="form-group col col-sm-6 col-md-4">
                <label for="nome">Cidade</label>
-               <input type="text" class="form-control" id="nome" placeholder="Nome da sua Cidade" name="city">
+               <input type="text" class="form-control" id="city" placeholder="Nome da sua Cidade" name="city">
             </div>
             <div class="form-group col col-sm-6  col-md-4">
                <label for="senha">Logradouro</label>
-               <input type="text" class="form-control" id="logradouro" placeholder="Número da sua casa" name="logradouro">
+               <input type="text" class="form-control" id="logradouro" placeholder="Rua" name="logradouro">
             </div>
             <div class="form-group col col-sm-6 col-md-4">
-               <label for="cpf">Complementos</label>
-               <input type="text" class="form-control" id="cpf" placeholder="opcional" name="complement">
+               <label for="complement">Complementos</label>
+               <input type="text" class="form-control" id="complement" placeholder="opcional" name="complement">
             </div>
             
 		            <div class="form-group col col-sm-6 col-md-4">
@@ -174,5 +174,6 @@
 	   }
 
 	   </script> 
+	  
 </body>
 </html>

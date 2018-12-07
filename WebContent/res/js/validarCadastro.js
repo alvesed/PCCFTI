@@ -1,11 +1,21 @@
 $(document).ready(function() {
 	
+	
   $("input").blur(function() {
    if ($(this).val() == "") {
      $(this).addClass('error');
    } else {
      $(this).removeClass('error');
    }
+   
+   
+   if(regex = /[a-z]*\s[a-z]*/gi.exec($("#nome").val())){
+	   $("#nome").removeClass('error');
+	   reason = false;
+	}else{
+		$("#nome").addClass('error');
+	   reason = true;
+	}
   });
 
   $("select").val("").blur(function() {
@@ -39,6 +49,13 @@ $(document).ready(function() {
 });
 function validarCadastro(cpf,dataNascimento,telefone,email) {
     var retorno = true;
+    
+    if(regex = /[a-z]*\s[a-z]*/gi.exec($("#nome").val())){
+    	alert("Digite um Nome completo");
+ 	  retorno = false;
+ 	}else{
+ 		retorno = true;
+ 	}
 
 	if(!testaCPF(cpf)){
 		alert("Digite um CPF valido Por favor");
@@ -67,6 +84,10 @@ function validarCadastro(cpf,dataNascimento,telefone,email) {
 	}else{
 		retorno = true;		
 	}
+	
+	
+	
+
 
     var formValues = {
 		
@@ -90,6 +111,7 @@ function validarCadastro(cpf,dataNascimento,telefone,email) {
         retorno = false;
       }
     }
+	console.log(retorno);
     return retorno;
 }
 
