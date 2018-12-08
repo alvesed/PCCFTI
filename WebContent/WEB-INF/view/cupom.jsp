@@ -28,47 +28,113 @@
       <form id="form" action="cadastrarCupom" method="post">
          <div class="row">
             <div class="form-group col col-sm-6 col-md-4">
-               <label for="nome">Código</label>
-               <input value = "${produtos.nome}" type="text" class="form-control" id="cod_cupom" placeholder="Código Alfa-Numérico" name="cod_cupom">
+               <label for="nome">Código *</label>
+               <input value = "${produtos.nome}" type="text" class="form-control" id="cod_cupom" placeholder="Código Alfa-Numérico" name="cod_cupom" required>
             </div>
             <div class="form-group col col-sm-6 col-md-4">
                <label for="qnt_cupons">Quantidade de Cupons</label>
                <input type="text" class="form-control" id="qnt_cupons" placeholder="" name="qnt_cupons">
             </div>
             
-            <div class="form-group col-md-4">
-               <label for="tipo_desconto">Tipo de Desconto</label>
+            <div class="form-group col-sm-6  col-md-4">
+               <label for="tipo_desconto">Tipo de Desconto *</label>
                <select id="tipo_desconto" class="form-control" name="tipo_desconto">
-                  <option value="n" disabled hidden>Selecione</option>
-                  <option value="r">Reais</option>
+                  <option value="r" selected>Reais</option>
                   <option value="p">Porcentagem</option>
                </select>
             </div>
             
             <div class="form-group col col-sm-6 col-md-4">
                <label for="valor_percent">Percentual de Desconto</label>
-               <input type="text" class="form-control" id="valor_percent" placeholder="0" name="valor_percent">
+               <input type="text" class="form-control" id="valor_percent" placeholder="0" name="valor_percent" required disabled>
             </div>
             <div class="form-group col col-sm-6 col-md-4">
                <label for="valor_desconto">Valor em Reais</label>
-               <input type="text" class="form-control" id="valor_desconto" placeholder="R 0,00" name="valor_desconto">
+               <input type="text" class="form-control" id="valor_desconto" placeholder="R 0,00" name="valor_desconto" required>
             </div>
             <div class="form-group col col-sm-6 col-md-4">
                <label for="valor_minimo">Valor Mínimo da Compra</label>
                <input type="text" class="form-control" id="valor_minimo" placeholder="R 0,00" name="valor_minimo">
             </div>
-            </div>
+         
+         
             <div class="form-group col col-sm-6  col-md-4">
-               <label for="descricao">Descrição</label>
-               <input type="descricao" class="form-control" id="descricao" placeholder="" name="descricao">
+               <label for="descricao">Descrição *</label>
+               
+               <textarea rows="" cols="" class="form-control" id="descricao" placeholder="" name="descricao" maxlength="250" required>
+               </textarea>
             </div>
          
-         <div class="form-row">
-            <div class="form-group col-md-4">
-               <label for="dataNascimento">Data de Expiração</label>
-               <input type="text" class="form-control" id="data_expiracao" placeholder="Dia/Mês/Ano"name="data_expiracao">
+         
+            <div class="form-group col-sm-6 col-md-4">
+               <label for="dataNascimento">Data de Expiração *</label>
+               <input type="text" class="form-control" id="data_expiracao" placeholder="Dia/Mês/Ano"name="data_expiracao" required>
             </div>
           </div>
+          
+         
+          
+          <div class="row">
+            <div class="col-md-6">
+            	<table class="table table-bordered">
+	  				<thead>
+	    				<tr> 
+	    				<th>
+	    				<input class="" type="checkbox" value="" id="todos-produtos">
+	          	 		</th>
+	          	 		<th>
+	          	 		Produtos
+	          	 		</th>
+	          	 		</tr>
+	          	 	</thead>
+	          	 	
+	          	 	<tbody>
+		          	 	<tr>
+		          	 	<td>
+		          	 		<input class="lista-produto" type="checkbox" value="" name="produto[]">
+		          	 	</td>
+		          	 	<td>
+		          	 	Teste
+		          	 	</td>
+		          	 	</tr>
+		          	 	<tr>
+		          	 	<td>
+		          	 		<input class="lista-produto" type="checkbox" value="" name="produto[]">
+		          	 	</td>
+		          	 	<td>
+		          	 	Teste
+		          	 	</td>
+		          	 	</tr>
+		          	 	<tr>
+		          	 	<td>
+		          	 		<input class="lista-produto" type="checkbox" value="" name="produto[]">
+		          	 	</td>
+		          	 	<td>
+		          	 	Teste
+		          	 	</td>
+		          	 	</tr>
+		          	 	<tr>
+		          	 	<td>
+		          	 		<input class="lista-produto" type="checkbox" value="" name="produto[]">
+		          	 	</td>
+		          	 	<td>
+		          	 	Teste
+		          	 	</td>
+		          	 	</tr>
+		          	 	<tr>
+		          	 	<td>
+		          	 		<input class="lista-produto" type="checkbox" value="" name="produto[]">
+		          	 	</td>
+		          	 	<td>
+		          	 	Teste
+		          	 	</td>
+		          	 	</tr>
+	          	 	</tbody>
+          	 	</table>	
+
+            </div>
+          </div>
+         
          
          <button type="submit" class="btn btn btn-primary" id="botao" >Cadastrar</button>
      	
@@ -95,6 +161,43 @@
  </c:forEach>
    </div>
 </div>
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script type="text/javascript">
+		
+			$(document).ready(function() {
+				
+				$("#todos-produtos").click(function() {
+				
+					if($(this).is(":checked"))
+						$(".lista-produto").prop('checked', true);
+					else
+						$(".lista-produto").prop('checked', false);
+					
+				});
+				
+				$("#tipo_desconto").change(function(){
+					
+					
+					if($(this).val()=="r"){
+					$("#valor_percent").prop('disabled', true);
+					$("#valor_percent").val("");
+					$("#valor_desconto").prop('disabled', false);
+					
+					}else if($(this).val()=="p"){
+						$("#valor_percent").prop('disabled', false);
+						$("#valor_desconto").prop('disabled', true);
+						$("#valor_desconto").val("");
+						}else{
+							$("#valor_percent").prop('disabled', false);
+							$("#valor_desconto").prop('disabled', false);							
+						}
+						
+				});
+				
+			});
+		
+</script>
+
 
 </body>
 </html>
