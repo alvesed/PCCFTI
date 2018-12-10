@@ -55,6 +55,16 @@
 					</div>
 				</div>
 				<div class="row">
+				<div class="form-group col-md-3">
+						<!-- label e input-->
+						<label>Categoria: </label>
+						<select class="form-control" name="idCategoria" id="idCategoria">
+						<c:forEach items="${categorias}" var="categorias">
+							<option value="${categorias.id}" >${categorias.descricao}</option>
+						</c:forEach></select>
+					</div>
+					</div>
+				<div class="row">
 					<div class="form-group col-md-2">
 						<!-- label e input-->
 						<label>Condição</label>
@@ -90,9 +100,12 @@
 					</div>
 					<hr>
 					<label>Fotos</label><br>
-							<c:forEach items="${produto.listaFotos}" var="listFotos">
-								<img style="max-height: 250px;max-width: 250px; width: auto; height: auto" src="${listFotos.urlFoto}" />
-				  			</c:forEach>
+					<c:if test="${fotos > 0 }">
+					<c:forEach items="${produto.listaFotos}" var="listFotos">
+						<img style="max-height: 250px;max-width: 250px; width: auto; height: auto" src="${listFotos.urlFoto}" />
+				  	</c:forEach>	
+					</c:if>
+						
 				</c:if>
 				<div class="row">
 					<div class="form-group col-md-2">

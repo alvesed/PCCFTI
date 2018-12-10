@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.whitemarket.dao.FotoDAO;
 import br.com.whitemarket.dao.PedidoDAO;
 import br.com.whitemarket.dao.ProdutoDAO;
+import br.com.whitemarket.model.Categoria;
 import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.Produto;
 import br.com.whitemarket.model.Usuario;
@@ -62,16 +63,18 @@ public class ControllerProduto {
 		if (usuario == null || usuario.getEmail().equals("")) {
 			return "redirect:login";
 		}
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+	    EntityManager manager = factory.createEntityManager();
+	    
+	    List<Categoria> query = manager.createQuery("SELECT c FROM Categoria c").getResultList();
+		model.addAttribute("categorias", query);
 		//VERIFICA SE É UMA EDIÇÃO
 		if (produto.getCodProduto() != 0) {
-			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-    	    EntityManager manager = factory.createEntityManager();
     	    manager.getTransaction().begin();
     	    model.addAttribute("produto", manager.find(Produto.class, produto.getCodProduto()));
-    	    
-    	    manager.close();
-    	    factory.close();
 		}
+	    manager.close();
+	    factory.close();
 	    return "cadastrarItem";
 	}
 	
@@ -80,6 +83,7 @@ public class ControllerProduto {
 	public String addItem(Produto produto, Model model) {
 		produto.setDataCadastro(new Date());
 		produto.setAtivo(false);
+
 		if (produto.getCondicao().equals("novo")) {
 			produto.setEstadoProduto(null);
 		}
@@ -89,7 +93,7 @@ public class ControllerProduto {
 	
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public ModelAndView uploadFiles(@RequestParam CommonsMultipartFile file, HttpSession session, Produto produto, String codUser) {
+	public ModelAndView uploadFiles(String idCategoria, @RequestParam CommonsMultipartFile file, HttpSession session, Produto produto, String codUser) {
 		Date date = new Date();
 		String path = "C:\\Users\\FTI\\git\\PCCFTI\\WebContent\\res\\img\\fotosProduto";
 		String filename = produto.getCodProduto() + "_" + "foto_" + date.getTime() + file.getOriginalFilename();
@@ -116,6 +120,7 @@ public class ControllerProduto {
 		fotinha.add(foto);
 		produto.setListaFotos(fotinha);
 		produto.setDataCadastro(new Date());
+		produto.setCategoria(new Categoria(Long.valueOf(idCategoria)));
 		produto.setAtivo(true);
 		if (produto.getCondicao().equals("novo")) {
 			produto.setEstadoProduto(null);
