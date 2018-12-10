@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -200,7 +202,11 @@ public class GerarPdfUtil {
         PdfPCell cell;
         
         if (pedido != null) {
-        	cell = new PdfPCell(new Phrase("Valor Total dos Itens: R$ " + pedido.getValor_pago()));
+        	
+        	HttpSession session = 
+        	Cupom cupom = (Cupom) session.
+        	
+        	cell = new PdfPCell(new Phrase(() "Valor Total dos Itens: R$ " + pedido.getValor_pago()));
         	cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
         	cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         	table.addCell(cell);

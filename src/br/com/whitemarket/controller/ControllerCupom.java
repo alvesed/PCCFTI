@@ -31,7 +31,7 @@ public class ControllerCupom {
 	PedidoDAO daoPedido;
 	
 	@RequestMapping(value = "/verificaCupom", method = RequestMethod.POST)
-	@ResponseBody String verificaCupom(@RequestParam("codCupom") String strCupom) {
+	@ResponseBody String verificaCupom(@RequestParam("codCupom") String strCupom, HttpSession session) {
 		
 		Cupom cupom = dao.encontrarCupom(strCupom);
 		Date date = cupom.getData_expiracao();
@@ -41,6 +41,9 @@ public class ControllerCupom {
 			if(cupom.getCod_cupom() != null) {
 				if(cupom.getQnt_cupons() > 0) {
 					if(actualDate.before(date)) {
+						
+						
+						
 						return "valid";
 					}
 				}

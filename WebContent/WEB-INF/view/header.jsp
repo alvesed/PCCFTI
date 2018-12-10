@@ -7,6 +7,7 @@
 	<head>
 	
 		<link rel="stylesheet" type="text/css" href="<spring:url value='res/css/headerStyle.css' />">
+		<script type="text/javascript" src="<spring:url value='res/js/jquery.js' />"></script>
 		<style type="text/css"> @font-face { font-family:'ubuntu'; src: url("<spring:url value='res/font/ubuntu.ttf' />"); font-weight:normal; font-style:normal; } </style>
 
 	</head>

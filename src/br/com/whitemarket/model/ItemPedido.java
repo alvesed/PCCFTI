@@ -18,7 +18,6 @@ public class ItemPedido implements Comparable<ItemPedido> {
 	public ItemPedido(long cod_pedido, long somaquantidade) {
 		this.pedido.setCod_pedido(cod_pedido);
 		this.quantidade = somaquantidade;
-		
 	}
 	
 	@Id
