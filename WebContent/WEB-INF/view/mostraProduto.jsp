@@ -128,6 +128,12 @@
 
 
 							</div>
+							
+							
+							
+							
+							
+							
 							<button onclick="comentar()" class="add-to-cart btn btn-outline-primary" type="button">Comentar</button>
 
 
@@ -309,14 +315,19 @@
 			contentType: 'application/x-www-form-urlencoded; charset=iso-8859-1;', 
 			success: function(resultado){
 				
+				if(resultado == "sucesso"){
 					var novoComentario = $(".modelo").clone();
 					novoComentario.removeClass("modelo hidden").addClass("nova");
 					novoComentario.find(".comentarioNovo").html(comentario);
 					novoComentario.insertAfter(".modelo");
-					
+				} else if (resultado =="fail"){
+					alert("Por favor logar antes de comentar");
+					window.location.href = 'login';
+				}
 	
 				
 			}
+			
 		});
 	}
 	

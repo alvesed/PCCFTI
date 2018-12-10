@@ -60,7 +60,8 @@ public class ControllerItemPedido {
 		return "mostraProduto";
 	}
 	
-	
+	/* --
+	 * Antigo metoro de adicionar comentario
 	@RequestMapping("adicionarComentario")
 	public String addComentario(String codProduto , Comentario comentario, HttpSession session, Model model) { //Comentario que vem do jsp e verificar se esta logado ou nao
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
@@ -81,13 +82,17 @@ public class ControllerItemPedido {
 		}
 		
 	}
-	 
 	
+	 */
+	
+	// Metodo de adicionar comentario em ajax
 	@RequestMapping("addComentarioAjax")
 	public @ResponseBody  String addComentarioAjax(String codProduto , Comentario comentario, HttpSession session, Model model) { //Comentario que vem do jsp e verificar se esta logado ou nao
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+		
+		
 		if (usuario == null || usuario.getEmail().equals("")) {
-			return "redirect:login";
+			return "fail";
 		} else {
 			Produto produto = new Produto();
 			produto.setCodProduto(Long.parseLong(codProduto));
