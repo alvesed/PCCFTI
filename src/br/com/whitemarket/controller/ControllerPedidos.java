@@ -3,7 +3,6 @@ package br.com.whitemarket.controller;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
@@ -171,12 +170,12 @@ public class ControllerPedidos {
 		String mimeType = URLConnection.guessContentTypeFromStream(inputS);
 		
 		if (mimeType == null) {
-			mimeType = "application/octet-stream";
+			mimeType = "application/pdf";
 		}
 		
 		response.setContentType(mimeType);
 		response.setContentLength((int)file.length());
-		response.setHeader("Content-Disposition", String.format("attachment-filename=\"%s\"", file.getName()));
+		response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
 		
 		FileCopyUtils.copy(inputS, response.getOutputStream());
 		

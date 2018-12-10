@@ -53,7 +53,7 @@
 
 	  </td>
 	  <td>
-	  	 <a href="gerarPdf?cod_pedido=${listPedidos.cod_pedido}" class="btn btn-primary">Gerar PDF</a>
+	  	 <a href="gerarPdf?cod_pedido=${listPedidos.cod_pedido}" class="btn btn-primary" target="_blank">Gerar PDF</a>
 	  </td>
     </tr>
  </c:forEach>
