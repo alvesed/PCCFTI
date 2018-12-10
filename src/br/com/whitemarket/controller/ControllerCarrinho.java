@@ -12,18 +12,17 @@ import javax.persistence.Persistence;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.uol.pagseguro.domain.Address;
 import br.com.uol.pagseguro.domain.Item;
+import br.com.whitemarket.model.Cupom;
 import br.com.whitemarket.model.Endereco;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
-import br.com.whitemarket.controller.Util;
 @Controller
 public class ControllerCarrinho {
 	
@@ -192,8 +191,6 @@ public class ControllerCarrinho {
 			List<Item> listItemPedido;
 			listItemPedido = new ArrayList<Item>();
 			
-	
-			
 			for(ItemPedido itemPedido: pedido.getListaPedidos()) {
 				Item item = new Item();
 				item.setId(String.valueOf(itemPedido.getProduto().getCodProduto()));
@@ -201,7 +198,12 @@ public class ControllerCarrinho {
 				item.setQuantity((int)itemPedido.getQuantidade());
 				item.setAmount(itemPedido.getProduto().getValor());
 				listItemPedido.add(item);
-			   }
+			}
+			
+			if(ControllerCupom.globalCupom != null) {
+				Cupom c = ControllerCupom.globalCupom;
+				c.setQnt_cupons(c.getQnt_cupons() - 1);
+			}
 			
 			session.setAttribute("listItemPedido", listItemPedido);
 		} catch (Exception e) {

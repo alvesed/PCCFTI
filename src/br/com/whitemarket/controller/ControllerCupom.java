@@ -30,6 +30,8 @@ public class ControllerCupom {
 	@Autowired
 	PedidoDAO daoPedido;
 	
+	public static Cupom globalCupom;
+	
 	@RequestMapping(value = "/verificaCupom", method = RequestMethod.POST)
 	@ResponseBody String verificaCupom(@RequestParam("codCupom") String strCupom, HttpSession session) {
 		
@@ -41,9 +43,7 @@ public class ControllerCupom {
 			if(cupom.getCod_cupom() != null) {
 				if(cupom.getQnt_cupons() > 0) {
 					if(actualDate.before(date)) {
-						
-						
-						
+						ControllerCupom.globalCupom = cupom;
 						return "valid";
 					}
 				}
@@ -84,7 +84,6 @@ public class ControllerCupom {
 			System.out.println("caiu no catch cupom");
 		}
 		
-
 		return "cupom";
 	}
 	
@@ -99,15 +98,10 @@ public class ControllerCupom {
 		System.out.println(cupom.getValor_minimo());
 		System.out.println(cupom.getValor_percent());
 		
-		
-		
 		dao.adicionaCupom(cupom);
-		
-		
-		
+	
 		return "cupom";
 	}
-	
 	
 	//"cadastrarCupom"
 	

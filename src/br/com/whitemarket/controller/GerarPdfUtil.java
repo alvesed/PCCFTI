@@ -203,10 +203,7 @@ public class GerarPdfUtil {
         
         if (pedido != null) {
         	
-        	HttpSession session = 
-        	Cupom cupom = (Cupom) session.
-        	
-        	cell = new PdfPCell(new Phrase(() "Valor Total dos Itens: R$ " + pedido.getValor_pago()));
+        	cell = new PdfPCell(new Phrase("Valor Total dos Itens: R$ " + pedido.getValor_pago()));
         	cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
         	cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         	table.addCell(cell);
