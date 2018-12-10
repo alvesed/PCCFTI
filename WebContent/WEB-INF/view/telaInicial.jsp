@@ -49,6 +49,7 @@
 						  <option  value="maior_preco">Maior Preço</option>
 						  <option  value="menor_preco">Menor Preço</option> 
 						  <option  value="mais_vendido">Mais Vendido</option>
+						  
 					   </select>
 					   </p>
 					</div>
