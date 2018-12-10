@@ -257,10 +257,11 @@
 		
 			$(document).ready(function() {
 
-				$("#searchbutton").click(function() {
+				$("#inputFindIcon").click(function() {
 					var find = {
-							busca: $(this).parent().find("#searchtext").val()
+							busca: $(this).parent().find("#inputFind").val()
 						}
+					alert(busca);
 					
 					$.ajax({
 						url: "telaPrincipal/busca",

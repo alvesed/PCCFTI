@@ -22,12 +22,15 @@ body * {
 	opacity: .6;
 }
 
+/* Comentei para testar o input!
 #inputFind:hover, #inputFind:focus {
 	width: 500px;
 	z-index: 100;
 	opacity: 1;
 }
-
+ */
+ 
+ 
 #inputFindIcon {
 	background-size: cover;
 	height: 25px;

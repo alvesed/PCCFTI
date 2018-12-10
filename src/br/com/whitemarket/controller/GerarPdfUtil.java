@@ -37,7 +37,7 @@ public class GerarPdfUtil {
 	       Rectangle pageSize = new Rectangle(PageSize.A4);
 	       Document document = new Document(pageSize);
 	       try {
-	           PdfWriter.getInstance(document, new FileOutputStream("C:\\PDF_Teste.pdf"));
+	           PdfWriter.getInstance(document, new FileOutputStream("D:\\PDF_Teste.pdf"));
 	           document.open();
 	           document.add(createTableUsuario(pedido, endereco));
 	           document.add(new Paragraph(" "));

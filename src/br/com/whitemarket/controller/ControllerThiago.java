@@ -58,6 +58,34 @@ public class ControllerThiago {
 		return "telaInicial";
 	}
 	
+	
+	@RequestMapping(value = "telaPrincipal/busca")
+	public String busca(@RequestParam("busca")String busca,Model model) {
+		
+		Util util = new Util();
+
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+		EntityManager	manager	= factory.createEntityManager();
+			
+		List<Produto> listProdutos =
+				   manager.createQuery("select NEW Produto(nome, descricao, condicao, valor, codProduto) from Produto p where p.nome = :busca").getResultList();
+			   
+			   for(Produto produto: listProdutos) {
+				   produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
+			   }
+
+		model.addAttribute("produto", listProdutos); 
+		
+		List<Categoria> listCategorias = manager.createQuery("select c from Categoria c").getResultList();
+		model.addAttribute("listaCategorias", listCategorias);
+		
+		
+		manager.close();  
+		factory.close();
+		
+		return "telaInicial";
+	}
+	
 	@RequestMapping(value = "/filtrarPorCategoria")
 	public String filtrarPorCategoria(@RequestParam("idCategoria") String idCategoria, String ordenar, Model model) {
 					
@@ -144,30 +172,6 @@ public class ControllerThiago {
 			factory.close();
 				
 			
-			return "telaInicial";
-	}
-	
-	
-	@RequestMapping(value = "/filtrarPorMenorValor")
-	public String filtrarPorMenorValor(Model model) {
-					
-			EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
-			EntityManager	manager	= factory.createEntityManager();
-				
-			Query query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto as p order by p.valor asc");
-	
-			List<Produto> listProdutos = query.getResultList();
-			
-			Util util = new Util();
-		   for(Produto produto: listProdutos) {
-			   if (!util.pegarPrimeiraFoto(produto.getCodProduto()).equals("")) produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
-		   }
-
-		   model.addAttribute("produto", listProdutos);
-
-			manager.close();  
-			factory.close();
-		
 			return "telaInicial";
 	}
 }
