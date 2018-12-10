@@ -33,7 +33,7 @@ public class Util {
 	}
 	
 	public String mostraEstadoProduto(String estado) {
-		if (!estado.equals("") && estado != null) {
+		if (estado != null && !estado.equals("")) {
 			if (estado.equals("seminovo")) {
 				estado = "Menos de 3 meses de uso.";
 			} else if (estado.equals("usado")) {
@@ -43,6 +43,7 @@ public class Util {
 			} else if (estado.equals("velho")) {
 				estado = "Acima de 1 ano de uso.";
 			}
+		
 		}		
 		return estado;
 	}
