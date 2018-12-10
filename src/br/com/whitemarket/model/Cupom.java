@@ -51,7 +51,6 @@ public class Cupom {
 	//Integer qnt_cupons;
 	private Integer qnt_cupons; //número máximo de vezes que cupom pode ser usado (Decrementável a cada uso)
 	
-	@NotNull
 	private Integer qnt_cupons_inicial; //número de Cupons inicial (Nunca alterável)
 	
 //	@ManyToMany
@@ -144,6 +143,14 @@ public class Cupom {
 	}
 	public void setListaProdutos(List<Produto> listaProdutos) {
 		this.listaProdutos = listaProdutos;
+	}
+
+	public Long getCupom_id() {
+		return cupom_id;
+	}
+
+	public void setCupom_id(Long cupom_id) {
+		this.cupom_id = cupom_id;
 	}
 
 	

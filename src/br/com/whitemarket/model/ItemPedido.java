@@ -34,10 +34,10 @@ public class ItemPedido implements Comparable<ItemPedido> {
 	
 	private long quantidade;
 	
+	private double valor_desconto;
+	
 	@SuppressWarnings("unused")
 	private Long fk_cupom_id;
-	
-	private double valor_desconto;
 
 	public Pedido getPedido() {
 		return pedido;

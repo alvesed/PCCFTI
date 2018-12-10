@@ -10,7 +10,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,13 +20,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.uol.pagseguro.domain.Address;
 import br.com.uol.pagseguro.domain.Item;
+import br.com.whitemarket.dao.CupomDAO;
+import br.com.whitemarket.dao.JPACupomDAO;
+import br.com.whitemarket.dao.JPAPedidoDAO;
 import br.com.whitemarket.model.Cupom;
 import br.com.whitemarket.model.Endereco;
 import br.com.whitemarket.model.ItemPedido;
 import br.com.whitemarket.model.Pedido;
 import br.com.whitemarket.model.Usuario;
+
+@Transactional
 @Controller
 public class ControllerCarrinho {
+	
+	@Autowired
+	JPACupomDAO cupomDAO;
+	
+	@Autowired
+	JPAPedidoDAO pedidoDAO;
 	
 	@RequestMapping(value="/verCarrinho")
 	public String cart(HttpSession session) {
@@ -200,9 +213,26 @@ public class ControllerCarrinho {
 				listItemPedido.add(item);
 			}
 			
-			if(ControllerCupom.globalCupom != null) {
-				Cupom c = ControllerCupom.globalCupom;
+			Cupom c = (Cupom) session.getAttribute("globalCupom");
+			
+			if(c != null) {
 				c.setQnt_cupons(c.getQnt_cupons() - 1);
+				cupomDAO.editaCupom(c);
+				
+				pedido.setCupom(c);
+				
+				
+				EntityManagerFactory factory = Persistence.createEntityManagerFactory("market");
+				EntityManager manager = factory.createEntityManager();
+				
+				manager.getTransaction().begin();
+				manager.merge(pedido);
+				manager.getTransaction().commit();
+				
+				System.out.println(pedido.getCupom().getCupom_id());
+				
+				manager.close();
+				factory.close();
 			}
 			
 			session.setAttribute("listItemPedido", listItemPedido);

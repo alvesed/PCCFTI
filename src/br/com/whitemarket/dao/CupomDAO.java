@@ -9,5 +9,6 @@ public interface CupomDAO {
 	void adicionaCupom(Cupom cupom);
 	Cupom encontrarCupom(String strCupom);
 	List<Cupom> listaCupom();
+	void editaCupom(Cupom cupom);
 	
 }

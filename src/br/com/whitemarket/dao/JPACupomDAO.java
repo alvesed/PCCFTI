@@ -21,6 +21,11 @@ public class JPACupomDAO implements CupomDAO {
 	public void adicionaCupom(Cupom cupom) {
 		manager.persist(cupom);
 	}
+	
+	@Override
+	public void editaCupom(Cupom cupom) {
+		manager.merge(cupom);
+	}
 
 	@Override
 	public Cupom encontrarCupom(String strCupom) {

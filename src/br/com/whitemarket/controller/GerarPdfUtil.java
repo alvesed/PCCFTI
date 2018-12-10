@@ -57,7 +57,7 @@ public class GerarPdfUtil {
 	}
 	
 	public static PdfPTable createTableUsuario(Pedido pedido, Endereco endereco) {
-		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.BLACK);
+		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 7, BaseColor.BLACK);
 		// CRIA UMA TABELA COM 3 COLUNAS
 		float[] columnWidths = {3, 5, 3};
 		PdfPTable table = new PdfPTable(columnWidths);
@@ -94,9 +94,9 @@ public class GerarPdfUtil {
 	}
 	
 	public static PdfPTable createTableProdutos(Pedido pedido) {
-		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA, 10, BaseColor.BLACK);
+		Font titleFont = FontFactory.getFont(FontFactory.HELVETICA, 6, BaseColor.BLACK);
 		// CRIA UMA TABELA COM 8 COLUNAS
-		float[] columnWidths = {5, 2, 4, 7, 5, 5, 2, 5, 5};
+		float[] columnWidths = {5, 2, 4, 7, 5, 5, 2, 5, 3, 5};
         PdfPTable table = new PdfPTable(columnWidths);
         table.setWidthPercentage(100);
         // CRIA UM OBJETO CELL
@@ -130,6 +130,10 @@ public class GerarPdfUtil {
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Valor Unit.", titleFont));
         cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
+        table.addCell(cell);
+        cell = new PdfPCell(new Phrase("Desconto", titleFont));
+        cell.setBackgroundColor(GrayColor.LIGHT_GRAY);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase("Valor Total", titleFont));
         cell.setBackgroundColor(GrayColor.LIGHT_GRAY);

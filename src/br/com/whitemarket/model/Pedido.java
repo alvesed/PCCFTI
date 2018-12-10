@@ -18,6 +18,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.sun.istack.internal.Nullable;
+
 @Entity
 @Table(name="pedido")
 public class Pedido {
@@ -52,7 +54,12 @@ public class Pedido {
 	
 	@OneToMany(mappedBy = "pedido", targetEntity = ItemPedido.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<ItemPedido> listaPedidos;
-
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_cod_cupom")
+	@Nullable
+	private Cupom cupom;
+	
 	@Transient
 	private long quantidadeItensPedido;
 	
@@ -109,5 +116,13 @@ public class Pedido {
 	}
 	public void setListaPedidos(List<ItemPedido> listaPedidos) {
 		this.listaPedidos = listaPedidos;
+	}
+
+	public Cupom getCupom() {
+		return cupom;
+	}
+
+	public void setCupom(Cupom cupom) {
+		this.cupom = cupom;
 	}
 }

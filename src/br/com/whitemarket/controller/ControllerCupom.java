@@ -30,8 +30,6 @@ public class ControllerCupom {
 	@Autowired
 	PedidoDAO daoPedido;
 	
-	public static Cupom globalCupom;
-	
 	@RequestMapping(value = "/verificaCupom", method = RequestMethod.POST)
 	@ResponseBody String verificaCupom(@RequestParam("codCupom") String strCupom, HttpSession session) {
 		
@@ -43,13 +41,15 @@ public class ControllerCupom {
 			if(cupom.getCod_cupom() != null) {
 				if(cupom.getQnt_cupons() > 0) {
 					if(actualDate.before(date)) {
-						ControllerCupom.globalCupom = cupom;
+						session.setAttribute("globalCupom", cupom);
 						return "valid";
 					}
 				}
+				session.removeAttribute("globalCupom");
 				return "expirated";
 			}
 		}
+		session.removeAttribute("globalCupom");
 		return "invalid";
 	}
 	
