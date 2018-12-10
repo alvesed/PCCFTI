@@ -43,6 +43,7 @@ public class ControllerCupom {
 			if(cupom.getCod_cupom() != null) {
 				if(cupom.getQnt_cupons() > 0) {
 					if(actualDate.before(date)) {
+						ControllerCupom.globalCupom = cupom;
 						return "valid";
 					}
 				}
