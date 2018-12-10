@@ -268,6 +268,10 @@
 	    			}	    			
 	    		}
 	    	})
+	    	
+	    	if("${produto.categoria.id}" != ""){
+	    		$("#idCategoria").val("${produto.categoria.id}");
+	    	}
 		</script>
 	</body>
 </html>

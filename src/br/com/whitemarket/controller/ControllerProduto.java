@@ -80,10 +80,11 @@ public class ControllerProduto {
 	
 	//ADICIONA O PRODUTO NO BANCO AO CLICAR EM 'PRÓXIMO'
 	@RequestMapping("/adicionaItem")
-	public String addItem(Produto produto, Model model) {
+	public String addItem(Produto produto, Model model, String idCategoria) {
 		produto.setDataCadastro(new Date());
 		produto.setAtivo(false);
-
+		produto.setCategoria(new Categoria(Long.valueOf(idCategoria)));
+		model.addAttribute("idCategoria", idCategoria);
 		if (produto.getCondicao().equals("novo")) {
 			produto.setEstadoProduto(null);
 		}
