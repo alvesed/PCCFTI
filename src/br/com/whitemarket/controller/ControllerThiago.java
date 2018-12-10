@@ -68,6 +68,10 @@ public class ControllerThiago {
 			
 			String titulo = "Novos Produtos";
 			
+			System.out.println("oq ta vindo no ordenar é :  " + ordenar + "e no id categoria é :  " + idCategoria + " .");
+			
+			
+			
 			long idCategoriaLong = 0;
 			if (idCategoria != null && !idCategoria.equalsIgnoreCase("")) {
 				idCategoriaLong = Long.parseLong(idCategoria);

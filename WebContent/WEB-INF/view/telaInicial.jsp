@@ -53,7 +53,7 @@
 					<h1>${titulo}</h1>  <!-- este titulo vem da controler que monta dinamicamente pela opção de ordenar -->
 				</div>
 					<div>
-					<input type="hidden" id="idCategoria" value="${idCategoria}">
+					<input type="hidden" id="idCategoria" value="${idCategoria}"> <!-- nao esta encontrando a categoria -->
 					 <p align="right">
 					 <label style="font-family: Arial; font-size: 8pt; width: 120px;">Listar por:</label>
 					   <select id="ordenar" size="1" style="font-family: Arial; font-size: 8pt; width: 120px; background-color:#d7cec7" >
@@ -253,10 +253,12 @@
 	
 	
 			$(document).ready(function() {
+			
 				
 				$( "#ordenar" ).change(function() {
-					
-					
+				
+					alert(idCategoria); // nao ta pegando o idCategoria corretamente?
+							
 					window.location = "filtrarPorCategoria?idCategoria=${idCategoria}&ordenar="+$(this).val();
 					
 				
