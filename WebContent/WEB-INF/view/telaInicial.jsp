@@ -257,7 +257,7 @@
 				
 				$( "#ordenar" ).change(function() {
 				
-					alert(idCategoria); // nao ta pegando o idCategoria corretamente?
+					
 							
 					window.location = "filtrarPorCategoria?idCategoria=${idCategoria}&ordenar="+$(this).val();
 					

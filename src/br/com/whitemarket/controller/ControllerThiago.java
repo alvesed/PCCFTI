@@ -67,26 +67,22 @@ public class ControllerThiago {
 			Query query = null;
 			
 			String titulo = "Novos Produtos";
-			
-			System.out.println("oq ta vindo no ordenar é :  " + ordenar + "e no id categoria é :  " + idCategoria + " .");
-			
-			
-			
+
 			long idCategoriaLong = 0;
 			if (idCategoria != null && !idCategoria.equalsIgnoreCase("")) {
 				idCategoriaLong = Long.parseLong(idCategoria);
 			}
 				 
-			
-			
 			if (idCategoriaLong == 0 && (ordenar == null || ordenar.equals(""))) {
 				
 				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto");
 			
 			}else if(idCategoriaLong != 0 && ordenar == null) {
 				
-				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoria");
-				query.setParameter("idCategoria", idCategoria);
+				
+				
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoriaLong");
+				query.setParameter("idCategoriaLong", idCategoriaLong); // nao esta setando aqui
 					
 			}else if(idCategoriaLong == 0 && ordenar == "menor_preco") {
 			
@@ -112,21 +108,22 @@ public class ControllerThiago {
 				   		+ "WHERE p.ativo = 1" // "WHERE p.ativo = 1 AND p.categoria.id ="  PARA FAZER A PROXIMA QUERY
 				   		+ "ORDER BY quantidadeDeVendas desc");
 			
-			
-			
 			// quando categoria e ordenar preenchidos
 			
-			} else if(idCategoriaLong != 0 && ordenar.equalsIgnoreCase("menor_preco")) {
-				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoria ORDER BY valor desc");
-				query.setParameter("idCategoria", idCategoria);
-			
+			} else if(idCategoriaLong != 0 && ordenar.equalsIgnoreCase("menor_preco")) {  
+				
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoriaLong ORDER BY valor asc");			
+				query.setParameter("idCategoriaLong", idCategoriaLong);
+	
+			}else if(idCategoriaLong != 0 && ordenar.equalsIgnoreCase("maior_preco")){
+				
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoriaLong ORDER BY valor desc");			
+				query.setParameter("idCategoriaLong", idCategoriaLong);
+				
 			}
 			
-			
-
 			List<Produto> listProdutos = query.getResultList();
 
-			
 			Util util = new Util();
 		   for(Produto produto: listProdutos) {
 			   //if (!util.pegarPrimeiraFoto(produto.getCodProduto()).equals("")) produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));
