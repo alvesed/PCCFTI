@@ -16,7 +16,7 @@
 <jsp:include page = "header.jsp" />
 
 <div id="divContainer">
-<div class="container">
+<div class="container" style="width: 70vw !important;">
 
 <div class="row btn-header">
 	<div class="col-md-6">

@@ -60,7 +60,7 @@
 						<label>Categoria: </label>
 						<select class="form-control" name="idCategoria" id="idCategoria">
 						<c:forEach items="${categorias}" var="categorias">
-							<option value="${categorias.id}" >${categorias.descricao}</option>
+							<option value="${categorias.id}"> ${categorias.descricao}</option>
 						</c:forEach></select>
 					</div>
 					</div>
