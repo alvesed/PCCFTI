@@ -89,53 +89,26 @@
 	          	 	</thead>
 	          	 	
 	          	 	<tbody>
+	          	 	
+	          	 	<c:forEach items="${listProdutos}" var="listProdutos">
 		          	 	<tr>
 		          	 	<td>
-		          	 		<input class="lista-produto" type="checkbox" value="" name="produto[]">
+		          	 		<input class="lista-produto" type="checkbox" value="${listProdutos.codProduto}" name="listaProdutos[]">
 		          	 	</td>
 		          	 	<td>
-		          	 	Teste
+		          	 	${listProdutos.nome}
 		          	 	</td>
 		          	 	</tr>
-		          	 	<tr>
-		          	 	<td>
-		          	 		<input class="lista-produto" type="checkbox" value="" name="produto[]">
-		          	 	</td>
-		          	 	<td>
-		          	 	Teste
-		          	 	</td>
-		          	 	</tr>
-		          	 	<tr>
-		          	 	<td>
-		          	 		<input class="lista-produto" type="checkbox" value="" name="produto[]">
-		          	 	</td>
-		          	 	<td>
-		          	 	Teste
-		          	 	</td>
-		          	 	</tr>
-		          	 	<tr>
-		          	 	<td>
-		          	 		<input class="lista-produto" type="checkbox" value="" name="produto[]">
-		          	 	</td>
-		          	 	<td>
-		          	 	Teste
-		          	 	</td>
-		          	 	</tr>
-		          	 	<tr>
-		          	 	<td>
-		          	 		<input class="lista-produto" type="checkbox" value="" name="produto[]">
-		          	 	</td>
-		          	 	<td>
-		          	 	Teste
-		          	 	</td>
-		          	 	</tr>
+		          	</c:forEach> 	
+		          	 	
+		          	 	
 	          	 	</tbody>
           	 	</table>	
 
             </div>
           </div>
          
-         
+         <input class="lista-produto" type="hidden" value="${usuarioLogado.codigo}" name="usuario">
          <button type="submit" class="btn btn btn-primary" id="botao" >Cadastrar</button>
      	
       </form>

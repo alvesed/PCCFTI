@@ -1,6 +1,7 @@
 package br.com.whitemarket.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import com.sun.istack.internal.Nullable;
+//import com.sun.istack.internal.Nullable;
 
 @Entity
 @Table(name="cupom")
@@ -65,6 +66,10 @@ public class Cupom {
 	
 	@OneToMany(mappedBy = "cupom", targetEntity = Produto.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Produto> listaProdutos;
+	
+	public Cupom() {
+		this.listaProdutos = new ArrayList<Produto>();
+	}
 
 	public String getCod_cupom() {
 		return cod_cupom;
@@ -136,6 +141,13 @@ public class Cupom {
 
 	public void setData_expiracao(Date data_expiracao) {
 		this.data_expiracao = data_expiracao;
+	}
+	
+	public List<Produto> getListaProdutos() {
+		return listaProdutos;
+	}
+	public void setListaProdutos(List<Produto> listaProdutos) {
+		this.listaProdutos = listaProdutos;
 	}
 
 	//@Transient
