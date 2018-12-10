@@ -34,19 +34,7 @@
 <div id="divContainer">
 	<div class="container" style="width: 92% !important;">
 	
-			<div class="row">
-				<div class="col-md-9">
-					<h1>TODOS OS PRODUTOS</h1>
-				</div>
-	
-				<c:forEach items="${produto}" var="produto">
-					<div class="price col-md-11">
-						<b>${produto.nome}</b> - ${produto.descricao} - ${produto.condicao} - R$ ${produto.valor}<br>
-					</div>
-				</c:forEach>
-			</div>	      
-	
-
+		  
 		<div class="row">
 			<div class="row">
 				<div class="col-md-9">

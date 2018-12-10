@@ -59,8 +59,8 @@ public class ControllerThiago {
 	}
 	
 	
-	@RequestMapping(value = "telaPrincipal/busca")
-	public String busca(@RequestParam("busca")String busca,Model model) {
+	@RequestMapping(value = "busca")
+	public String busca(@RequestParam String busca, Model model) {
 		
 		Util util = new Util();
 
@@ -68,7 +68,7 @@ public class ControllerThiago {
 		EntityManager	manager	= factory.createEntityManager();
 			
 		List<Produto> listProdutos =
-				   manager.createQuery("select NEW Produto(nome, descricao, condicao, valor, codProduto) from Produto p where p.nome = :busca").getResultList();
+				   manager.createQuery("select NEW Produto(nome, descricao, condicao, valor, codProduto) from Produto p where p.nome LIKE :busca").setParameter("busca", "%" + busca + "%").getResultList();
 			   
 			   for(Produto produto: listProdutos) {
 				   produto.setUrlPrimeiraImagem(util.pegarPrimeiraFoto(produto.getCodProduto()));

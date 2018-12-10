@@ -259,22 +259,8 @@
 			$(document).ready(function() {
 
 				$("#inputFindIcon").click(function() {
-					var find = {
-							busca: $(this).parent().find("#inputFind").val()
-						}
-					alert(busca);
-					
-					$.ajax({
-						url: "telaPrincipal/busca",
-						type: "POST",
-						data: find,
-						contentType: "application/x-www-form-urlencoded; charset = iso-8859-1;",
-						success: function(data){
-							
-							window.location.href="telaPrincipal";
-						}
-					});
-					
+					var parametro = $(this).parent().find("#inputFind").val();
+					window.location.href = "busca?busca="+parametro;
 				});
 			});
 		
