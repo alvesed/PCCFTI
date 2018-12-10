@@ -3,6 +3,7 @@ package br.com.whitemarket.model;
 import br.com.whitemarket.model.Produto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ public class Foto {
 	@Column(name="cod_foto")
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_cod_produto")
 	Produto produto;
 	
