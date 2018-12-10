@@ -55,6 +55,16 @@
 					</div>
 				</div>
 				<div class="row">
+				<div class="form-group col-md-3">
+						<!-- label e input-->
+						<label>Categoria: </label>
+						<select class="form-control" name="condicao" id="condicao">
+							<option value="novo" <c:if test="${produto.condicao eq 'novo'}">selected</c:if>>Novo</option>
+							<option value="usado" <c:if test="${produto.condicao eq 'usado'}">selected</c:if>>Usado</option>
+						</select>
+					</div>
+					</div>
+				<div class="row">
 					<div class="form-group col-md-2">
 						<!-- label e input-->
 						<label>Condição</label>
@@ -90,9 +100,12 @@
 					</div>
 					<hr>
 					<label>Fotos</label><br>
-							<c:forEach items="${produto.listaFotos}" var="listFotos">
-								<img style="max-height: 250px;max-width: 250px; width: auto; height: auto" src="${listFotos.urlFoto}" />
-				  			</c:forEach>
+					<c:if test="${fotos > 0 }">
+					<c:forEach items="${produto.listaFotos}" var="listFotos">
+						<img style="max-height: 250px;max-width: 250px; width: auto; height: auto" src="${listFotos.urlFoto}" />
+				  	</c:forEach>	
+					</c:if>
+						
 				</c:if>
 				<div class="row">
 					<div class="form-group col-md-2">
