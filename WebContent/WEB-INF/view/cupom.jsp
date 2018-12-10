@@ -44,6 +44,7 @@
                </select>
             </div>
             
+            
             <div class="form-group col col-sm-6 col-md-4">
                <label for="valor_percent">Percentual de Desconto</label>
                <input type="text" class="form-control" id="valor_percent" placeholder="0" name="valor_percent" required disabled>

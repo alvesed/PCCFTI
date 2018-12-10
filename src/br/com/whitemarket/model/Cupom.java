@@ -150,6 +150,7 @@ public class Cupom {
 		this.listaProdutos = listaProdutos;
 	}
 
+	
 	//@Transient
 	//private long quantidadeProdutos;
 
