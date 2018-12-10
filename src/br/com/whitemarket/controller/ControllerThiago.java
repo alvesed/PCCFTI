@@ -96,35 +96,55 @@ public class ControllerThiago {
 			
 			String titulo = "Novos Produtos";
 
+			System.out.println("idCategoria  :" + idCategoria + "  ordenar   :" + ordenar);
+			
 			long idCategoriaLong = 0;
+			
 			if (idCategoria != null && !idCategoria.equalsIgnoreCase("")) {
 				idCategoriaLong = Long.parseLong(idCategoria);
+				
+				System.out.println("na condição" + idCategoriaLong);
+				
+			}else {
+				idCategoriaLong = 0;
+			}
+			
+			if (ordenar == null) {
+				ordenar = "";
 			}
 				 
-			if (idCategoriaLong == 0 && (ordenar == null || ordenar.equals(""))) {
+			if (idCategoriaLong == 0 && ordenar.equals("") ) {
 				
 				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto");
 			
-			}else if(idCategoriaLong != 0 && ordenar == null) {
+			}else if(idCategoriaLong != 0 && ordenar.equals("maior_preco")) {
 				
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoriaLong ORDER BY valor desc");
+				query.setParameter("idCategoriaLong", idCategoriaLong); // nao esta setando aqui
+					
 				
+			}else if(idCategoriaLong != 0 && (ordenar == null || ordenar.equals(""))) {
 				
 				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p where p.categoria.id = :idCategoriaLong");
 				query.setParameter("idCategoriaLong", idCategoriaLong); // nao esta setando aqui
 					
-			}else if(idCategoriaLong == 0 && ordenar == "menor_preco") {
+				
+			}else if(idCategoriaLong == 0 && ordenar.equals("menor_preco")) {
 			
-				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p ORDER BY valor desc");
+				System.out.println(" Dentro da condição    -     idCategoria  :" + idCategoria + "  ordenar   :" + ordenar);
+		
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p ORDER BY valor asc");
 				titulo = "Produtos com Menor Preço";		
 			
 				
-			}else if(idCategoriaLong == 0 && ordenar == "maior_preco") {
+			}else if(idCategoriaLong == 0 && ordenar.equals("maior_preco")) {
+				System.out.println(" Dentro da condição    -     idCategoria  :" + idCategoria + "  ordenar   :" + ordenar);
 				
-				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p ORDER BY valor asc");
+				query = manager.createQuery("select NEW Produto(nome,descricao,condicao,valor,codProduto) from Produto p ORDER BY valor desc");
 				titulo = "Produtos com Maior Preço";	
 				
 
-			}else if(ordenar.equals("mais_vendido")) {
+			}else if(idCategoriaLong == 0 && ordenar.equals("mais_vendido")) {
 				
 				titulo = "Produtos Mais Vendidos";
 				query = manager.createQuery("select NEW Produto(valor," +
@@ -132,9 +152,26 @@ public class ControllerThiago {
 				   		" count(i.quantidade) as quantidades " + 
 				   		" FROM ItemPedido i "
 				   		+ " WHERE i.produto.codProduto = p.codProduto " + 
-				   		" ) as quantidadeDeVendas, dataCadastro, codProduto, usuario) from Produto p "
-				   		+ "WHERE p.ativo = 1" // "WHERE p.ativo = 1 AND p.categoria.id ="  PARA FAZER A PROXIMA QUERY
+				   		" ) as quantidadeDeVendas, dataCadastro, codProduto, usuario, p.nome) from Produto p "
+				   		+ "WHERE p.ativo = 1 " // "WHERE p.ativo = 1 AND p.categoria.id ="  PARA FAZER A PROXIMA QUERY
 				   		+ "ORDER BY quantidadeDeVendas desc");
+				
+				
+				
+				
+			}else if(idCategoriaLong !=0 && ordenar.equals("mais_vendido")) {
+				
+				titulo = "Produtos Mais Vendidos";
+				query = manager.createQuery("select NEW Produto(valor," +
+				   		" (SELECT " + 
+				   		" count(i.quantidade) as quantidades " + 
+				   		" FROM ItemPedido i "
+				   		+ " WHERE i.produto.codProduto = p.codProduto " + 
+				   		" ) as quantidadeDeVendas, dataCadastro, codProduto, usuario, p.nome) from Produto p "
+				   		+ "WHERE p.ativo = 1 AND p.categoria.id =:idCategoriaLong "
+				   		+ "ORDER BY quantidadeDeVendas desc");
+				
+				query.setParameter("idCategoriaLong", idCategoriaLong);
 			
 			// quando categoria e ordenar preenchidos
 			

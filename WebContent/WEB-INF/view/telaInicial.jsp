@@ -53,14 +53,14 @@
 					<h1>${titulo}</h1>  <!-- este titulo vem da controler que monta dinamicamente pela opção de ordenar -->
 				</div>
 					<div>
-					<input type="hidden" id="idCategoria" value="${idCategoria}"> <!-- nao esta encontrando a categoria -->
+					<input type="hidden" id="idCategoria" value="${idCategoria}"> <!-- nao esta encontrando a categoria? -->
 					 <p align="right">
 					 <label style="font-family: Arial; font-size: 8pt; width: 120px;">Listar por:</label>
 					   <select id="ordenar" size="1" style="font-family: Arial; font-size: 8pt; width: 120px; background-color:#d7cec7" >
 						   <option value="" selected="selected">Selecione</option>
 						  <option  value="maior_preco">Maior Preço</option>
 						  <option  value="menor_preco">Menor Preço</option> 
-						  <option id="maisvendido" value="mais_vendido">Mais Vendido</option>
+						  <option  value="mais_vendido">Mais Vendido</option>
 					   </select>
 					   </p>
 					</div>
