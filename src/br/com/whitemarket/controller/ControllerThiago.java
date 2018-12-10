@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.whitemarket.dao.ItemProdutoDAO;
 import br.com.whitemarket.model.Produto;
+import br.com.whitemarket.model.Usuario;
 import br.com.whitemarket.model.Categoria;
 import br.com.whitemarket.model.Foto;
 import br.com.whitemarket.model.Pedido;
@@ -60,7 +62,7 @@ public class ControllerThiago {
 	
 	
 	@RequestMapping(value = "busca")
-	public String busca(@RequestParam String busca, Model model) {
+	public String busca(@RequestParam String busca, Model model, HttpSession session) {
 		
 		Util util = new Util();
 
@@ -77,8 +79,8 @@ public class ControllerThiago {
 		model.addAttribute("produto", listProdutos); 
 		
 		List<Categoria> listCategorias = manager.createQuery("select c from Categoria c").getResultList();
-		model.addAttribute("listaCategorias", listCategorias);
 		
+		session.setAttribute("listaCategorias", listCategorias);
 		
 		manager.close();  
 		factory.close();
