@@ -210,6 +210,14 @@ public class Produto {
 	public void setComentario(List<Comentario> comentario) {
 		this.comentario = comentario;
 	}
+
+	public Cupom getCupom() {
+		return cupom;
+	}
+
+	public void setCupom(Cupom cupom) {
+		this.cupom = cupom;
+	}
 	
 	
 	

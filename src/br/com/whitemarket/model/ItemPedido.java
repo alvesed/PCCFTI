@@ -33,6 +33,11 @@ public class ItemPedido implements Comparable<ItemPedido> {
 	private Produto produto;
 	
 	private long quantidade;
+	
+	@SuppressWarnings("unused")
+	private Long fk_cupom_id;
+	
+	private double valor_desconto;
 
 	public Pedido getPedido() {
 		return pedido;
@@ -69,6 +74,27 @@ public class ItemPedido implements Comparable<ItemPedido> {
 	@Override
 	public int compareTo(ItemPedido o) {
 		return Long.compare(this.getProduto().getUsuario().getCod_usuario(), o.getProduto().getUsuario().getCod_usuario());
+	}
+
+	public double getValor_desconto() {
+		return valor_desconto;
+	}
+	
+	public double getSetValor_desconto(double valor_desconto) {
+		
+		if(valor_desconto == 0) {
+			if(String.valueOf(this.getProduto().getCupom().getTipo_desconto()).equals("p")) {
+				setValor_desconto((this.getProduto().getCupom().getValor_percent() / 100) * this.getProduto().getValor().doubleValue());
+			}
+			else setValor_desconto(this.getProduto().getCupom().getValor_desconto());
+		} else setValor_desconto(valor_desconto);
+		
+		return getValor_desconto();
+	}
+
+	public void setValor_desconto(double valor_desconto) {
+		
+		this.valor_desconto = valor_desconto;
 	}
 	
 }
