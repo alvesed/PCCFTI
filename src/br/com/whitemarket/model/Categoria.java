@@ -17,6 +17,15 @@ import javax.persistence.Table;
 @Table(name="categoria")
 public class Categoria {
 	
+	public Categoria() {}
+	
+	public Categoria(long id) 
+	{
+		this.id = id;
+		
+	}
+	
+	
 	@Id
 	@GeneratedValue()
 	@Column(name="id")

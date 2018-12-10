@@ -58,10 +58,10 @@
 				<div class="form-group col-md-3">
 						<!-- label e input-->
 						<label>Categoria: </label>
-						<select class="form-control" name="condicao" id="condicao">
-							<option value="novo" <c:if test="${produto.condicao eq 'novo'}">selected</c:if>>Novo</option>
-							<option value="usado" <c:if test="${produto.condicao eq 'usado'}">selected</c:if>>Usado</option>
-						</select>
+						<select class="form-control" name="idCategoria" id="idCategoria">
+						<c:forEach items="${categorias}" var="categorias">
+							<option value="${categorias.id}" >${categorias.descricao}</option>
+						</c:forEach></select>
 					</div>
 					</div>
 				<div class="row">
