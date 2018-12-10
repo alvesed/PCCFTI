@@ -1,15 +1,24 @@
 package br.com.whitemarket.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -146,7 +155,7 @@ public class ControllerPedidos {
 	
 	//BOTÃO GERAR PDF. Lucas
 	@RequestMapping("/gerarPdf")
-	public String gerarPdf(Model model, HttpSession session, @RequestParam("cod_pedido") long codPedido, HttpServletResponse response) {
+	public String gerarPdf(Model model, HttpSession session, @RequestParam("cod_pedido") long codPedido, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		Util util = new Util();
 		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 				
@@ -155,6 +164,21 @@ public class ControllerPedidos {
 		}
 				
 		GerarPdfUtil.gerarPdf(dao.retornaProdutosDentroDePedido(codPedido), util.getEnderecoUsuarioLogado(usuario.getCod_usuario()));
+		
+		File file = new File("C:\\PDF_Teste.pdf");
+		
+		InputStream inputS = new BufferedInputStream(new FileInputStream(file));
+		String mimeType = URLConnection.guessContentTypeFromStream(inputS);
+		
+		if (mimeType == null) {
+			mimeType = "application/octet-stream";
+		}
+		
+		response.setContentType(mimeType);
+		response.setContentLength((int)file.length());
+		response.setHeader("Content-Disposition", String.format("attachment-filename=\"%s\"", file.getName()));
+		
+		FileCopyUtils.copy(inputS, response.getOutputStream());
 		
 		return "redirect:verPedidos";
 	}
